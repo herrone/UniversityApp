@@ -34,6 +34,15 @@
             android:name=".Calendar"
             android:exported="false" />
         <activity
+            android:name=".editModule"
+            android:exported="false" />
+        <activity
+            android:name=".editClass"
+            android:exported="false" />
+        <activity
+            android:name=".editAssignment"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>

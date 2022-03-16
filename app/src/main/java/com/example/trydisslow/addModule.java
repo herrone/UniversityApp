@@ -33,7 +33,6 @@ public class addModule extends AppCompatActivity {
                 m.moduleCode = moduleCod.getText().toString();
                 EditText moduleLeader = (EditText) findViewById(R.id.addModuleLeader);
                 m.courseLeader = moduleLeader.getText().toString();
-
                 EditText moduleNotes = (EditText) findViewById(R.id.addModuleNotesBox);
                 m.modNotes  = moduleNotes.getText().toString();
 
@@ -42,9 +41,9 @@ public class addModule extends AppCompatActivity {
 
                 SQLiteDatabase myBase = getApplicationContext().openOrCreateDatabase("Names.db", 0, null);
 
-                myBase.execSQL("CREATE TABLE if not exists TESTMODULE(title TEXT, code TEXT, leader TEXT, notes TEXT);");
-                String insertStatement = "INSERT INTO TESTMODULE VALUES('" + m.nameMod + "','" + m.moduleCode + "','" + m.modNotes + "','" + m.courseLeader + "');";
-               // String insertStatement = "INSERT INTO Modules VALUES('" + m.nameMod + "','"+ m.moduleCode + "','"  + m.courseLeader + "','"  + m.modNotes + "')\"";
+                myBase.execSQL("CREATE TABLE if not exists NEWMODULE8(title TEXT, code TEXT, leader TEXT, notes TEXT);");
+                String insertStatement = "INSERT INTO NEWMODULE8 VALUES('" + m.nameMod + "','" + m.moduleCode + "','" + m.courseLeader + "','" + m.modNotes + "')";
+                // String insertStatement = "INSERT INTO Modules VALUES('" + m.nameMod + "','"+ m.moduleCode + "','"  + m.courseLeader + "','"  + m.modNotes + "')\"";
                 myBase.execSQL(insertStatement);
                 //db.addModule(m);
                 Toast.makeText(addModule.this, "Saved Module " + m.nameMod,

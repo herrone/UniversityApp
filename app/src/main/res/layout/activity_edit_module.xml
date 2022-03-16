@@ -6,4 +6,77 @@
     android:layout_height="match_parent"
     tools:context=".editModule">
 
+    <TextView
+        android:id="@+id/addModulesTitle"
+        android:layout_width="182dp"
+        android:layout_height="40dp"
+        android:fontFamily="sans-serif-thin"
+        android:text="Edit a Module"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.117"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.078" />
+    <EditText
+        android:id="@+id/addModuleTitleBox"
+        android:layout_width="299dp"
+        android:layout_height="47dp"
+        android:text="Enter Module Title"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.255" />
+
+
+    <Button
+        android:id="@+id/buttonSaveModule"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#03A9F4"
+        android:text="Save Module"
+        android:textColor="#4A148C"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.404"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.796" />
+
+
+    <EditText
+        android:id="@+id/addModuleCodeBox"
+        android:layout_width="299dp"
+        android:layout_height="47dp"
+        android:text="Enter Module Code"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.394" />
+
+    <EditText
+        android:id="@+id/addModuleLeader"
+        android:layout_width="299dp"
+        android:layout_height="47dp"
+        android:text="Enter Module Leader"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.521" />
+    <EditText
+        android:id="@+id/addModuleNotesBox"
+        android:layout_width="299dp"
+        android:layout_height="47dp"
+        android:text="Enter Module Notes"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.666" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

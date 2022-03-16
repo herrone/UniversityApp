@@ -3,8 +3,11 @@ package com.example.trydisslow;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -13,77 +16,96 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 public class ModulesAndClasses extends AppCompatActivity {
-
+String selectedModule;
+String selectedClass;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_modules_and_classes);
-      ListView myModuleListView = (ListView) findViewById(R.id.moduleListView);
-        ArrayList<String> moduleListItems = new ArrayList<String>();
-        ListView myClassListView = (ListView) findViewById(R.id.classListView);
-        ArrayList<String> classListItems = new ArrayList<String>();
-
-//
-//        SQLiteDatabase myBase = getApplicationContext().openOrCreateDatabase("Names.db", 0, null);
-//
-//        myBase.execSQL("CREATE TABLE if not exists TESTMODULE(code TEXT, type TEXT, lecturer TEXT, notes TEXT, location TEXT, day TEXT, start TEXT, finish TEXT );");
-//
-//        Cursor moduleQuery = myBase.rawQuery("SELECT * FROM TESTMODULE", null);
-
-        moduleListItems.add("a");
-        moduleListItems.add("a");
-        moduleListItems.add("a");
-        moduleListItems.add("a");
-        moduleListItems.add("a");
-        moduleListItems.add("a");
-//        if(moduleQuery.moveToFirst()) {
-//            String name = moduleQuery.getString(0);
-//           // moduleListItems.add(name);
-//            while (moduleQuery.moveToNext()) {
-//                name = moduleQuery.getString(0);
-//                moduleListItems.add(name);
-//            }
-//        }
-        ArrayAdapter<String> moduleAdapter = new ArrayAdapter<String>(ModulesAndClasses.this,R.layout.activity_module_list,moduleListItems);
-        myModuleListView.setAdapter(moduleAdapter);
-        myModuleListView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
-        myClassListView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
-        myClassListView.getSelectedItem();
-//
-//        myBase.execSQL("CREATE TABLE if not exists TESTCLASS(code TEXT, type TEXT, lecturer TEXT, notes TEXT, location TEXT, day TEXT, start TEXT, finish TEXT );");
-//         Cursor classQuery = myBase.rawQuery("SELECT * FROM TESTCLASS", null);
-
-//
-//        if(classQuery.moveToFirst()) {
-//            String name = classQuery.getString(0);
-//            classListItems.add(name);
-//            while (classQuery.moveToNext()) {
-//                name = classQuery.getString(0);
-//                classListItems.add(name);
-//            }
-//        }
-        classListItems.add("a");
-        classListItems.add("a");
-        classListItems.add("a");
-        classListItems.add("a");
-        classListItems.add("a");
-        classListItems.add("a");
-        classListItems.add("a");
-        classListItems.add("a");
-        classListItems.add("a");classListItems.add("a");
-
-
-        ArrayAdapter<String> classAdapter = new ArrayAdapter<String>(ModulesAndClasses.this,R.layout.activity_class_list,classListItems);
-        myClassListView.setAdapter(classAdapter);
-
-
-        Button addClassButton = (Button)findViewById(R.id.editClassButton);
+        Button addClassButton = (Button)findViewById(R.id.buttonGoToAddClass2);
         addClassButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(ModulesAndClasses.this, addClass.class));
             }
         });
+      ListView myModuleListView = (ListView) findViewById(R.id.moduleListView);
+        ArrayList<String> moduleListItems = new ArrayList<String>();
+        ListView myClassListView = (ListView) findViewById(R.id.classListView);
+        ArrayList<String> classListItems = new ArrayList<String>();
+
+        SQLiteDatabase myBase = getApplicationContext().openOrCreateDatabase("Names.db", 0, null);
+
+        myBase.execSQL("CREATE TABLE if not exists NEWMODULE8(code TEXT, type TEXT, lecturer TEXT, notes TEXT, location TEXT, day TEXT, start TEXT, finish TEXT );");
+
+        Cursor moduleQuery = myBase.rawQuery("SELECT * FROM NEWMODULE8", null);
+//
+//        moduleListItems.add("a");
+//        moduleListItems.add("a");
+//        moduleListItems.add("a");
+//        moduleListItems.add("a");
+//        moduleListItems.add("a");
+//        moduleListItems.add("a");
+        if(moduleQuery.moveToFirst()) {
+            String name = moduleQuery.getString(0);
+           // moduleListItems.add(name);
+            while (moduleQuery.moveToNext()) {
+                name = moduleQuery.getString(1);
+                moduleListItems.add(name);
+            }
+        }
+        ArrayAdapter<String> moduleAdapter = new ArrayAdapter<String>(ModulesAndClasses.this,R.layout.activity_module_list,moduleListItems);
+        myModuleListView.setAdapter(moduleAdapter);
+        myModuleListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+                selectedModule = myModuleListView.getItemAtPosition(i).toString();
+
+                //    Toast.makeText(Assignments.this, s, Toast.LENGTH_LONG).show();
+                // adapter.dismiss(); // If you want to close the adapter
+            }
+        });
+        myModuleListView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
+        myClassListView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
+       // myClassListView.getSelectedItem();
+//
+        myBase.execSQL("CREATE TABLE if not exists NEWCLASS2(code TEXT, type TEXT, lecturer TEXT, notes TEXT, location TEXT, day TEXT, start TEXT, finish TEXT );");
+         Cursor classQuery = myBase.rawQuery("SELECT * FROM NEWCLASS2", null);
+
+        if(classQuery.moveToFirst()) {
+            String name = classQuery.getString(0) + classQuery.getString(1);
+            classListItems.add(name);
+            while (classQuery.moveToNext()) {
+                name = classQuery.getString(0);
+                classListItems.add(name);
+            }
+        }
+//        classListItems.add("a");
+//        classListItems.add("a");
+//        classListItems.add("a");
+//        classListItems.add("a");
+//        classListItems.add("a");
+//        classListItems.add("a");
+//        classListItems.add("a");
+//        classListItems.add("a");
+//        classListItems.add("a");classListItems.add("a");
+
+
+        ArrayAdapter<String> classAdapter = new ArrayAdapter<String>(ModulesAndClasses.this,R.layout.activity_class_list,classListItems);
+        myClassListView.setAdapter(classAdapter);
+        myClassListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+                selectedClass = myClassListView.getItemAtPosition(i).toString();
+
+                //    Toast.makeText(Assignments.this, s, Toast.LENGTH_LONG).show();
+                // adapter.dismiss(); // If you want to close the adapter
+            }
+        });
+
+
         Button addModuleButton = (Button)findViewById(R.id.buttonGoToAddModule);
         addModuleButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -124,12 +146,9 @@ public class ModulesAndClasses extends AppCompatActivity {
         editModuleButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String pass = myModuleListView.getSelectedItem().toString();
                 Intent i = new Intent (ModulesAndClasses.this, editModule.class);
-
-                i.putExtra("editableModule", pass);
+                i.putExtra("editableModule", selectedModule);
                 startActivity(i);
-              //  startActivity(new Intent(ModulesAndClasses.this, editModule.class));
             }
         });
         Button deleteModuleButton = (Button)findViewById(R.id.deleteModuleButton);
@@ -145,12 +164,9 @@ public class ModulesAndClasses extends AppCompatActivity {
         editClassButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String pass = myClassListView.getSelectedItem().toString();
                 Intent i = new Intent (ModulesAndClasses.this, editClass.class);
-
-                i.putExtra("editableModule", pass);
+                i.putExtra("editableClass", selectedClass);
                 startActivity(i);
-                //    startActivity(new Intent(ModulesAndClasses.this, editClass.class));
             }
         });
         Button deleteClassButton = (Button)findViewById(R.id.deleteClassButton);
