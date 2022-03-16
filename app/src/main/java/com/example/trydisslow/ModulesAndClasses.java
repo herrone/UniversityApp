@@ -30,8 +30,11 @@ public class ModulesAndClasses extends AppCompatActivity {
         if(query.moveToFirst()){
 
             String name = query.getString(0);
-            String name2 = query.getString(1);
-            String name3 = query.getString(2);
+            query.moveToNext();
+            String name2 = query.getString(0);
+            query.moveToNext();
+            String name3 = query.getString(0);
+            query.moveToNext();
             moduleA.setText(name);
             moduleB.setText(name2);
             moduleC.setText(name3);
@@ -45,8 +48,10 @@ public class ModulesAndClasses extends AppCompatActivity {
         if(query2.moveToFirst()){
 
             String name = query2.getString(0);
-            String name2 = query2.getString(1);
-            String name3 = query2.getString(2);
+            query.moveToNext();
+            String name2 = query2.getString(0);
+            query.moveToNext();
+            String name3 = query2.getString(0);
             classA.setText(name);
             classB.setText(name2);
             classC.setText(name3);

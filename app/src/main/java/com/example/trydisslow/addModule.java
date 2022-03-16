@@ -42,8 +42,8 @@ public class addModule extends AppCompatActivity {
 
                 SQLiteDatabase myBase = getApplicationContext().openOrCreateDatabase("Names.db", 0, null);
 
-                myBase.execSQL("CREATE TABLE if not exists FullModule(title TEXT, code TEXT, leader TEXT, notes TEXT);");
-                String insertStatement = "INSERT INTO FullModule VALUES('" + m.nameMod + "','" + m.moduleCode + "','" + m.modNotes + "','" + m.courseLeader + "');";
+                myBase.execSQL("CREATE TABLE if not exists NEWMODULE(title TEXT, code TEXT, leader TEXT, notes TEXT);");
+                String insertStatement = "INSERT INTO NEWMODULE VALUES('" + m.nameMod + "','" + m.moduleCode + "','" + m.modNotes + "','" + m.courseLeader + "');";
                // String insertStatement = "INSERT INTO Modules VALUES('" + m.nameMod + "','"+ m.moduleCode + "','"  + m.courseLeader + "','"  + m.modNotes + "')\"";
                 myBase.execSQL(insertStatement);
                 //db.addModule(m);

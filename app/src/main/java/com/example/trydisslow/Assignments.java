@@ -21,25 +21,30 @@ public class Assignments extends AppCompatActivity {
         TextView assignmentB = (TextView)findViewById(R.id.assignmentB);
         TextView assignmentC = (TextView)findViewById(R.id.assignmentC);
         SQLiteDatabase myBase = getApplicationContext().openOrCreateDatabase("Names.db", 0, null);
-        Cursor query = myBase.rawQuery("SELECT * FROM FullAssignment", null);
+        Cursor query = myBase.rawQuery("SELECT * FROM NEWASSIGNMENT", null);
       //  Cursor query2 = myBase.rawQuery("SELECT * FROM ClassesFullStrings2", null);
 
         if(query.moveToFirst()){
-
             String name = query.getString(0);
-            String name2 = query.getString(1);
-            String name3 = query.getString(2);
             assignmentA.setText(name);
-            assignmentB.setText(name2);
-            assignmentC.setText(name3);
+           if(query.moveToNext()) {
+               String name2 = query.getString(0);
+               assignmentB.setText(name2);
+           }
+            if(query.moveToNext()) {
+                String name3 = query.getString(0);
+                assignmentC.setText(name3);
+            }
+
+
 
         }
 
-        else {
-            Toast t = Toast.makeText(getApplicationContext()
-                    , "nope", Toast.LENGTH_LONG);
-            t.show();
-        }
+//        else {
+//            Toast t = Toast.makeText(getApplicationContext()
+//                    , "nope", Toast.LENGTH_LONG);
+//            t.show();
+//        }
         Button modulesAndClassesButton = (Button)findViewById(R.id.buttonModulesAndClasses);
         modulesAndClassesButton.setOnClickListener(new View.OnClickListener() {
             @Override

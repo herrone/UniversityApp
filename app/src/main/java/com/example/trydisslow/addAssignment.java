@@ -56,8 +56,8 @@ public class addAssignment extends AppCompatActivity {
                 Assignment a = new Assignment(title, d.toString(),  moduleCodeInQuestion,notes);
                 SQLiteDatabase myBase = getApplicationContext().openOrCreateDatabase("Names.db", 0, null);
 
-                myBase.execSQL("CREATE TABLE if not exists FullAssignment(title TEXT, code TEXT, dueDate TEXT, notes TEXT);");
-                String insertStatement = "INSERT INTO FullAssignment VALUES('" + a.title + "','" + a.whichModuleIsTaskFor + "','" + a.dueDate + "','" + a.notes + "');";
+                myBase.execSQL("CREATE TABLE if not exists NEWASSIGNMENT(title TEXT, code TEXT, dueDate TEXT, notes TEXT);");
+                String insertStatement = "INSERT INTO NEWASSIGNMENT VALUES('" + a.title + "','" + a.whichModuleIsTaskFor + "','" + a.dueDate + "','" + a.notes + "');";
                 // String insertStatement = "INSERT INTO Modules VALUES('" + m.nameMod + "','"+ m.moduleCode + "','"  + m.courseLeader + "','"  + m.modNotes + "')\"";
                 myBase.execSQL(insertStatement);
                 Toast.makeText(addAssignment.this, "Saved Assignment " + a.title,
