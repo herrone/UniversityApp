@@ -3,13 +3,14 @@ package com.example.trydisslow;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.TextView;
+import android.widget.ListView;
 import android.widget.Toast;
+
+import java.util.ArrayList;
 
 public class ModulesAndClasses extends AppCompatActivity {
 
@@ -17,53 +18,66 @@ public class ModulesAndClasses extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_modules_and_classes);
-        TextView classA = (TextView)findViewById(R.id.classBox1);
-        TextView classB = (TextView)findViewById(R.id.classBox2);
-        TextView classC = (TextView)findViewById(R.id.classBox3);
-        TextView moduleA = (TextView)findViewById(R.id.moduleBox1);
-        TextView moduleB = (TextView)findViewById(R.id.moduleBox2);
-        TextView moduleC = (TextView)findViewById(R.id.moduleBox3);
-        SQLiteDatabase myBase = getApplicationContext().openOrCreateDatabase("Names.db", 0, null);
-        Cursor query = myBase.rawQuery("SELECT * FROM FullModule", null);
-        Cursor query2 = myBase.rawQuery("SELECT * FROM ClassesFullStrings2", null);
+      ListView myModuleListView = (ListView) findViewById(R.id.moduleListView);
+        ArrayList<String> moduleListItems = new ArrayList<String>();
+        ListView myClassListView = (ListView) findViewById(R.id.classListView);
+        ArrayList<String> classListItems = new ArrayList<String>();
 
-        if(query.moveToFirst()){
+//
+//        SQLiteDatabase myBase = getApplicationContext().openOrCreateDatabase("Names.db", 0, null);
+//
+//        myBase.execSQL("CREATE TABLE if not exists TESTMODULE(code TEXT, type TEXT, lecturer TEXT, notes TEXT, location TEXT, day TEXT, start TEXT, finish TEXT );");
+//
+//        Cursor moduleQuery = myBase.rawQuery("SELECT * FROM TESTMODULE", null);
 
-            String name = query.getString(0);
-            query.moveToNext();
-            String name2 = query.getString(0);
-            query.moveToNext();
-            String name3 = query.getString(0);
-            query.moveToNext();
-            moduleA.setText(name);
-            moduleB.setText(name2);
-            moduleC.setText(name3);
+        moduleListItems.add("a");
+        moduleListItems.add("a");
+        moduleListItems.add("a");
+        moduleListItems.add("a");
+        moduleListItems.add("a");
+        moduleListItems.add("a");
+//        if(moduleQuery.moveToFirst()) {
+//            String name = moduleQuery.getString(0);
+//           // moduleListItems.add(name);
+//            while (moduleQuery.moveToNext()) {
+//                name = moduleQuery.getString(0);
+//                moduleListItems.add(name);
+//            }
+//        }
+        ArrayAdapter<String> moduleAdapter = new ArrayAdapter<String>(ModulesAndClasses.this,R.layout.activity_module_list,moduleListItems);
+        myModuleListView.setAdapter(moduleAdapter);
+        myModuleListView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
+        myClassListView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
+        myClassListView.getSelectedItem();
+//
+//        myBase.execSQL("CREATE TABLE if not exists TESTCLASS(code TEXT, type TEXT, lecturer TEXT, notes TEXT, location TEXT, day TEXT, start TEXT, finish TEXT );");
+//         Cursor classQuery = myBase.rawQuery("SELECT * FROM TESTCLASS", null);
 
-        }
-        else {
-            Toast t = Toast.makeText(getApplicationContext()
-                    , "nope", Toast.LENGTH_LONG);
-            t.show();
-        }
-        if(query2.moveToFirst()){
+//
+//        if(classQuery.moveToFirst()) {
+//            String name = classQuery.getString(0);
+//            classListItems.add(name);
+//            while (classQuery.moveToNext()) {
+//                name = classQuery.getString(0);
+//                classListItems.add(name);
+//            }
+//        }
+        classListItems.add("a");
+        classListItems.add("a");
+        classListItems.add("a");
+        classListItems.add("a");
+        classListItems.add("a");
+        classListItems.add("a");
+        classListItems.add("a");
+        classListItems.add("a");
+        classListItems.add("a");classListItems.add("a");
 
-            String name = query2.getString(0);
-            query.moveToNext();
-            String name2 = query2.getString(0);
-            query.moveToNext();
-            String name3 = query2.getString(0);
-            classA.setText(name);
-            classB.setText(name2);
-            classC.setText(name3);
 
-        }
-        else {
-            Toast t = Toast.makeText(getApplicationContext()
-                    , "nope", Toast.LENGTH_LONG);
-            t.show();
-        }
+        ArrayAdapter<String> classAdapter = new ArrayAdapter<String>(ModulesAndClasses.this,R.layout.activity_class_list,classListItems);
+        myClassListView.setAdapter(classAdapter);
 
-        Button addClassButton = (Button)findViewById(R.id.buttonGoToAddClass);
+
+        Button addClassButton = (Button)findViewById(R.id.editClassButton);
         addClassButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -104,6 +118,46 @@ public class ModulesAndClasses extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(ModulesAndClasses.this, Calendar.class));
+            }
+        });
+        Button editModuleButton = (Button)findViewById(R.id.editModuleButton);
+        editModuleButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String pass = myModuleListView.getSelectedItem().toString();
+                Intent i = new Intent (ModulesAndClasses.this, editModule.class);
+
+                i.putExtra("editableModule", pass);
+                startActivity(i);
+              //  startActivity(new Intent(ModulesAndClasses.this, editModule.class));
+            }
+        });
+        Button deleteModuleButton = (Button)findViewById(R.id.deleteModuleButton);
+        deleteModuleButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+            //    startActivity(new Intent(ModulesAndClasses.this, editModule.class));
+
+            }
+        });
+
+        Button editClassButton = (Button)findViewById(R.id.editClassButton);
+        editClassButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String pass = myClassListView.getSelectedItem().toString();
+                Intent i = new Intent (ModulesAndClasses.this, editClass.class);
+
+                i.putExtra("editableModule", pass);
+                startActivity(i);
+                //    startActivity(new Intent(ModulesAndClasses.this, editClass.class));
+            }
+        });
+        Button deleteClassButton = (Button)findViewById(R.id.deleteClassButton);
+        deleteClassButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+              //  startActivity(new Intent(ModulesAndClasses.this, editModule.class));
             }
         });
 

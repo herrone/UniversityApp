@@ -13,63 +13,23 @@
         android:text="Assignments"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.41"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.143" />
+        app:layout_constraintVertical_bias="0.049" />
 
-    <TextView
-        android:id="@+id/assignmentD"
-        android:layout_width="364dp"
-        android:layout_height="34dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="52dp"
-        android:layout_marginEnd="31dp"
+    <ListView
+        android:id="@+id/listView"
+        android:layout_width="379dp"
+        android:layout_height="484dp"
+        android:choiceMode="singleChoice"
+        android:listSelector="#666666"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/assignmentC"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <TextView
-        android:id="@+id/assignmentC"
-        android:layout_width="364dp"
-        android:layout_height="34dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="31dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.464" />
+        app:layout_constraintVertical_bias="0.611" />
 
-    <TextView
-        android:id="@+id/assignmentB"
-        android:layout_width="367dp"
-        android:layout_height="51dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="18dp"
-        android:layout_marginEnd="31dp"
-        android:layout_marginBottom="42dp"
-        app:layout_constraintBottom_toTopOf="@+id/assignmentC"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.333"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/assignmentA" />
-
-    <TextView
-        android:id="@+id/assignmentA"
-        android:layout_width="364dp"
-        android:layout_height="34dp"
-        android:layout_marginStart="18dp"
-        android:layout_marginTop="40dp"
-        android:layout_marginEnd="29dp"
-        android:layout_marginBottom="18dp"
-        app:layout_constraintBottom_toTopOf="@+id/assignmentB"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/assignmentTitleInput" />
     <Button
         android:id="@+id/buttonSettings"
         android:layout_width="110dp"
@@ -112,6 +72,7 @@
         app:layout_constraintStart_toEndOf="@+id/buttonCalendar"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0" />
+
     <Button
         android:id="@+id/buttonCalendar"
         android:layout_width="98dp"
@@ -125,6 +86,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0" />
+
     <Button
         android:id="@+id/buttonGoToAddAssignments"
         android:layout_width="wrap_content"

@@ -4,6 +4,7 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Build;
 import android.os.Bundle;
@@ -15,6 +16,8 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TimePicker;
 import android.widget.Toast;
+
+import java.util.ArrayList;
 
 public class addClass extends AppCompatActivity {
 
@@ -30,12 +33,34 @@ public class addClass extends AppCompatActivity {
         Spinner moduleCodeList = findViewById(R.id.moduleCodeList);
         Spinner dayList = findViewById(R.id.dayList);
         Spinner classTypeList = findViewById(R.id.classTypeList);
-        String[] moduleCodeArray = new String[]{"choose a module code","a", "b", "c"};
-        String[] classTypeItems = new String[]{"choose class type", "lecture", "practical", "tutorial"};
+        ArrayList<String> moduleCodeArray = new ArrayList<String>();
+
+
+
+     //  moduleCodeArray[0] = "choose a module";
+
+        SQLiteDatabase myBase = getApplicationContext().openOrCreateDatabase("Names.db", 0, null);
+        Cursor query = myBase.rawQuery("SELECT * FROM NEWMODULE", null);
+
+        if(query.moveToFirst()){
+            String name = query.getString(0);
+            moduleCodeArray.add(name);
+            if(query.moveToNext()) {
+                String name2 = query.getString(0);
+                moduleCodeArray.add(name2);
+            }
+            if(query.moveToNext()) {
+                String name3 = query.getString(0);
+                moduleCodeArray.add(name3);
+            }
+
+       }
 //create an adapter to describe how the items are displayed, adapters are used in several places in android.
 //There are multiple variations of this, but this is the basic variant.
 
         ArrayAdapter<String> moduleCodeAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, moduleCodeArray);
+
+        String[] classTypeItems = new String[]{"choose class type", "lecture", "practical", "tutorial"};
         ArrayAdapter<String> classTypeAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, classTypeItems);
 //set the spinners adapter to the previously created one.
         classTypeList.setAdapter(classTypeAdapter);
@@ -73,9 +98,9 @@ public class addClass extends AppCompatActivity {
 
 
                 //myBase.execSQL("CREATE TABLE if not exists Classes(code TEXT, type TEXT, lecturer TEXT, notes TEXT, location TEXT, day TEXT, start TIME, finish TIME );");
-                myBase.execSQL("CREATE TABLE if not exists NEWCLASS(code TEXT, type TEXT, lecturer TEXT, notes TEXT, location TEXT, day TEXT, start TEXT, finish TEXT );");
+                myBase.execSQL("CREATE TABLE if not exists TESTCLASS(code TEXT, type TEXT, lecturer TEXT, notes TEXT, location TEXT, day TEXT, start TEXT, finish TEXT );");
                // String insertStatement = "INSERT INTO Classes2 VALUES('" + c.modCode + "','" + c.classType + "','" + c.lecturer + "','" + c.notes + "');";
-                 String insertStatement = "INSERT INTO NEWCLASS VALUES('" + c.modCode + "','" + c.classType + "','" + c.lecturer + "','" + c.notes + "','" + c.locationOrLink + "','" + c.startTime + "','" + c.dayOfClass + "','"+ c.endTime + "');";
+                 String insertStatement = "INSERT INTO TESTCLASS VALUES('" + c.modCode + "','" + c.classType + "','" + c.lecturer + "','" + c.notes + "','" + c.locationOrLink + "','" + c.startTime + "','" + c.dayOfClass + "','"+ c.endTime + "');";
                 myBase.execSQL(insertStatement);
                 Toast.makeText(addClass.this, c.classType +  c.modCode + c.lecturer + c.notes  + c.dayOfClass + c.locationOrLink + "Saved Class for module ",
                         Toast.LENGTH_LONG).show();
@@ -86,7 +111,7 @@ public class addClass extends AppCompatActivity {
 
 
        // TimePicker picker=(TimePicker)findViewById(R.id.timePickerFrom);
-        from.setIs24HourView(true);
-        to.setIs24HourView(true);
+       // from.setIs24HourView(true);
+       // to.setIs24HourView(true);
     }
 }

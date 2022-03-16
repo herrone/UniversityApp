@@ -6,109 +6,48 @@
     android:layout_height="match_parent"
     tools:context=".ModulesAndClasses">
 
-    <TextView
-        android:id="@+id/classBox1"
-        android:layout_width="316dp"
-        android:layout_height="26dp"
-        android:layout_marginStart="35dp"
-        android:layout_marginTop="25dp"
-        android:layout_marginEnd="62dp"
-        android:layout_marginBottom="22dp"
-        app:layout_constraintBottom_toTopOf="@+id/classBox2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/myClassesTitle" />
 
-    <TextView
-        android:id="@+id/classBox2"
-        android:layout_width="316dp"
-        android:layout_height="26dp"
-        android:layout_marginStart="35dp"
-        android:layout_marginTop="22dp"
-        android:layout_marginEnd="62dp"
-        android:layout_marginBottom="26dp"
-        app:layout_constraintBottom_toTopOf="@+id/classBox3"
+    <Button
+        android:id="@+id/deleteModuleButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="222dp"
+        android:background="#03A9F4"
+        android:text="Delete Class"
+        android:textColor="#4A148C"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/classBox1" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.145" />
 
-    <TextView
-        android:id="@+id/classBox3"
-        android:layout_width="316dp"
-        android:layout_height="26dp"
-        android:layout_marginStart="35dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginEnd="62dp"
-        android:layout_marginBottom="15dp"
-        app:layout_constraintBottom_toTopOf="@+id/classBox4"
+    <Button
+        android:id="@+id/buttonGoToAddClass2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="222dp"
+        android:background="#03A9F4"
+        android:text="Add Class"
+        android:textColor="#4A148C"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.996"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/classBox2" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.828" />
 
-    <TextView
-        android:id="@+id/classBox4"
-        android:layout_width="316dp"
-        android:layout_height="26dp"
-        android:layout_marginStart="35dp"
-        android:layout_marginTop="2dp"
-        android:layout_marginEnd="62dp"
-        android:layout_marginBottom="7dp"
-        app:layout_constraintBottom_toTopOf="@+id/buttonGoToAddClass"
+    <ListView
+        android:id="@+id/classListView"
+        android:layout_width="409dp"
+        android:layout_height="210dp"
+        android:choiceMode="singleChoice"
+        android:listSelector='#666666'
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/classBox3" />
-
-    <TextView
-        android:id="@+id/moduleBox4"
-        android:layout_width="316dp"
-        android:layout_height="26dp"
-        android:layout_marginStart="25dp"
-        android:layout_marginTop="6dp"
-        android:layout_marginEnd="72dp"
-        android:layout_marginBottom="11dp"
-        app:layout_constraintBottom_toTopOf="@+id/buttonGoToAddModule"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/moduleBox3" />
-
-    <TextView
-        android:id="@+id/moduleBox3"
-        android:layout_width="316dp"
-        android:layout_height="26dp"
-        android:layout_marginStart="25dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginEnd="72dp"
-        android:layout_marginBottom="5dp"
-        app:layout_constraintBottom_toTopOf="@+id/moduleBox4"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/moduleBox2" />
-
-    <TextView
-        android:id="@+id/moduleBox2"
-        android:layout_width="316dp"
-        android:layout_height="26dp"
-        android:layout_marginStart="25dp"
-        android:layout_marginTop="23dp"
-        android:layout_marginEnd="72dp"
-        android:layout_marginBottom="17dp"
-        app:layout_constraintBottom_toTopOf="@+id/moduleBox3"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/moduleBox1" />
-
-    <TextView
-        android:id="@+id/moduleBox1"
-        android:layout_width="316dp"
-        android:layout_height="26dp"
-        android:layout_marginStart="25dp"
-        android:layout_marginTop="21dp"
-        android:layout_marginEnd="72dp"
-        android:layout_marginBottom="23dp"
-        app:layout_constraintBottom_toTopOf="@+id/moduleBox2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/MyModulesTitle" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.756" />
 
     <TextView
         android:id="@+id/myClassesTitle"
@@ -147,25 +86,55 @@
         android:textColor="#4A148C"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.91"
+        app:layout_constraintHorizontal_bias="0.996"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.099" />
+        app:layout_constraintVertical_bias="0.145" />
 
     <Button
-        android:id="@+id/buttonGoToAddClass"
+        android:id="@+id/editModuleButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="222dp"
+        android:background="#7CB342"
+        android:text="Edit Module"
+        android:textColor="#4A148C"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.007"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.145" />
+
+    <Button
+        android:id="@+id/editClassButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="222dp"
         android:background="#03A9F4"
-        android:text="Add Class"
+        android:text="Edit Class"
         android:textColor="#4A148C"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.914"
+        app:layout_constraintHorizontal_bias="0.054"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.8" />
+        app:layout_constraintVertical_bias="0.828" />
+
+    <Button
+        android:id="@+id/deleteClassButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="222dp"
+        android:background="#03A9F4"
+        android:text="Delete Class"
+        android:textColor="#4A148C"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.828" />
 
     <Button
         android:id="@+id/buttonSettings"
@@ -209,6 +178,7 @@
         app:layout_constraintStart_toEndOf="@+id/buttonCalendar"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0" />
+
     <Button
         android:id="@+id/buttonCalendar"
         android:layout_width="98dp"
@@ -222,5 +192,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0" />
+
+    <ListView
+        android:id="@+id/moduleListView"
+        android:layout_width="409dp"
+        android:layout_height="210dp"
+        android:choiceMode="singleChoice"
+        android:listSelector='#666666'
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.111" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

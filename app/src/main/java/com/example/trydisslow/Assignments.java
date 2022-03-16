@@ -7,9 +7,12 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.TextView;
+import android.widget.ListView;
 import android.widget.Toast;
+
+import java.util.ArrayList;
 
 public class Assignments extends AppCompatActivity {
 
@@ -17,34 +20,26 @@ public class Assignments extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_assignments);
-        TextView assignmentA = (TextView)findViewById(R.id.assignmentA);
-        TextView assignmentB = (TextView)findViewById(R.id.assignmentB);
-        TextView assignmentC = (TextView)findViewById(R.id.assignmentC);
+        ListView myListView = (ListView) findViewById(R.id.listView);
+        ArrayList<String> listItems = new ArrayList<String>();
+
         SQLiteDatabase myBase = getApplicationContext().openOrCreateDatabase("Names.db", 0, null);
-        Cursor query = myBase.rawQuery("SELECT * FROM NEWASSIGNMENT", null);
-      //  Cursor query2 = myBase.rawQuery("SELECT * FROM ClassesFullStrings2", null);
+        myBase.execSQL("CREATE TABLE if not exists TESTASSIGNMENT(title TEXT, code TEXT, dueDate TEXT, notes TEXT);");
+        Cursor query = myBase.rawQuery("SELECT * FROM TESTASSIGNMENT", null);
 
-        if(query.moveToFirst()){
+
+        if(query.moveToFirst()) {
             String name = query.getString(0);
-            assignmentA.setText(name);
-           if(query.moveToNext()) {
-               String name2 = query.getString(0);
-               assignmentB.setText(name2);
-           }
-            if(query.moveToNext()) {
-                String name3 = query.getString(0);
-                assignmentC.setText(name3);
+            listItems.add(name);
+            while (query.moveToNext()) {
+                name = query.getString(0);
+                listItems.add(name);
             }
-
-
-
         }
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(Assignments.this,R.layout.activity_assignment_list,listItems);
+        myListView.setAdapter(adapter);
 
-//        else {
-//            Toast t = Toast.makeText(getApplicationContext()
-//                    , "nope", Toast.LENGTH_LONG);
-//            t.show();
-//        }
+
         Button modulesAndClassesButton = (Button)findViewById(R.id.buttonModulesAndClasses);
         modulesAndClassesButton.setOnClickListener(new View.OnClickListener() {
             @Override
