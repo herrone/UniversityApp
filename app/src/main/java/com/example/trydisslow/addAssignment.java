@@ -42,7 +42,7 @@ public class addAssignment extends AppCompatActivity {
             //  moduleCodeArray[0] = "choose a module";
 
             SQLiteDatabase myBase = getApplicationContext().openOrCreateDatabase("Names.db", 0, null);
-            Cursor query = myBase.rawQuery("SELECT * FROM NEWASSIGNMENT2", null);
+            Cursor query = myBase.rawQuery("SELECT * FROM NEWMODULE3", null);
 
             if (query.moveToFirst()) {
                 String name = query.getString(0);
@@ -57,7 +57,7 @@ public class addAssignment extends AppCompatActivity {
                 }
 
             }
-            moduleCodeArray.add("a");
+            //moduleCodeArray.add("a");
 //create an adapter to describe how the items are displayed, adapters are used in several places in android.
 //There are multiple variations of this, but this is the basic variant.
 
@@ -90,8 +90,8 @@ public class addAssignment extends AppCompatActivity {
                     Assignment a = new Assignment(title, d.toString(), moduleCodeInQuestion, notes);
                     SQLiteDatabase myBase = getApplicationContext().openOrCreateDatabase("Names.db", 0, null);
 
-                    myBase.execSQL("CREATE TABLE if not exists NEWASSIGNMENT2(title TEXT, code TEXT, dueDate TEXT, notes TEXT);");
-                    String insertStatement = "INSERT INTO NEWASSIGNMENT2 VALUES('" + a.title + "','" + a.whichModuleIsTaskFor + "','" + a.dueDate + "','" + a.notes + "');";
+                    myBase.execSQL("CREATE TABLE if not exists NEWASSIGNMENT3(title TEXT, code TEXT, dueDate TEXT, notes TEXT);");
+                    String insertStatement = "INSERT INTO NEWASSIGNMENT3 VALUES('" + a.title + "','" + a.whichModuleIsTaskFor + "','" + a.dueDate + "','" + a.notes + "');";
                     // String insertStatement = "INSERT INTO Modules VALUES('" + m.nameMod + "','"+ m.moduleCode + "','"  + m.courseLeader + "','"  + m.modNotes + "')\"";
                     myBase.execSQL(insertStatement);
                     Toast.makeText(addAssignment.this, "Time of " + a.dueDate,

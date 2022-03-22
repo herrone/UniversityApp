@@ -48,9 +48,22 @@ public class editClass extends AppCompatActivity {
         ArrayList<String> moduleCodeArray = new ArrayList<String>();
 
         SQLiteDatabase myBase = getApplicationContext().openOrCreateDatabase("Names.db", 0, null);
-        String retrieveClass = "SELECT * FROM NEWCLASS2 WHERE code = '" + editableClass + "'";
+        String retrieveClass = "SELECT * FROM NEWCLASS3 WHERE code = '" + editableClass + "'";
         //code TEXT, type TEXT, lecturer TEXT, notes TEXT, location TEXT, day TEXT, start TEXT, finish TEXT
         Cursor query = myBase.rawQuery(retrieveClass, null);
+      //  SQLiteDatabase myBase = getApplicationContext().openOrCreateDatabase("Names.db", 0, null);
+        Cursor queryModuleCodes = myBase.rawQuery("SELECT * FROM NEWMODULE3", null);
+
+        if(query.moveToFirst()) {
+            while (query.moveToNext()) {
+                moduleCodeArray.add(query.getString(0));
+            }
+        }
+
+//create an adapter to describe how the items are displayed, adapters are used in several places in android.
+//There are multiple variations of this, but this is the basic variant.
+
+        ArrayAdapter<String> moduleCodeAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, moduleCodeArray);
 
         if (query.moveToFirst()) {
            // code TEXT, type TEXT, lecturer TEXT, notes TEXT, location TEXT, day TEXT, start TEXT, finish TEXT
@@ -62,9 +75,10 @@ public class editClass extends AppCompatActivity {
              day = query.getString(5);
             start= query.getString(6);
             finish = query.getString(7);
-//            notes.setText(notesText);
-//            lecturer.setText(professor);
-//            where.setText(location);
+           notes.setText(notesText);
+            lecturer.setText(professor);
+            where.setText(location);
+
 
         }
 
@@ -74,7 +88,7 @@ public class editClass extends AppCompatActivity {
 //create an adapter to describe how the items are displayed, adapters are used in several places in android.
 //There are multiple variations of this, but this is the basic variant.
 
-        ArrayAdapter<String> moduleCodeAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, moduleCodeArray);
+        //ArrayAdapter<String> moduleCodeAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, moduleCodeArray);
         String[] classTypeItems = new String[]{"choose class type", "lecture", "practical", "tutorial"};
         ArrayAdapter<String> classTypeAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, classTypeItems);
 //set the spinners adapter to the previously created one.

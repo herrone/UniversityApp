@@ -31,6 +31,7 @@ public class editAssignment extends AppCompatActivity {
         setContentView(R.layout.activity_edit_assignment);
         Intent intent = getIntent();
         String editableAssignment = intent.getExtras().getString("editableAssignment");
+
         Toast.makeText(this,editableAssignment,
                 Toast.LENGTH_SHORT).show();
         Spinner moduleCodeList = findViewById(R.id.moduleCodeList);
@@ -52,7 +53,7 @@ public class editAssignment extends AppCompatActivity {
         TimePicker timeDue = (TimePicker) findViewById(R.id.timeDue);
         DatePicker dateDue = (DatePicker) findViewById(R.id.dateDue);
         SQLiteDatabase myBase = getApplicationContext().openOrCreateDatabase("Names.db", 0, null);
-        String retrieveDetails = "SELECT * FROM NEWASSIGNMENT2 WHERE title = '" + editableAssignment + "'";
+        String retrieveDetails = "SELECT * FROM NEWASSIGNMENT3 WHERE title = '" + editableAssignment + "'";
         Cursor assignmentDetails = myBase.rawQuery(retrieveDetails, null);
 
         if (assignmentDetails.moveToFirst()) {
@@ -76,7 +77,7 @@ public class editAssignment extends AppCompatActivity {
             @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onClick(View v) {
-                String deleteStatement = "DELETE FROM NEWASSIGNMENT2 WHERE title = '" + editableAssignment + "'";
+               String deleteStatement = "DELETE FROM NEWASSIGNMENT3 WHERE title = '" + editableAssignment + "'";
                 myBase.execSQL(deleteStatement);
                 String notes = assignmentNotes.getText().toString();
                 String title = assignmentTitle.getText().toString();
@@ -91,14 +92,44 @@ public class editAssignment extends AppCompatActivity {
                 Assignment a = new Assignment(title, d.toString(), moduleCodeInQuestion, notes);
                 SQLiteDatabase myBase = getApplicationContext().openOrCreateDatabase("Names.db", 0, null);
 
-                myBase.execSQL("CREATE TABLE if not exists NEWASSIGNMENT2(title TEXT, code TEXT, dueDate TEXT, notes TEXT);");
-                String insertStatement = "INSERT INTO NEWASSIGNMENT2 VALUES('" + a.title + "','" + a.whichModuleIsTaskFor + "','" + a.dueDate + "','" + a.notes + "');";
+                myBase.execSQL("CREATE TABLE if not exists NEWASSIGNMENT3(title TEXT, code TEXT, dueDate TEXT, notes TEXT);");
+                String insertStatement = "INSERT INTO NEWASSIGNMENT3 VALUES('" + a.title + "','" + a.whichModuleIsTaskFor + "','" + a.dueDate + "','" + a.notes + "');";
                 // String insertStatement = "INSERT INTO Modules VALUES('" + m.nameMod + "','"+ m.moduleCode + "','"  + m.courseLeader + "','"  + m.modNotes + "')\"";
                 myBase.execSQL(insertStatement);
                 Toast.makeText(editAssignment.this, "Time of " + a.dueDate,
                         Toast.LENGTH_LONG).show();
                 startActivity(new Intent(editAssignment.this, Assignments.class));
 
+            }
+        });
+        Button modulesAndClassesButton = (Button)findViewById(R.id.buttonModulesAndClasses);
+        modulesAndClassesButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(editAssignment.this, ModulesAndClasses.class));
+            }
+        });
+        Button assignmentsButton = (Button) findViewById(R.id.buttonAssignments);
+        assignmentsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(editAssignment.this, Assignments.class));
+            }
+        });
+
+
+        Button settingsButton = (Button)findViewById(R.id.buttonSettings);
+        settingsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(editAssignment.this, Settings.class));
+            }
+        });
+        Button calendarButton = (Button) findViewById(R.id.buttonCalendar);
+        calendarButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(editAssignment.this, "Already here", Toast.LENGTH_LONG).show();
             }
         });
     }

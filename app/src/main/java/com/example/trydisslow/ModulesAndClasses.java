@@ -36,9 +36,9 @@ String selectedClass;
 
         SQLiteDatabase myBase = getApplicationContext().openOrCreateDatabase("Names.db", 0, null);
 
-        myBase.execSQL("CREATE TABLE if not exists NEWMODULE8(code TEXT, type TEXT, lecturer TEXT, notes TEXT, location TEXT, day TEXT, start TEXT, finish TEXT );");
+        myBase.execSQL("CREATE TABLE if not exists NEWMODULE3(title TEXT, code TEXT, leader TEXT, notes TEXT);");
 
-        Cursor moduleQuery = myBase.rawQuery("SELECT * FROM NEWMODULE8", null);
+        Cursor moduleQuery = myBase.rawQuery("SELECT * FROM NEWMODULE3", null);
 //
 //        moduleListItems.add("a");
 //        moduleListItems.add("a");
@@ -50,7 +50,7 @@ String selectedClass;
             String name = moduleQuery.getString(0);
            // moduleListItems.add(name);
             while (moduleQuery.moveToNext()) {
-                name = moduleQuery.getString(1);
+                name = moduleQuery.getString(0);
                 moduleListItems.add(name);
             }
         }
@@ -70,14 +70,14 @@ String selectedClass;
         myClassListView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
        // myClassListView.getSelectedItem();
 //
-        myBase.execSQL("CREATE TABLE if not exists NEWCLASS2(code TEXT, type TEXT, lecturer TEXT, notes TEXT, location TEXT, day TEXT, start TEXT, finish TEXT );");
-         Cursor classQuery = myBase.rawQuery("SELECT * FROM NEWCLASS2", null);
+        myBase.execSQL("CREATE TABLE if not exists NEWCLASS3(code TEXT, type TEXT, lecturer TEXT, notes TEXT, location TEXT, day TEXT, start TEXT, finish TEXT );");
+         Cursor classQuery = myBase.rawQuery("SELECT * FROM NEWCLASS3", null);
 
         if(classQuery.moveToFirst()) {
-            String name = classQuery.getString(0) + classQuery.getString(1);
+            String name = classQuery.getString(1) + classQuery.getString(1);
             classListItems.add(name);
             while (classQuery.moveToNext()) {
-                name = classQuery.getString(0);
+                name = classQuery.getString(1);
                 classListItems.add(name);
             }
         }
@@ -155,7 +155,9 @@ String selectedClass;
         deleteModuleButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-            //    startActivity(new Intent(ModulesAndClasses.this, editModule.class));
+                String deleteStatement = "DELETE FROM NEWMODULE3 WHERE title = '" + selectedModule + "';";
+                myBase.execSQL(deleteStatement);
+                startActivity(new Intent(ModulesAndClasses.this, ModulesAndClasses.class));
 
             }
         });
@@ -173,7 +175,9 @@ String selectedClass;
         deleteClassButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-              //  startActivity(new Intent(ModulesAndClasses.this, editModule.class));
+                String deleteStatement = "DELETE FROM NEWCLASS3 WHERE code = '" + selectedClass + "'";
+                myBase.execSQL(deleteStatement);
+                startActivity(new Intent(ModulesAndClasses.this, ModulesAndClasses.class));
             }
         });
 

@@ -30,7 +30,7 @@ public class editModule extends AppCompatActivity {
         Toast.makeText(this,editableModule,
                 Toast.LENGTH_SHORT).show();
         SQLiteDatabase myBase = getApplicationContext().openOrCreateDatabase("Names.db", 0, null);
-        String retrieveModule = "SELECT * from NEWMODULE8 WHERE title = '" + editableModule + "'";
+        String retrieveModule = "SELECT * from NEWMODULE3 WHERE title = '" + editableModule + "'";
 //       // myBase.execSQL(retrieveModule);
         Cursor query = myBase.rawQuery(retrieveModule, null);
 //

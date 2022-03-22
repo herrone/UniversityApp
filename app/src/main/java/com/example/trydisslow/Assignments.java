@@ -21,6 +21,7 @@ String selected;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        String selectedAssignment;
         setContentView(R.layout.activity_assignments);
 
         ListView myListView = (ListView) findViewById(R.id.listView);
@@ -28,8 +29,8 @@ String selected;
         ArrayList<String> listItems = new ArrayList<String>();
 
         SQLiteDatabase myBase = getApplicationContext().openOrCreateDatabase("Names.db", 0, null);
-        myBase.execSQL("CREATE TABLE if not exists NEWASSIGNMENT2(title TEXT, code TEXT, dueDate TEXT, notes TEXT);");
-        Cursor query = myBase.rawQuery("SELECT * FROM NEWASSIGNMENT2", null);
+        myBase.execSQL("CREATE TABLE if not exists NEWASSIGNMENT3(title TEXT, code TEXT, dueDate TEXT, notes TEXT);");
+        Cursor query = myBase.rawQuery("SELECT * FROM NEWASSIGNMENT3", null);
 
 
         if(query.moveToFirst()) {
@@ -50,7 +51,7 @@ String selected;
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
              selected = myListView.getItemAtPosition(i).toString();
-
+             //   selectedModule = myModuleListView.getItemAtPosition(i).toString();
             //    Toast.makeText(Assignments.this, s, Toast.LENGTH_LONG).show();
                // adapter.dismiss(); // If you want to close the adapter
             }
@@ -105,6 +106,16 @@ String selected;
 
                 i.putExtra("editableAssignment", selected);
                 startActivity(i);
+
+            }
+        });
+        Button deleteAssignmentButton = (Button)findViewById(R.id.deleteAssignmentButton);
+        deleteAssignmentButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String deleteStatement = "DELETE FROM NEWASSIGNMENT3 WHERE title = '" + selected + "';";
+                myBase.execSQL(deleteStatement);
+                startActivity(new Intent(Assignments.this, Assignments.class));
 
             }
         });

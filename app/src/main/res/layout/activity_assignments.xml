@@ -6,6 +6,21 @@
     android:layout_height="match_parent"
     tools:context=".Assignments">
 
+    <Button
+        android:id="@+id/deleteAssignmentButton"
+        android:layout_width="132dp"
+        android:layout_height="52dp"
+        android:layout_marginTop="222dp"
+        android:background="#03A9F4"
+        android:text="Delete Assignment"
+        android:textColor="#4A148C"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.828" />
+
     <EditText
         android:id="@+id/assignmentTitleInput"
         android:layout_width="299dp"
@@ -93,23 +108,23 @@
 
     <Button
         android:id="@+id/buttonGoToAddAssignments"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="142dp"
+        android:layout_height="47dp"
         android:layout_marginTop="222dp"
         android:background="#03A9F4"
         android:text="Add Assignment"
         android:textColor="#4A148C"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.815"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.757" />
+        app:layout_constraintVertical_bias="0.828" />
 
     <Button
         android:id="@+id/buttonGoToEditAssignments"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="136dp"
+        android:layout_height="49dp"
         android:layout_marginTop="222dp"
         android:background="#03A9F4"
         android:text="Edit Assignment"
@@ -119,6 +134,6 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.757" />
+        app:layout_constraintVertical_bias="0.828" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

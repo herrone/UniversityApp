@@ -40,11 +40,11 @@ public class addClass extends AppCompatActivity {
      //  moduleCodeArray[0] = "choose a module";
 
         SQLiteDatabase myBase = getApplicationContext().openOrCreateDatabase("Names.db", 0, null);
-        Cursor query = myBase.rawQuery("SELECT * FROM NEWMODULE8", null);
+        Cursor query = myBase.rawQuery("SELECT * FROM NEWMODULE3", null);
 
         if(query.moveToFirst()) {
             while (query.moveToNext()) {
-                moduleCodeArray.add(query.getString(0));
+                moduleCodeArray.add(query.getString(1));
             }
         }
 
@@ -94,9 +94,9 @@ public class addClass extends AppCompatActivity {
 
 
                 //myBase.execSQL("CREATE TABLE if not exists Classes(code TEXT, type TEXT, lecturer TEXT, notes TEXT, location TEXT, day TEXT, start TIME, finish TIME );");
-                myBase.execSQL("CREATE TABLE if not exists NEWCLASS2(code TEXT, type TEXT, lecturer TEXT, notes TEXT, location TEXT, day TEXT, start TEXT, finish TEXT );");
+                myBase.execSQL("CREATE TABLE if not exists NEWCLASS3(code TEXT, type TEXT, lecturer TEXT, notes TEXT, location TEXT, day TEXT, start TEXT, finish TEXT );");
                // String insertStatement = "INSERT INTO Classes2 VALUES('" + c.modCode + "','" + c.classType + "','" + c.lecturer + "','" + c.notes + "');";
-                 String insertStatement = "INSERT INTO NEWCLASS2 VALUES('" + c.modCode + "','" + c.classType + "','" + c.lecturer + "','" + c.notes + "','" + c.locationOrLink + "','" + c.startTime + "','" + c.dayOfClass + "','"+ c.endTime + "');";
+                 String insertStatement = "INSERT INTO NEWCLASS3 VALUES('" + c.modCode + "','" + c.classType + "','" + c.lecturer + "','" + c.notes + "','" + c.locationOrLink + "','" + c.startTime + "','" + c.dayOfClass + "','"+ c.endTime + "');";
                 myBase.execSQL(insertStatement);
                 Toast.makeText(addClass.this, c.classType +  c.modCode + c.lecturer + c.notes  + c.dayOfClass + c.locationOrLink + "Saved Class for module ",
                         Toast.LENGTH_LONG).show();
