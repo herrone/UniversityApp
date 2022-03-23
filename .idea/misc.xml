@@ -8,17 +8,18 @@
         <entry key="app/src/main/res/layout/activity_add_module.xml" value="0.14629211425781252" />
         <entry key="app/src/main/res/layout/activity_add_module2.xml" value="0.25831298828125004" />
         <entry key="app/src/main/res/layout/activity_assignment_list.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/activity_assignments.xml" value="0.22984619140625004" />
-        <entry key="app/src/main/res/layout/activity_calendar.xml" value="0.20774078369140625" />
+        <entry key="app/src/main/res/layout/activity_assignments.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_calendar.xml" value="0.24742268041237114" />
         <entry key="app/src/main/res/layout/activity_class_list.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_delete.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/activity_edit_assignment.xml" value="0.31987915039062503" />
+        <entry key="app/src/main/res/layout/activity_edit_assignment.xml" value="0.32867431640625" />
         <entry key="app/src/main/res/layout/activity_edit_class.xml" value="0.3330718994140625" />
         <entry key="app/src/main/res/layout/activity_edit_module.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.22523636127073837" />
         <entry key="app/src/main/res/layout/activity_module_list.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/activity_modules_and_classes.xml" value="0.14814814814814814" />
-        <entry key="app/src/main/res/layout/activity_settings.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_modules_and_classes.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_modules_and_classes_2.xml" value="0.12968591691995948" />
+        <entry key="app/src/main/res/layout/activity_settings.xml" value="0.33966827392578125" />
         <entry key="app/src/main/res/layout/activity_try_scroll.xml" value="0.1" />
         <entry key="app/src/main/res/layout/calendar_screen.xml" value="0.1" />
       </map>

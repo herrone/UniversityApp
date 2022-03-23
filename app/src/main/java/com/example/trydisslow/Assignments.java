@@ -29,8 +29,8 @@ String selected;
         ArrayList<String> listItems = new ArrayList<String>();
 
         SQLiteDatabase myBase = getApplicationContext().openOrCreateDatabase("Names.db", 0, null);
-        myBase.execSQL("CREATE TABLE if not exists NEWASSIGNMENT3(title TEXT, code TEXT, dueDate TEXT, notes TEXT);");
-        Cursor query = myBase.rawQuery("SELECT * FROM NEWASSIGNMENT3", null);
+        myBase.execSQL("CREATE TABLE if not exists NEWASSIGNMENTWITHIDS2(title TEXT, code TEXT, dueDate TEXT, notes TEXT, id INT, hID INT, tfID INT, feID INT);");
+        Cursor query = myBase.rawQuery("SELECT * FROM NEWASSIGNMENTWITHIDS2", null);
 
 
         if(query.moveToFirst()) {
@@ -113,7 +113,7 @@ String selected;
         deleteAssignmentButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String deleteStatement = "DELETE FROM NEWASSIGNMENT3 WHERE title = '" + selected + "';";
+                String deleteStatement = "DELETE FROM NEWASSIGNMENTWITHIDS2 WHERE title = '" + selected + "';";
                 myBase.execSQL(deleteStatement);
                 startActivity(new Intent(Assignments.this, Assignments.class));
 

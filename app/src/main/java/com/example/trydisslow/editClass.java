@@ -48,7 +48,7 @@ public class editClass extends AppCompatActivity {
         ArrayList<String> moduleCodeArray = new ArrayList<String>();
 
         SQLiteDatabase myBase = getApplicationContext().openOrCreateDatabase("Names.db", 0, null);
-        String retrieveClass = "SELECT * FROM NEWCLASS3 WHERE code = '" + editableClass + "'";
+        String retrieveClass = "SELECT * FROM NEWCLASSWITHIDS WHERE title = '" + editableClass + "'";
         //code TEXT, type TEXT, lecturer TEXT, notes TEXT, location TEXT, day TEXT, start TEXT, finish TEXT
         Cursor query = myBase.rawQuery(retrieveClass, null);
       //  SQLiteDatabase myBase = getApplicationContext().openOrCreateDatabase("Names.db", 0, null);
@@ -81,7 +81,6 @@ public class editClass extends AppCompatActivity {
 
 
         }
-
 
         //from.set
 

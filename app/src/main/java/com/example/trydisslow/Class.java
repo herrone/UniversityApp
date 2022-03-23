@@ -14,11 +14,12 @@ public class Class {
     String locationOrLink;
     String notes;
     String lecturer;
+    int id;
 
     public Class(){
 
     }
-    public Class( String code, String type, String day, String startTimeClass, String endTimeClass, String locationOrLinkClass, String notesClass, String lecturerClass){
+    public Class( String code, String type, String day, String startTimeClass, String endTimeClass, String locationOrLinkClass, String notesClass, String lecturerClass, int id){
 
         modCode = code;
         classType = type;
@@ -28,6 +29,7 @@ public class Class {
         locationOrLink = locationOrLinkClass;
         notes = notesClass;
         lecturer = lecturerClass;
+        this.id = id;
 
     }
 }

@@ -6,6 +6,45 @@
     android:layout_height="match_parent"
     tools:context=".addAssignment">
 
+    <CheckBox
+        android:id="@+id/notificationAssignmentTwentyFourHoursBefore"
+        android:layout_width="113dp"
+        android:layout_height="24dp"
+        android:text="24 hours before"
+        android:textSize="10sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.486"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.776" />
+
+    <CheckBox
+        android:id="@+id/notificationAssignmentFourtyEightHoursBefore"
+        android:layout_width="113dp"
+        android:layout_height="24dp"
+        android:text="48 hours before"
+        android:textSize="10sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.922"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.776" />
+
+    <CheckBox
+        android:id="@+id/notificationAssignmentOneHourBefore"
+        android:layout_width="113dp"
+        android:layout_height="24dp"
+        android:text="1 hour before"
+        android:textSize="10sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.053"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.776" />
+
     <TextView
         android:id="@+id/addAssignmentTitle"
         android:layout_width="371dp"
@@ -30,7 +69,7 @@
         app:layout_constraintHorizontal_bias="0.142"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.73" />
+        app:layout_constraintVertical_bias="0.672" />
 
     <Spinner
         android:id="@+id/moduleCodeList"
@@ -45,7 +84,6 @@
         app:layout_constraintVertical_bias="0.11" />
 
 
-
     <TimePicker
         android:id="@+id/timeDue"
         android:layout_width="215dp"
@@ -56,13 +94,13 @@
         app:layout_constraintHorizontal_bias="0.831"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.604" />
+        app:layout_constraintVertical_bias="0.556" />
 
     <EditText
         android:id="@+id/dueTimeBox"
         android:layout_width="100dp"
         android:layout_height="39dp"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="20dp"
         android:layout_marginEnd="38dp"
         android:ems="10"
         android:inputType="textPersonName"
@@ -72,7 +110,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.552" />
+        app:layout_constraintVertical_bias="0.508" />
 
     <EditText
         android:id="@+id/dueDateBox"
@@ -88,7 +126,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.306" />
+        app:layout_constraintVertical_bias="0.296" />
 
     <DatePicker
         android:id="@+id/dateDue"
@@ -100,10 +138,10 @@
         android:datePickerMode="spinner"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.75"
+        app:layout_constraintHorizontal_bias="0.625"
         app:layout_constraintStart_toEndOf="@+id/dueDateBox"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.357" />
+        app:layout_constraintVertical_bias="0.338" />
 
     <EditText
         android:id="@+id/assignmentTitleInput"
@@ -112,10 +150,10 @@
         android:text="Enter Assignment Title"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.262"
+        app:layout_constraintHorizontal_bias="0.279"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.196" />
+        app:layout_constraintVertical_bias="0.174" />
 
     <Button
         android:id="@+id/buttonSaveAssignment"
@@ -126,10 +164,10 @@
         android:textColor="#4A148C"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.404"
+        app:layout_constraintHorizontal_bias="0.418"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.853" />
+        app:layout_constraintVertical_bias="0.878" />
 
     <Button
         android:id="@+id/buttonSettings"
@@ -188,5 +226,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-medium"
+        android:text="Set Notifications"
+        android:textSize="16sp"
+        tools:layout_editor_absoluteX="25dp"
+        tools:layout_editor_absoluteY="514dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

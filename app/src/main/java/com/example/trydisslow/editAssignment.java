@@ -1,13 +1,20 @@
 package com.example.trydisslow;
 
+import android.app.AlarmManager;
+import android.app.Notification;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.media.RingtoneManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -16,9 +23,12 @@ import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Random;
 
 public class editAssignment extends AppCompatActivity {
     String name;
@@ -77,7 +87,28 @@ public class editAssignment extends AppCompatActivity {
             @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onClick(View v) {
-               String deleteStatement = "DELETE FROM NEWASSIGNMENT3 WHERE title = '" + editableAssignment + "'";
+//                Cursor moduleQuery = myBase.rawQuery("SELECT * FROM NEWASSIGNMENTSWITHIDS WHERE title = " + editableAssignment + ";", null);
+//              //  title TEXT, code TEXT, dueDate TEXT, notes TEXT, id INT, hID INT, tfID INT, feID INT
+//                if(moduleQuery.moveToFirst()) {
+//                   int hourCode = moduleQuery.getInt(5);
+//                    int thourCode = moduleQuery.getInt(6);
+//                    int fhourCode = moduleQuery.getInt(7);
+//                 if (hourCode != 0){
+//                     Context context = addAssignment.this;
+//                     Intent intent = new Intent(context, MainActivity.class);
+//                     PendingIntent activity = PendingIntent.getActivity(context, notificationId, intent, PendingIntent.FLAG_CANCEL_CURRENT);
+//                    // scheduleNotification(addAssignment.this, delayCalculator(d, 24), r.nextInt(100), "24 Hour Reminder", title + "due soon");
+//                 }
+//                    if (thourCode != 0){
+//
+//                    }
+//                    if (fhourCode != 0){
+//
+//                    }
+//
+//                }
+
+                String deleteStatement = "DELETE FROM NEWASSIGNMENTWITHIDS WHERE title = '" + editableAssignment + "'";
                 myBase.execSQL(deleteStatement);
                 String notes = assignmentNotes.getText().toString();
                 String title = assignmentTitle.getText().toString();
@@ -89,11 +120,40 @@ public class editAssignment extends AppCompatActivity {
                 d.setYear(dateDue.getYear());
                 d.setMonth(dateDue.getMonth());
                 d.setDate(dateDue.getDayOfMonth());
-                Assignment a = new Assignment(title, d.toString(), moduleCodeInQuestion, notes);
-                SQLiteDatabase myBase = getApplicationContext().openOrCreateDatabase("Names.db", 0, null);
+                int hourID = 0;
+                int tfHourID = 0;
+                int feHourID = 0;
+                CheckBox hour = findViewById(R.id.notificationAssignmentOneHourBefore);
+                CheckBox twfohour = findViewById(R.id.notificationAssignmentTwentyFourHoursBefore);
+                CheckBox foeihour = findViewById(R.id.notificationAssignmentFourtyEightHoursBefore);
+                Random r = new Random();
+                if(hour.isChecked()){
+                    Toast.makeText(editAssignment.this, "1 hour",
+                            Toast.LENGTH_LONG).show();
+                    hourID = r.nextInt(1000);
+                    scheduleNotification(editAssignment.this, delayCalculator(d, 1), r.nextInt(100), "1 Hour Reminder", title + "due soon");
 
-                myBase.execSQL("CREATE TABLE if not exists NEWASSIGNMENT3(title TEXT, code TEXT, dueDate TEXT, notes TEXT);");
-                String insertStatement = "INSERT INTO NEWASSIGNMENT3 VALUES('" + a.title + "','" + a.whichModuleIsTaskFor + "','" + a.dueDate + "','" + a.notes + "');";
+                    //  scheduleNotification(addAssignment.this, delayCalculator(d, 1),r.nextInt() , "1 Hour Warning", title);
+                }
+                if(twfohour.isChecked()){
+                    tfHourID = r.nextInt(1000);
+
+                    scheduleNotification(editAssignment.this, delayCalculator(d, 24), r.nextInt(100), "24 Hour Reminder", title + "due soon");
+                    //  scheduleNotification(addAssignment.this, delayCalculator(d, 24), r.nextInt(), "24 Hour Warning", title);
+                }
+                if(foeihour.isChecked()){
+                    //  scheduleNotification(addAssignment.this, delayCalculator(d, 48), r.nextInt(), "48 Hour Warning", title);
+                    feHourID = r.nextInt(1000);
+                    scheduleNotification(editAssignment.this, delayCalculator(d, 48), r.nextInt(100), "48 Hour Reminder", title + "due soon");
+                }
+
+
+                SQLiteDatabase myBase = getApplicationContext().openOrCreateDatabase("Names.db", 0, null);
+//                AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+//                alarmManager.cancel();
+                Assignment a = new Assignment(title, d.toString(), moduleCodeInQuestion, notes, hourID, tfHourID, feHourID);
+                myBase.execSQL("CREATE TABLE if not exists NEWASSIGNMENTWITHIDS2(title TEXT, code TEXT, dueDate TEXT, notes TEXT, id TEXT, hID INT, tfID INT, feID INT);");
+                String insertStatement = "INSERT INTO NEWASSIGNMENTWITHIDS2 VALUES('" + a.title + "','" + a.whichModuleIsTaskFor + "','" + a.dueDate + "','" + a.notes + "'," + a.assignmentId +"," + a.hourID +"," + a.tfHourId +"," + a.feHourId +");";
                 // String insertStatement = "INSERT INTO Modules VALUES('" + m.nameMod + "','"+ m.moduleCode + "','"  + m.courseLeader + "','"  + m.modNotes + "')\"";
                 myBase.execSQL(insertStatement);
                 Toast.makeText(editAssignment.this, "Time of " + a.dueDate,
@@ -132,6 +192,48 @@ public class editAssignment extends AppCompatActivity {
                 Toast.makeText(editAssignment.this, "Already here", Toast.LENGTH_LONG).show();
             }
         });
+
+    }
+    public void scheduleNotification(Context context, long delay, int notificationId, String title, String content) {//delay is after how much time(in millis) from current time you want to schedule the notification
+        String CHANNEL_ID="MYCHANNEL";
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(getApplicationContext(),CHANNEL_ID)
+                .setContentTitle(title)
+                .setContentText(content)
+                .setAutoCancel(true)
+                .setSmallIcon(R.drawable.alarm)
+                //.setLargeIcon(((BitmapDrawable) context.getResources().getDrawable(R.drawable.app_icon)).getBitmap())
+                .setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION));
+
+        Intent intent = new Intent(context, MainActivity.class);
+        PendingIntent activity = PendingIntent.getActivity(context, notificationId, intent, PendingIntent.FLAG_CANCEL_CURRENT);
+        builder.setContentIntent(activity);
+
+        Notification notification = builder.build();
+
+        Intent notificationIntent = new Intent(context, MyNotificationPublisher.class);
+        notificationIntent.putExtra(MyNotificationPublisher.NOTIFICATION_ID, notificationId);
+        notificationIntent.putExtra(MyNotificationPublisher.NOTIFICATION, notification);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(context, notificationId, notificationIntent, PendingIntent.FLAG_CANCEL_CURRENT);
+
+        long futureInMillis = SystemClock.elapsedRealtime() + delay;
+        AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+        alarmManager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, futureInMillis, pendingIntent);
+    }
+
+
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    public long delayCalculator(Date due, int hours){
+
+       // SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM-dd 'at' HH:mm:ss z");
+        Date date = new Date(System.currentTimeMillis());
+        long dueMillis = due.getTime();
+        long nowMillis = date.getTime();
+
+        long beforeMillis = hours * 60 * 60 * 1000;
+
+
+        long delay = dueMillis - nowMillis - beforeMillis;
+        return delay;
     }
 }
 //       }

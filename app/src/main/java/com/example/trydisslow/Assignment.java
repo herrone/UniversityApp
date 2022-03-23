@@ -11,19 +11,37 @@ public class Assignment extends AppCompatActivity {
     String whichModuleIsTaskFor;
     String notes;
     String title;
-    int assignmentCode;
+    int assignmentId;
+    int hourID;
+    int tfHourId;
+    int feHourId;
 
     Random random = new Random();
     public Assignment(){
-        assignmentCode = random.nextInt(100);
+        //assignmentCode = random.nextInt(100);
     }
-    public Assignment(String name, String due,  String whichModule, String note){
+    public Assignment(String name, String due,  String whichModule, String note, int h, int t, int f){
 
         dueDate = due;
         //percentOfGrade = percent;
         whichModuleIsTaskFor = whichModule;
         notes = note;
         title = name;
-        assignmentCode = random.nextInt(100);
+        assignmentId = random.nextInt(1000);
+        h = hourID;
+        t = tfHourId;
+        f = feHourId;
+    }
+    public Assignment(String name, String due,  String whichModule, String note, int id, int h, int t, int f){
+
+        dueDate = due;
+        //percentOfGrade = percent;
+        whichModuleIsTaskFor = whichModule;
+        notes = note;
+        title = name;
+        assignmentId = id;
+        h = hourID;
+        t = tfHourId;
+        f = feHourId;
     }
 }

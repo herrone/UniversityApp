@@ -27,6 +27,7 @@ String selectedClass;
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(ModulesAndClasses.this, addClass.class));
+
             }
         });
       ListView myModuleListView = (ListView) findViewById(R.id.moduleListView);
@@ -70,28 +71,18 @@ String selectedClass;
         myClassListView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
        // myClassListView.getSelectedItem();
 //
-        myBase.execSQL("CREATE TABLE if not exists NEWCLASS3(code TEXT, type TEXT, lecturer TEXT, notes TEXT, location TEXT, day TEXT, start TEXT, finish TEXT );");
-         Cursor classQuery = myBase.rawQuery("SELECT * FROM NEWCLASS3", null);
+        myBase.execSQL("CREATE TABLE if not exists NEWCLASSWITHIDS(code TEXT, type TEXT, lecturer TEXT, notes TEXT, location TEXT, day TEXT, start TEXT, finish TEXT, id INT);");
+         Cursor classQuery = myBase.rawQuery("SELECT * FROM NEWCLASSWITHIDS", null);
 
         if(classQuery.moveToFirst()) {
-            String name = classQuery.getString(1) + classQuery.getString(1);
+            String name = classQuery.getString(8) + "," + classQuery.getString(1);
             classListItems.add(name);
             while (classQuery.moveToNext()) {
-                name = classQuery.getString(1);
+                name = classQuery.getString(8) + "," + classQuery.getString(1);
                 classListItems.add(name);
             }
         }
-//        classListItems.add("a");
-//        classListItems.add("a");
-//        classListItems.add("a");
-//        classListItems.add("a");
-//        classListItems.add("a");
-//        classListItems.add("a");
-//        classListItems.add("a");
-//        classListItems.add("a");
-//        classListItems.add("a");classListItems.add("a");
-
-
+//
         ArrayAdapter<String> classAdapter = new ArrayAdapter<String>(ModulesAndClasses.this,R.layout.activity_class_list,classListItems);
         myClassListView.setAdapter(classAdapter);
         myClassListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -100,8 +91,6 @@ String selectedClass;
 
                 selectedClass = myClassListView.getItemAtPosition(i).toString();
 
-                //    Toast.makeText(Assignments.this, s, Toast.LENGTH_LONG).show();
-                // adapter.dismiss(); // If you want to close the adapter
             }
         });
 
@@ -175,7 +164,9 @@ String selectedClass;
         deleteClassButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String deleteStatement = "DELETE FROM NEWCLASS3 WHERE code = '" + selectedClass + "'";
+              String[] bits =  selectedClass.split(",");
+             int selectedCode = Integer.parseInt(bits[0]);
+                String deleteStatement = "DELETE FROM NEWCLASSWITHIDS WHERE id = " + selectedCode+ ";";
                 myBase.execSQL(deleteStatement);
                 startActivity(new Intent(ModulesAndClasses.this, ModulesAndClasses.class));
             }
