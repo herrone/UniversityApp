@@ -1,6 +1,7 @@
 package com.example.trydisslow;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatButton;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,7 +14,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Button letsGoButton = (Button)findViewById(R.id.buttonLetsGo);
+        getSupportActionBar().hide();
+        AppCompatButton letsGoButton = (AppCompatButton)findViewById(R.id.buttonLetsGo);
         letsGoButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

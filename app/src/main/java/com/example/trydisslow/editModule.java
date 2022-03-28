@@ -18,6 +18,7 @@ public class editModule extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_module);
+        getSupportActionBar().hide();
         Intent intent = getIntent();
         String editableModule = intent.getExtras().getString("editableModule");
 
@@ -51,7 +52,7 @@ public class editModule extends AppCompatActivity {
         moduleLeader.setText(leader);
 }
 //        Module m = new Module();
-//        Button saveModuleButton = (Button) findViewById(R.id.buttonSaveModule);
+//        AppCompatButton saveModuleButton = (AppCompatButton) findViewById(R.id.buttonSaveModule);
 //        saveModuleButton.setOnClickListener(new View.OnClickListener() {
 //            @RequiresApi(api = Build.VERSION_CODES.M)
 //            @Override

@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatButton;
 
 import java.util.ArrayList;
 
@@ -32,6 +33,7 @@ public class editClass extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_class);
+        getSupportActionBar().hide();
         Intent intent = getIntent();
         String editableClass = intent.getExtras().getString("editableClass");
 
@@ -100,7 +102,7 @@ public class editClass extends AppCompatActivity {
 //There are multiple variations of this, but this is the basic variant.
         ArrayAdapter<String> adapterDays = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, days);
         dayList.setAdapter(adapterDays);
-        Button saveClassButton = (Button) findViewById(R.id.buttonSaveClass);
+        AppCompatButton saveClassButton = (AppCompatButton) findViewById(R.id.buttonSaveClass);
         saveClassButton.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.M)
             @Override

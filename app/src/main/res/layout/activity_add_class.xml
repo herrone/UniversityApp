@@ -5,7 +5,24 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".addClass">
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="@drawable/customborder"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" >
 
+        <TextView
+            android:id="@+id/addClassesTitle"
+            android:layout_width="182dp"
+            android:layout_height="40dp"
+            android:fontFamily="@font/caladea_bold"
+            android:text="Add a Class"
+            android:textSize="24sp" />
+    </LinearLayout>
     <TextView
         android:id="@+id/dayTextPrompt"
         android:layout_width="53dp"
@@ -36,8 +53,8 @@
 
     <EditText
         android:id="@+id/addLocationBox"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="326dp"
+        android:layout_height="40dp"
         android:text="Add Location or videolink "
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -120,20 +137,6 @@
         app:layout_constraintVertical_bias="0.219" />
 
     <TextView
-        android:id="@+id/addClassesTitle"
-        android:layout_width="182dp"
-        android:layout_height="40dp"
-        android:fontFamily="sans-serif-black"
-        android:text="Add a Class"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.061"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.054" />
-
-    <TextView
         android:id="@+id/codeTextPrompt"
         android:layout_width="69dp"
         android:layout_height="28dp"
@@ -148,16 +151,17 @@
         app:layout_constraintVertical_bias="0.147" />
 
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/buttonSaveClass"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="#03A9F4"
+        android:layout_width="123dp"
+        android:layout_height="49dp"
+        android:background="#F3C677"
         android:text="Save Class"
+        android:fontFamily="@font/caladea_bold"
+        android:textSize="24sp"
         android:textColor="#4A148C"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.41"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.976" />

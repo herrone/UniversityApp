@@ -2,6 +2,7 @@ package com.example.trydisslow;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatButton;
 
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
@@ -17,11 +18,11 @@ public class addModule extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        getSupportActionBar().hide();
         setContentView(R.layout.activity_add_module2);
         //DatabaseSingleton db = new DatabaseSingleton();
         Module m = new Module();
-        Button saveModuleButton = (Button) findViewById(R.id.buttonSaveModule);
+       AppCompatButton saveModuleButton = (AppCompatButton) findViewById(R.id.buttonSaveModule);
         saveModuleButton.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.M)
             @Override

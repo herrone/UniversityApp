@@ -2,6 +2,7 @@ package com.example.trydisslow;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatButton;
 import androidx.core.app.NotificationCompat;
 
 import android.app.NotificationChannel;
@@ -44,7 +45,8 @@ public class addAssignment extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_assignment);
-        Random r = new Random(1000);
+        getSupportActionBar().hide();
+        Random r = new Random();
 
         //  Assignment a = new Assignment();
         //        Intent intent = getIntent();
@@ -54,7 +56,7 @@ public class addAssignment extends AppCompatActivity {
         //        } else {
 
         Spinner moduleCodeList = findViewById(R.id.moduleCodeList);
-        ArrayList < String > moduleCodeArray = new ArrayList < String > ();
+        ArrayList<String> moduleCodeArray = new ArrayList<String>();
         CheckBox hour = findViewById(R.id.notificationAssignmentOneHourBefore);
         CheckBox twfohour = findViewById(R.id.notificationAssignmentTwentyFourHoursBefore);
         CheckBox foeihour = findViewById(R.id.notificationAssignmentFourtyEightHoursBefore);
@@ -62,6 +64,7 @@ public class addAssignment extends AppCompatActivity {
         //  moduleCodeArray[0] = "choose a module";
 
         SQLiteDatabase myBase = getApplicationContext().openOrCreateDatabase("Names.db", 0, null);
+        myBase.execSQL("CREATE TABLE if not exists NEWMODULE3(title TEXT, code TEXT, leader TEXT, notes TEXT);");
         Cursor query = myBase.rawQuery("SELECT * FROM NEWMODULE3", null);
 
         if (query.moveToFirst()) {
@@ -76,12 +79,14 @@ public class addAssignment extends AppCompatActivity {
                 moduleCodeArray.add(name3);
             }
 
+        } else {
+            moduleCodeArray.add("Please add a module first");
         }
         //moduleCodeArray.add("a");
         //create an adapter to describe how the items are displayed, adapters are used in several places in android.
         //There are multiple variations of this, but this is the basic variant.
 
-        ArrayAdapter < String > moduleCodeAdapter = new ArrayAdapter < > (this, android.R.layout.simple_spinner_dropdown_item, moduleCodeArray);
+        ArrayAdapter<String> moduleCodeAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, moduleCodeArray);
 
         // ArrayAdapter<String> moduleCodeArray = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, moduleCodes);
         //set the spinners adapter to the previously created one.
@@ -90,13 +95,13 @@ public class addAssignment extends AppCompatActivity {
         EditText assignmentNotes = (EditText) findViewById(R.id.addAssignmentNotesBox);
         TimePicker timeDue = (TimePicker) findViewById(R.id.timeDue);
         DatePicker dateDue = (DatePicker) findViewById(R.id.dateDue);
-        Settings settings = new Settings();
-        Button saveAssignmentButton = (Button) findViewById(R.id.buttonSaveAssignment);
+//       // Settings settings = new Settings();
+        AppCompatButton saveAssignmentButton = (AppCompatButton) findViewById(R.id.buttonSaveAssignment);
         saveAssignmentButton.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onClick(View v) {
-                int hourID = 0;
+                int  hourID = 0;
                 int tfHourID = 0;
                 int feHourID = 0;
                 String notes = assignmentNotes.getText().toString();
@@ -109,64 +114,69 @@ public class addAssignment extends AppCompatActivity {
                 d.setYear(dateDue.getYear());
                 d.setMonth(dateDue.getMonth());
                 d.setDate(dateDue.getDayOfMonth());
-                show_Notification();
-
-                //scheduleNotification(com.example.trydisslow.addAssignment.this, 0, 2, "sent", "this worked");
+                //show_Notification();
+//                //scheduleNotification(com.example.trydisslow.addAssignment.this, 0, 2, "sent", "this worked");
                 SQLiteDatabase myBase = getApplicationContext().openOrCreateDatabase("Names.db", 0, null);
                 if (hour.isChecked()) {
-                    Toast.makeText(addAssignment.this, "1 hour",
-                            Toast.LENGTH_LONG).show();
                     hourID = r.nextInt(1000);
-
-                    scheduleNotification(addAssignment.this, delayCalculator(d, 1), r.nextInt(100), "1 Hour Reminder", title + "due soon");
-
-                    //  scheduleNotification(addAssignment.this, delayCalculator(d, 1),r.nextInt() , "1 Hour Warning", title);
+                   // int thisAlarm = 0;
+                  //  myBase.execSQL("CREATE TABLE if not exists Alarms(alarmId int);");
+                   // String receieveAlarm = "SELECT MAX(alarmId) FROM Alarms";
+                  //Cursor query = myBase.rawQuery(receieveAlarm, null);
+                //  thisAlarm = query.getInt(0) + 1;
+                 // String insertNew = "Insert INTO Alarms Values(" + thisAlarm + ");";
+//int five = 5;
+                 //Toast.makeText(addAssignment.this, Integer.toString(hourID), Toast.LENGTH_LONG).show();
+                     scheduleNotification(addAssignment.this, delayCalculator(d, 1),hourID , "1 Hour Warning", title);
+                    Toast.makeText(addAssignment.this, "scheduled", Toast.LENGTH_LONG).show();
                 }
                 if (twfohour.isChecked()) {
                     tfHourID = r.nextInt(1000);
 
-                    scheduleNotification(addAssignment.this, delayCalculator(d, 24), r.nextInt(100), "24 Hour Reminder", title + "due soon");
-                    //  scheduleNotification(addAssignment.this, delayCalculator(d, 24), r.nextInt(), "24 Hour Warning", title);
+                 //   scheduleNotification(addAssignment.this, delayCalculator(d, 24), tfHourID, "24 Hour Reminder", title + "due soon");
+                      scheduleNotification(addAssignment.this, delayCalculator(d, 24), tfHourID, "24 Hour Warning", title);
                 }
                 if (foeihour.isChecked()) {
                     //  scheduleNotification(addAssignment.this, delayCalculator(d, 48), r.nextInt(), "48 Hour Warning", title);
                     feHourID = r.nextInt(1000);
-                    scheduleNotification(addAssignment.this, delayCalculator(d, 48), r.nextInt(100), "48 Hour Reminder", title + "due soon");
+                    scheduleNotification(addAssignment.this, delayCalculator(d, 48), feHourID, "48 Hour Reminder", title + "due soon");
                 }
-                Assignment a = new Assignment(title, d.toString(), moduleCodeInQuestion, notes, hourID, tfHourID, feHourID);
-                myBase.execSQL("CREATE TABLE if not exists NEWASSIGNMENTWITHIDS2(title TEXT, code TEXT, dueDate TEXT, notes TEXT, id TEXT, hID INT, tfID INT, feID INT);");
-                String insertStatement = "INSERT INTO NEWASSIGNMENTWITHIDS2 VALUES('" + a.title + "','" + a.whichModuleIsTaskFor + "','" + a.dueDate + "','" + a.notes + "'," + a.assignmentId + "," + a.hourID + "," + a.tfHourId + "," + a.feHourId + ");";
-                // String insertStatement = "INSERT INTO Modules VALUES('" + m.nameMod + "','"+ m.moduleCode + "','"  + m.courseLeader + "','"  + m.modNotes + "')\"";
+
+                Assignment a = new Assignment(title, d.toString(), moduleCodeInQuestion, notes, 3, tfHourID, feHourID);
+                myBase.execSQL("CREATE TABLE if not exists NEWASSIGNMENTSWITHIDS2(title TEXT, code TEXT, dueDate TEXT, notes TEXT, id TEXT, hID INT, tfID INT, feID INT);");
+                String insertStatement = "INSERT INTO NEWASSIGNMENTSWITHIDS2 VALUES('" + a.title + "','" + a.whichModuleIsTaskFor + "','" + a.dueDate + "','" + a.notes + "'," + a.assignmentId + "," + a.hourID + "," + a.tfHourId + "," + a.feHourId + ");";
                 myBase.execSQL(insertStatement);
+                // String insertStatement = "INSERT INTO Modules VALUES('" + m.nameMod + "','"+ m.moduleCode + "','"  + m.courseLeader + "','"  + m.modNotes + "')\"";
                 //                    Toast.makeText(addAssignment.this, "Time of " + a.dueDate,
                 //                            Toast.LENGTH_LONG).show();
                 startActivity(new Intent(addAssignment.this, Assignments.class));
 
             }
         });
-        Button modulesAndClassesButton = (Button) findViewById(R.id.buttonModulesAndClasses);
-        modulesAndClassesButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(addAssignment.this, ModulesAndClasses.class));
-            }
-        });
-
-        Button settingsButton = (Button) findViewById(R.id.buttonSettings);
-        settingsButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(addAssignment.this, Settings.class));
-            }
-        });
-        Button calendarButton = (Button) findViewById(R.id.buttonCalendar);
-        calendarButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(addAssignment.this, Calendar.class));
-            }
-        });
+//        AppCompatButton modulesAndClassesButton = (AppCompatButton) findViewById(R.id.buttonModulesAndClasses);
+//        modulesAndClassesButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                startActivity(new Intent(addAssignment.this, ModulesAndClasses.class));
+//            }
+//        });
+//
+//       AppCompatButton settingsButton =(AppCompatButton) findViewById(R.id.buttonSettings);
+//        settingsButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                startActivity(new Intent(addAssignment.this, Settings.class));
+//            }
+//        });
+//        AppCompatButton calendarButton = (AppCompatButton) findViewById(R.id.buttonCalendar);
+//        calendarButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                startActivity(new Intent(addAssignment.this, Calendar.class));
+//            }
+//        });
     }
+         //   }});}
     @RequiresApi(api = Build.VERSION_CODES.O)
     public void show_Notification() {
 

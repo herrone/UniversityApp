@@ -6,6 +6,40 @@
     android:layout_height="match_parent"
     tools:context=".Settings">
 
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/buttonCalendar4"
+        android:layout_width="163dp"
+        android:layout_height="50dp"
+        android:background="#B33F62"
+        android:text="Calendar"
+        android:textColor="#FFFFFF"
+        android:textSize="12sp"
+        tools:layout_editor_absoluteX="-17dp"
+        tools:layout_editor_absoluteY="681dp" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/buttonAssignments4"
+        android:layout_width="134dp"
+        android:layout_height="50dp"
+        android:background="#B33F62"
+        android:text="Assignments"
+        android:textColor="#FFFFFF"
+        android:textSize="12sp"
+        tools:layout_editor_absoluteX="280dp"
+        tools:layout_editor_absoluteY="681dp" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/buttonModulesAndClasses4"
+        android:layout_width="149dp"
+        android:layout_height="50dp"
+        android:background="#B33F62"
+        android:text="Modules / Classes"
+        android:textColor="#FFFFFF"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="681dp" />
+
     <EditText
         android:id="@+id/assignmentNotificationsTitle"
         android:layout_width="299dp"
@@ -128,7 +162,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.527" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/buttonSaveSettings"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -141,63 +175,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.865" />
-
-    <Button
-        android:id="@+id/buttonSettings"
-        android:layout_width="119dp"
-        android:layout_height="73dp"
-        android:layout_marginEnd="6dp"
-        android:background="#ACA7A7"
-        android:text="Settings"
-        android:textColor="#4E342E"
-        android:textSize="10sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/buttonAssignments"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
-
-    <Button
-        android:id="@+id/buttonAssignments"
-        android:layout_width="103dp"
-        android:layout_height="74dp"
-        android:background="#ACA7A7"
-        android:text="Assignments"
-        android:textColor="#4E342E"
-        android:textSize="10sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/buttonSettings"
-        app:layout_constraintStart_toEndOf="@+id/buttonModulesAndClasses"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
-
-    <Button
-        android:id="@+id/buttonModulesAndClasses"
-        android:layout_width="98dp"
-        android:layout_height="73dp"
-        android:background="#ACA7A7"
-        android:text="Modules / Classes"
-        android:textColor="#4E342E"
-        android:textSize="10sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/buttonAssignments"
-        app:layout_constraintStart_toEndOf="@+id/buttonCalendar"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
-
-    <Button
-        android:id="@+id/buttonCalendar"
-        android:layout_width="98dp"
-        android:layout_height="73dp"
-        android:background="#ACA7A7"
-        android:text="Calendar"
-        android:textColor="#4E342E"
-        android:textSize="10sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/buttonModulesAndClasses"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
 
     <CheckBox
         android:id="@+id/classNotificationsOnCheckBox"

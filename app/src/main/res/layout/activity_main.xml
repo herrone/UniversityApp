@@ -20,11 +20,11 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.305" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
     android:id="@+id/buttonLetsGo"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:background="#03A9F4"
+    android:background="#F3C677"
     android:text="Let's Go! "
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintEnd_toEndOf="parent"

@@ -2,6 +2,7 @@ package com.example.trydisslow;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatButton;
 
 import android.content.Intent;
 import android.database.Cursor;
@@ -25,6 +26,7 @@ public class addClass extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getSupportActionBar().hide();
         setContentView(R.layout.activity_add_class);
         EditText notes = (EditText) findViewById(R.id.addNotesBox);
         TimePicker from = (TimePicker) findViewById(R.id.timePickerFrom);
@@ -70,7 +72,7 @@ public class addClass extends AppCompatActivity {
         ArrayAdapter<String> adapterDays = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, days);
         dayList.setAdapter(adapterDays);
         Random r = new Random();
-        Button saveClassButton = (Button) findViewById(R.id.buttonSaveClass);
+      AppCompatButton saveClassButton =(AppCompatButton) findViewById(R.id.buttonSaveClass);
         saveClassButton.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.M)
             @Override

@@ -6,190 +6,63 @@
     android:layout_height="match_parent"
     tools:context=".Calendar">
 
-    <TextView
-        android:id="@+id/calendarDisplay8"
-        android:layout_width="316dp"
-        android:layout_height="26dp"
-        android:layout_marginStart="56dp"
-        android:layout_marginEnd="39dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.822" />
-
-    <TextView
-        android:id="@+id/calendarDisplay7"
-        android:layout_width="316dp"
-        android:layout_height="26dp"
-        android:layout_marginStart="56dp"
-        android:layout_marginEnd="39dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.736" />
-
-    <TextView
-        android:id="@+id/calendarDisplay9"
-        android:layout_width="316dp"
-        android:layout_height="26dp"
-        android:layout_marginStart="56dp"
-        android:layout_marginEnd="39dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.882" />
-
-    <TextView
-        android:id="@+id/calendarDisplay2"
-        android:layout_width="316dp"
-        android:layout_height="26dp"
-        android:layout_marginStart="56dp"
-        android:layout_marginEnd="39dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.268" />
-
-    <TextView
-        android:id="@+id/calendarDisplay1"
-        android:layout_width="316dp"
-        android:layout_height="26dp"
-        android:layout_marginStart="56dp"
-        android:layout_marginEnd="39dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.19" />
-
-    <TextView
-        android:id="@+id/calendarDisplay3"
-        android:layout_width="316dp"
-        android:layout_height="26dp"
-        android:layout_marginStart="56dp"
-        android:layout_marginEnd="39dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.347" />
-
-    <TextView
-        android:id="@+id/calendarDisplay4"
-        android:layout_width="316dp"
-        android:layout_height="26dp"
-        android:layout_marginStart="56dp"
-        android:layout_marginEnd="39dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.422" />
-
-    <TextView
-        android:id="@+id/calendarDisplay5"
-        android:layout_width="316dp"
-        android:layout_height="26dp"
-        android:layout_marginStart="56dp"
-        android:layout_marginEnd="39dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.485" />
-
-    <TextView
-        android:id="@+id/calendarDisplay6"
-        android:layout_width="316dp"
-        android:layout_height="26dp"
-        android:layout_marginStart="56dp"
-        android:layout_marginEnd="39dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.547" />
-
-    <EditText
-        android:id="@+id/calendarTitleBox"
-        android:layout_width="299dp"
-        android:layout_height="48dp"
-        android:text="Calendar"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.062" />
-
-    <Button
-        android:id="@+id/buttonSettings"
-        android:layout_width="110dp"
-        android:layout_height="74dp"
-        android:layout_marginEnd="6dp"
-        android:background="#ACA7A7"
-        android:text="Settings"
-        android:textColor="#4E342E"
-        android:textSize="10sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/buttonAssignments"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
-
-    <Button
-        android:id="@+id/buttonAssignments"
-        android:layout_width="98dp"
-        android:layout_height="73dp"
-        android:background="#ACA7A7"
-        android:text="Assignments"
-        android:textColor="#4E342E"
-        android:textSize="10sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/buttonSettings"
-        app:layout_constraintStart_toEndOf="@+id/buttonModulesAndClasses"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
-
-    <Button
-        android:id="@+id/buttonModulesAndClasses"
-        android:layout_width="98dp"
-        android:layout_height="73dp"
-        android:background="#ACA7A7"
-        android:text="Modules / Classes"
-        android:textColor="#4E342E"
-        android:textSize="10sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/buttonAssignments"
-        app:layout_constraintStart_toEndOf="@+id/buttonCalendar"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
-
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/buttonCalendar"
-        android:layout_width="98dp"
-        android:layout_height="73dp"
-        android:background="#ACA7A7"
+        android:layout_width="163dp"
+        android:layout_height="50dp"
+        android:background="#B33F62"
         android:text="Calendar"
-        android:textColor="#4E342E"
-        android:textSize="10sp"
+        android:textColor="#FFFDD835"
+        android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/buttonModulesAndClasses"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0" />
 
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/buttonAssignments"
+        android:layout_width="134dp"
+        android:layout_height="50dp"
+        android:background="#B33F62"
+        android:text="Assignments"
+        android:textColor="#FFFDD835"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/buttonModulesAndClasses"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/buttonModulesAndClasses"
+        android:layout_width="149dp"
+        android:layout_height="50dp"
+        android:background="#B33F62"
+        android:text="Modules / Classes"
+        android:textColor="#FFFDD835"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.542"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <EditText
+        android:id="@+id/calendarTitleBox"
+        android:layout_width="299dp"
+        android:layout_height="48dp"
+        android:fontFamily="@font/caladea_bold"
+        android:text="Calendar"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.062" />
+
+
+    />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

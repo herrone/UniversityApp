@@ -23,6 +23,7 @@ import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatButton;
 import androidx.core.app.NotificationCompat;
 
 import java.text.SimpleDateFormat;
@@ -35,10 +36,15 @@ public class editAssignment extends AppCompatActivity {
     String notes;
     String code;
     String dueD;
+    int hourId = 0;
+    int tfHourId = 0;
+    int feHourId = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_edit_assignment);
+        getSupportActionBar().hide();
         Intent intent = getIntent();
         String editableAssignment = intent.getExtras().getString("editableAssignment");
 
@@ -63,41 +69,48 @@ public class editAssignment extends AppCompatActivity {
         TimePicker timeDue = (TimePicker) findViewById(R.id.timeDue);
         DatePicker dateDue = (DatePicker) findViewById(R.id.dateDue);
         SQLiteDatabase myBase = getApplicationContext().openOrCreateDatabase("Names.db", 0, null);
-        String retrieveDetails = "SELECT * FROM NEWASSIGNMENT3 WHERE title = '" + editableAssignment + "'";
+
+        String retrieveDetails = "SELECT * FROM NEWASSIGNMENTSWITHIDS2 WHERE title = '" + editableAssignment + "'";
         Cursor assignmentDetails = myBase.rawQuery(retrieveDetails, null);
 
         if (assignmentDetails.moveToFirst()) {
             name = assignmentDetails.getString(0);
-         code = assignmentDetails.getString(1);
+            code = assignmentDetails.getString(1);
             dueD = assignmentDetails.getString(2);
             notes = assignmentDetails.getString(3);
+            hourId = assignmentDetails.getInt(5);
+            tfHourId = assignmentDetails.getInt(6);
+            feHourId = assignmentDetails.getInt(7);
 
-        }
-        assignmentNotes.setText(notes);
-        assignmentTitle.setText(name);
-        moduleCodeArray.add(code);
-        ArrayAdapter<String> moduleCodeAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, moduleCodeArray);
+            assignmentNotes.setText(notes);
+            assignmentTitle.setText(name);
+            moduleCodeArray.add(code);
+            ArrayAdapter<String> moduleCodeAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, moduleCodeArray);
 
-        // ArrayAdapter<String> moduleCodeArray = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, moduleCodes);
+            // ArrayAdapter<String> moduleCodeArray = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, moduleCodes);
 //set the spinners adapter to the previously created one.
-        moduleCodeList.setAdapter(moduleCodeAdapter);
-
-        Button saveAssignmentButton = (Button) findViewById(R.id.buttonSaveAssignment);
+            moduleCodeList.setAdapter(moduleCodeAdapter);
+        }
+        else {}
+        AppCompatButton saveAssignmentButton = (AppCompatButton) findViewById(R.id.buttonSaveAssignment);
         saveAssignmentButton.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onClick(View v) {
-//                Cursor moduleQuery = myBase.rawQuery("SELECT * FROM NEWASSIGNMENTSWITHIDS WHERE title = " + editableAssignment + ";", null);
-//              //  title TEXT, code TEXT, dueDate TEXT, notes TEXT, id INT, hID INT, tfID INT, feID INT
+                //Random random = new Random();
+              //  int notificationId = 0;
+             //  Cursor moduleQuery = myBase.rawQuery("SELECT * FROM NEWASSIGNMENTSWITHIDS WHERE title = " + editableAssignment + ";", null);
+              //  title TEXT, code TEXT, dueDate TEXT, notes TEXT, id INT, hID INT, tfID INT, feID INT
 //                if(moduleQuery.moveToFirst()) {
 //                   int hourCode = moduleQuery.getInt(5);
 //                    int thourCode = moduleQuery.getInt(6);
 //                    int fhourCode = moduleQuery.getInt(7);
 //                 if (hourCode != 0){
-//                     Context context = addAssignment.this;
+//                     Context context = editAssignment.this;
+//                     notificationId = random.nextInt();
 //                     Intent intent = new Intent(context, MainActivity.class);
 //                     PendingIntent activity = PendingIntent.getActivity(context, notificationId, intent, PendingIntent.FLAG_CANCEL_CURRENT);
-//                    // scheduleNotification(addAssignment.this, delayCalculator(d, 24), r.nextInt(100), "24 Hour Reminder", title + "due soon");
+//                     scheduleNotification(editAssignment.this, delayCalculator(d, 24), r.nextInt(100), "24 Hour Reminder", title + "due soon");
 //                 }
 //                    if (thourCode != 0){
 //
@@ -109,6 +122,24 @@ public class editAssignment extends AppCompatActivity {
 //                }
 
                 String deleteStatement = "DELETE FROM NEWASSIGNMENTWITHIDS WHERE title = '" + editableAssignment + "'";
+                if (hourId > 0){
+                    Intent myIntent = new Intent(editAssignment.this, Assignments.class);
+                    PendingIntent pendingIntent = PendingIntent.getBroadcast(editAssignment.this, hourId, myIntent, 0);
+                    AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+                    alarmManager.cancel(pendingIntent);
+                }
+                if (tfHourId > 0){
+                    Intent myIntent = new Intent(editAssignment.this, Assignments.class);
+                    PendingIntent pendingIntent = PendingIntent.getBroadcast(editAssignment.this, tfHourId, myIntent, 0);
+                    AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+                    alarmManager.cancel(pendingIntent);
+                }
+                if (feHourId > 0){
+                    Intent myIntent = new Intent(editAssignment.this, Assignments.class);
+                    PendingIntent pendingIntent = PendingIntent.getBroadcast(editAssignment.this, feHourId, myIntent, 0);
+                    AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+                    alarmManager.cancel(pendingIntent);
+                }
                 myBase.execSQL(deleteStatement);
                 String notes = assignmentNotes.getText().toString();
                 String title = assignmentTitle.getText().toString();
@@ -162,36 +193,7 @@ public class editAssignment extends AppCompatActivity {
 
             }
         });
-        Button modulesAndClassesButton = (Button)findViewById(R.id.buttonModulesAndClasses);
-        modulesAndClassesButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(editAssignment.this, ModulesAndClasses.class));
-            }
-        });
-        Button assignmentsButton = (Button) findViewById(R.id.buttonAssignments);
-        assignmentsButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(editAssignment.this, Assignments.class));
-            }
-        });
 
-
-        Button settingsButton = (Button)findViewById(R.id.buttonSettings);
-        settingsButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(editAssignment.this, Settings.class));
-            }
-        });
-        Button calendarButton = (Button) findViewById(R.id.buttonCalendar);
-        calendarButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(editAssignment.this, "Already here", Toast.LENGTH_LONG).show();
-            }
-        });
 
     }
     public void scheduleNotification(Context context, long delay, int notificationId, String title, String content) {//delay is after how much time(in millis) from current time you want to schedule the notification

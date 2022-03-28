@@ -1,6 +1,7 @@
 package com.example.trydisslow;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatButton;
 import androidx.core.app.NotificationCompat;
 
 import android.app.Notification;
@@ -30,7 +31,7 @@ public class Settings extends AppCompatActivity {
         setContentView(R.layout.activity_settings);
       //show_Notification();
 
-        Button modulesAndClassesButton = (Button)findViewById(R.id.buttonModulesAndClasses);
+        AppCompatButton modulesAndClassesButton = (AppCompatButton)findViewById(R.id.buttonModulesAndClasses);
 
         modulesAndClassesButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -39,21 +40,21 @@ public class Settings extends AppCompatActivity {
             }
         });
 
-        Button settingsButton = (Button)findViewById(R.id.buttonSettings);
-        settingsButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(Settings.this, "Already here", Toast.LENGTH_LONG).show();
-            }
-        });
-        Button calendarButton = (Button)findViewById(R.id.buttonCalendar);
+//        AppCompatButton settingsButton = (AppCompatButton)findViewById(R.id.buttonSettings);
+//        settingsButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Toast.makeText(Settings.this, "Already here", Toast.LENGTH_LONG).show();
+//            }
+//        });
+        AppCompatButton calendarButton = (AppCompatButton)findViewById(R.id.buttonCalendar);
         calendarButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(Settings.this, Calendar.class));
             }
         });
-        Button assignmentButton = (Button)findViewById(R.id.buttonAssignments);
+        AppCompatButton assignmentButton = (AppCompatButton)findViewById(R.id.buttonAssignments);
         assignmentButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

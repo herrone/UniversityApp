@@ -1,6 +1,7 @@
 package com.example.trydisslow;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatButton;
 
 import android.content.Intent;
 import android.database.Cursor;
@@ -22,7 +23,8 @@ String selectedClass;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_modules_and_classes);
-        Button addClassButton = (Button)findViewById(R.id.buttonGoToAddClass2);
+        getSupportActionBar().hide();
+       AppCompatButton addClassButton =(AppCompatButton)findViewById(R.id.buttonGoToAddClass2);
         addClassButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -94,83 +96,77 @@ String selectedClass;
             }
         });
 
-
-        Button addModuleButton = (Button)findViewById(R.id.buttonGoToAddModule);
+//
+       AppCompatButton addModuleButton =(AppCompatButton)findViewById(R.id.buttonGoToAddModule);
         addModuleButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(ModulesAndClasses.this, addModule.class));
             }
         });
-        Button assignmentsButton = (Button) findViewById(R.id.buttonAssignments);
+       AppCompatButton assignmentsButton =(AppCompatButton) findViewById(R.id.buttonAssignments);
         assignmentsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(ModulesAndClasses.this, Assignments.class));
             }
         });
-        Button modulesAndClassesButton = (Button) findViewById(R.id.buttonModulesAndClasses);
+       AppCompatButton modulesAndClassesButton =(AppCompatButton) findViewById(R.id.buttonModulesAndClasses);
         modulesAndClassesButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Toast.makeText(ModulesAndClasses.this, "Already here", Toast.LENGTH_LONG).show();
             }
         });
-
-        Button settingsButton = (Button)findViewById(R.id.buttonSettings);
-        settingsButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(ModulesAndClasses.this, Settings.class));
-            }
-        });
-        Button calendarButton = (Button) findViewById(R.id.buttonCalendar);
+//
+//
+       AppCompatButton calendarButton =(AppCompatButton) findViewById(R.id.buttonCalendar);
         calendarButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(ModulesAndClasses.this, Calendar.class));
             }
         });
-        Button editModuleButton = (Button)findViewById(R.id.editModuleButton);
-        editModuleButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent (ModulesAndClasses.this, editModule.class);
-                i.putExtra("editableModule", selectedModule);
-                startActivity(i);
-            }
-        });
-        Button deleteModuleButton = (Button)findViewById(R.id.deleteModuleButton);
-        deleteModuleButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String deleteStatement = "DELETE FROM NEWMODULE3 WHERE title = '" + selectedModule + "';";
-                myBase.execSQL(deleteStatement);
-                startActivity(new Intent(ModulesAndClasses.this, ModulesAndClasses.class));
-
-            }
-        });
-
-        Button editClassButton = (Button)findViewById(R.id.editClassButton);
-        editClassButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent (ModulesAndClasses.this, editClass.class);
-                i.putExtra("editableClass", selectedClass);
-                startActivity(i);
-            }
-        });
-        Button deleteClassButton = (Button)findViewById(R.id.deleteClassButton);
-        deleteClassButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-              String[] bits =  selectedClass.split(",");
-             int selectedCode = Integer.parseInt(bits[0]);
-                String deleteStatement = "DELETE FROM NEWCLASSWITHIDS WHERE id = " + selectedCode+ ";";
-                myBase.execSQL(deleteStatement);
-                startActivity(new Intent(ModulesAndClasses.this, ModulesAndClasses.class));
-            }
-        });
+//       AppCompatButton editModuleButton =(AppCompatButton)findViewById(R.id.editModuleButton);
+//        editModuleButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent i = new Intent (ModulesAndClasses.this, editModule.class);
+//                i.putExtra("editableModule", selectedModule);
+//                startActivity(i);
+//            }
+//        });
+//       AppCompatButton deleteModuleButton =(AppCompatButton)findViewById(R.id.deleteModuleButton);
+//        deleteModuleButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                String deleteStatement = "DELETE FROM NEWMODULE3 WHERE title = '" + selectedModule + "';";
+//                myBase.execSQL(deleteStatement);
+//                startActivity(new Intent(ModulesAndClasses.this, ModulesAndClasses.class));
+//
+//            }
+//        });
+//
+//       AppCompatButton editClassButton =(AppCompatButton)findViewById(R.id.editClassButton);
+//        editClassButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent i = new Intent (ModulesAndClasses.this, editClass.class);
+//                i.putExtra("editableClass", selectedClass);
+//                startActivity(i);
+//            }
+//        });
+//       AppCompatButton deleteClassButton =(AppCompatButton)findViewById(R.id.deleteClassButton);
+//        deleteClassButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//              String[] bits =  selectedClass.split(",");
+//             int selectedCode = Integer.parseInt(bits[0]);
+//                String deleteStatement = "DELETE FROM NEWCLASSWITHIDS WHERE id = " + selectedCode+ ";";
+//                myBase.execSQL(deleteStatement);
+//                startActivity(new Intent(ModulesAndClasses.this, ModulesAndClasses.class));
+//            }
+//        });
 
 
     }

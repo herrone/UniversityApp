@@ -5,7 +5,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".editClass">
-
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="@drawable/customborder"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
     <TextView
         android:id="@+id/dayTextPrompt"
         android:layout_width="53dp"
@@ -123,8 +131,8 @@
         android:id="@+id/addClassesTitle"
         android:layout_width="182dp"
         android:layout_height="40dp"
-        android:fontFamily="sans-serif-black"
         android:text="Edit Class"
+        android:fontFamily="@font/caladea_bold"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -148,11 +156,11 @@
         app:layout_constraintVertical_bias="0.147" />
 
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/buttonSaveClass"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="#03A9F4"
+        android:background="#F3C677"
         android:text="Save Class"
         android:textColor="#4A148C"
         app:layout_constraintBottom_toBottomOf="parent"

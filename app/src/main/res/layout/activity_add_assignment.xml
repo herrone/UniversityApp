@@ -6,6 +6,16 @@
     android:layout_height="match_parent"
     tools:context=".addAssignment">
 
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="@drawable/customborder"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
     <CheckBox
         android:id="@+id/notificationAssignmentTwentyFourHoursBefore"
         android:layout_width="113dp"
@@ -49,7 +59,7 @@
         android:id="@+id/addAssignmentTitle"
         android:layout_width="371dp"
         android:layout_height="35dp"
-        android:fontFamily="sans-serif-black"
+        android:fontFamily="@font/caladea_bold"
         android:text="Add an Assignment"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -115,7 +125,7 @@
     <EditText
         android:id="@+id/dueDateBox"
         android:layout_width="100dp"
-        android:layout_height="39dp"
+        android:layout_height="48dp"
         android:layout_marginStart="24dp"
         android:layout_marginEnd="38dp"
         android:ems="10"
@@ -155,11 +165,11 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.174" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/buttonSaveAssignment"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="#03A9F4"
+        android:layout_width="135dp"
+        android:layout_height="48dp"
+        android:background="#F3C677"
         android:text="Save Assignment"
         android:textColor="#4A148C"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -168,73 +178,5 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.878" />
-
-    <Button
-        android:id="@+id/buttonSettings"
-        android:layout_width="110dp"
-        android:layout_height="74dp"
-        android:layout_marginEnd="6dp"
-        android:background="#ACA7A7"
-        android:text="Settings"
-        android:textColor="#4E342E"
-        android:textSize="10sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/buttonAssignments"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
-
-    <Button
-        android:id="@+id/buttonAssignments"
-        android:layout_width="98dp"
-        android:layout_height="73dp"
-        android:background="#ACA7A7"
-        android:text="Assignments"
-        android:textColor="#4E342E"
-        android:textSize="10sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/buttonSettings"
-        app:layout_constraintStart_toEndOf="@+id/buttonModulesAndClasses"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.998" />
-
-    <Button
-        android:id="@+id/buttonModulesAndClasses"
-        android:layout_width="98dp"
-        android:layout_height="73dp"
-        android:layout_marginEnd="1dp"
-        android:background="#ACA7A7"
-        android:text="Modules / Classes"
-        android:textColor="#4E342E"
-        android:textSize="10sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/buttonAssignments"
-        app:layout_constraintStart_toEndOf="@+id/buttonCalendar"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
-
-    <Button
-        android:id="@+id/buttonCalendar"
-        android:layout_width="98dp"
-        android:layout_height="73dp"
-        android:background="#ACA7A7"
-        android:text="Calendar"
-        android:textColor="#4E342E"
-        android:textSize="10sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/buttonModulesAndClasses"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="sans-serif-medium"
-        android:text="Set Notifications"
-        android:textSize="16sp"
-        tools:layout_editor_absoluteX="25dp"
-        tools:layout_editor_absoluteY="514dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

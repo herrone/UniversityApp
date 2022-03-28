@@ -5,12 +5,21 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".addModule">
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="@drawable/customborder"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/addModulesTitle"
         android:layout_width="182dp"
         android:layout_height="40dp"
-        android:fontFamily="sans-serif-thin"
+        android:fontFamily="@font/caladea_bold"
         android:text="Add a Module"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -23,6 +32,8 @@
         android:id="@+id/addModuleTitleBox"
         android:layout_width="299dp"
         android:layout_height="47dp"
+        android:fontFamily="@font/caladea_bold"
+        android:textSize="24sp"
         android:text="Enter Module Title"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -31,20 +42,19 @@
         app:layout_constraintVertical_bias="0.255" />
 
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/buttonSaveModule"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="#03A9F4"
+        android:background="#F3C677"
         android:text="Save Module"
         android:textColor="#4A148C"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.404"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.796" />
-
+        app:layout_constraintVertical_bias="0.879" />
 
     <EditText
         android:id="@+id/addModuleCodeBox"
