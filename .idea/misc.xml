@@ -6,7 +6,7 @@
         <entry key="app/src/main/res/drawable/customborder.xml" value="0.167" />
         <entry key="app/src/main/res/drawable/listviewborder.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_add_assignment.xml" value="0.24951782226562502" />
-        <entry key="app/src/main/res/layout/activity_add_class.xml" value="0.19234924316406252" />
+        <entry key="app/src/main/res/layout/activity_add_class.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_add_module.xml" value="0.14629211425781252" />
         <entry key="app/src/main/res/layout/activity_add_module2.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_assignment_list.xml" value="0.1" />

@@ -21,7 +21,7 @@ import java.util.ArrayList;
 
 public class Assignments extends AppCompatActivity {
 String selected;
-    String selectedAssignment = "";
+    String selectedAssignment;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

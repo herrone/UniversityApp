@@ -15,42 +15,46 @@
 <!--        app:layout_constraintStart_toStartOf="parent"-->
 <!--        app:layout_constraintTop_toTopOf="parent" >-->
 
-        <TextView
-            android:id="@+id/addClassesTitle"
-            android:layout_width="182dp"
-            android:layout_height="40dp"
-            android:fontFamily="sans-serif-condensed-medium"
-            android:text="Add a Class"
-            android:textSize="24sp"
-            tools:ignore="MissingConstraints" />
-<!--    </LinearLayout>-->
+    <!--    </LinearLayout>-->
+
+    <TextView
+        android:id="@+id/addClassesTitle"
+        android:layout_width="182dp"
+        android:layout_height="40dp"
+        android:fontFamily="sans-serif-condensed-medium"
+        android:text="Add a Class"
+        android:textSize="24sp"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="9dp"
+        tools:layout_editor_absoluteY="35dp" />
+
     <TextView
         android:id="@+id/dayTextPrompt"
-        android:layout_width="53dp"
-        android:layout_height="34dp"
+        android:layout_width="117dp"
+        android:layout_height="48dp"
         android:fontFamily="sans-serif-black"
-        android:text="Day"
+        android:text="Day of class"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.061"
+        app:layout_constraintHorizontal_bias="0.03"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.286" />
+        app:layout_constraintVertical_bias="0.31" />
 
     <TextView
         android:id="@+id/typeTextPrompt"
-        android:layout_width="53dp"
-        android:layout_height="23dp"
+        android:layout_width="109dp"
+        android:layout_height="24dp"
         android:fontFamily="sans-serif-black"
-        android:text="Type"
+        android:text="Type of class"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.061"
+        app:layout_constraintHorizontal_bias="0.033"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.218" />
+        app:layout_constraintVertical_bias="0.226" />
 
     <EditText
         android:id="@+id/addLocationBox"
@@ -137,30 +141,30 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.219" />
 
+
     <TextView
         android:id="@+id/codeTextPrompt"
-        android:layout_width="69dp"
-        android:layout_height="28dp"
+        android:layout_width="107dp"
+        android:layout_height="39dp"
         android:fontFamily="sans-serif-black"
-        android:text="Title"
+        android:text="Module Code"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.061"
+        app:layout_constraintHorizontal_bias="0.032"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.147" />
-
+        app:layout_constraintVertical_bias="0.148" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/buttonSaveClass"
         android:layout_width="123dp"
         android:layout_height="49dp"
         android:background="#F3C677"
-        android:text="Save Class"
         android:fontFamily="@font/caladea_bold"
-        android:textSize="30sp"
+        android:text="Save Class"
         android:textColor="#4A148C"
+        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

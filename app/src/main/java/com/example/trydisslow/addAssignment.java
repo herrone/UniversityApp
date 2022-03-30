@@ -40,7 +40,7 @@ import java.util.Date;
 import java.util.Random;
 
 public class addAssignment extends AppCompatActivity {
-
+//to-do, change spinner to populate with new module codes for table.8
     @SuppressLint("NewApi")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
