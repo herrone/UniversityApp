@@ -26,6 +26,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.core.app.NotificationCompat;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -36,6 +37,7 @@ public class editAssignment extends AppCompatActivity {
     String notes;
     String code;
     String dueD;
+    Date myDate;
     int hourId = 0;
     int tfHourId = 0;
     int feHourId = 0;
@@ -77,12 +79,16 @@ public class editAssignment extends AppCompatActivity {
             name = assignmentDetails.getString(0);
             code = assignmentDetails.getString(1);
             dueD = assignmentDetails.getString(2);
+            java.text.SimpleDateFormat sdfBackToDate = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            try {
+               myDate = sdfBackToDate.parse(dueD);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
             notes = assignmentDetails.getString(3);
             hourId = assignmentDetails.getInt(5);
             tfHourId = assignmentDetails.getInt(6);
             feHourId = assignmentDetails.getInt(7);
-
-            assignmentNotes.setText(notes);
             assignmentTitle.setText(name);
             moduleCodeArray.add(code);
             ArrayAdapter<String> moduleCodeAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, moduleCodeArray);
@@ -182,7 +188,7 @@ public class editAssignment extends AppCompatActivity {
                 SQLiteDatabase myBase = getApplicationContext().openOrCreateDatabase("Names.db", 0, null);
 //                AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
 //                alarmManager.cancel();
-                Assignment a = new Assignment(title, d.toString(), moduleCodeInQuestion, notes, hourID, tfHourID, feHourID);
+                Assignment a = new Assignment(title, d, moduleCodeInQuestion, notes, hourID, tfHourID, feHourID);
                 myBase.execSQL("CREATE TABLE if not exists NEWASSIGNMENTWITHIDS2(title TEXT, code TEXT, dueDate TEXT, notes TEXT, id TEXT, hID INT, tfID INT, feID INT);");
                 String insertStatement = "INSERT INTO NEWASSIGNMENTWITHIDS2 VALUES('" + a.title + "','" + a.whichModuleIsTaskFor + "','" + a.dueDate + "','" + a.notes + "'," + a.assignmentId +"," + a.hourID +"," + a.tfHourId +"," + a.feHourId +");";
                 // String insertStatement = "INSERT INTO Modules VALUES('" + m.nameMod + "','"+ m.moduleCode + "','"  + m.courseLeader + "','"  + m.modNotes + "')\"";

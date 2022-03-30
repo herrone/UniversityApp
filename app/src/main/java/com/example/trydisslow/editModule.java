@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatButton;
 
 public class editModule extends AppCompatActivity {
     @Override
@@ -20,70 +21,77 @@ public class editModule extends AppCompatActivity {
         setContentView(R.layout.activity_edit_module);
         getSupportActionBar().hide();
         Intent intent = getIntent();
+        EditText moduleTitle = (EditText) findViewById(R.id.addModuleTitleBox);
+        EditText moduleCod = (EditText) findViewById(R.id.addModuleCodeBox);
+        EditText moduleLeader = (EditText) findViewById(R.id.addModuleLeader);
+        EditText moduleNotes = (EditText) findViewById(R.id.addModuleNotesBox);
+
         String editableModule = intent.getExtras().getString("editableModule");
 
-         String title;
+        String title;
         String code;
         String leader;
         String notes;
 
-      // String editableModule = "module a";
-        Toast.makeText(this,editableModule,
+        // String editableModule = "module a";
+        Toast.makeText(this, editableModule,
                 Toast.LENGTH_SHORT).show();
         SQLiteDatabase myBase = getApplicationContext().openOrCreateDatabase("Names.db", 0, null);
         String retrieveModule = "SELECT * from NEWMODULE3 WHERE title = '" + editableModule + "'";
 //       // myBase.execSQL(retrieveModule);
         Cursor query = myBase.rawQuery(retrieveModule, null);
 //
-        if(query.moveToFirst()) {
+        if (query.moveToFirst()) {
             title = query.getString(0);
             code = query.getString(1);
             leader = query.getString(2);
-            notes= query.getString(3);
+            notes = query.getString(3);
 //
-            EditText moduleTitle = (EditText) findViewById(R.id.addModuleTitleBox);
-        EditText moduleCod = (EditText) findViewById(R.id.addModuleCodeBox);
-        EditText moduleLeader = (EditText) findViewById(R.id.addModuleLeader);
-        EditText moduleNotes = (EditText) findViewById(R.id.addModuleNotesBox);
-        moduleNotes.setText(notes);
-       moduleCod.setText(code);
+//            EditText moduleTitle = (EditText) findViewById(R.id.addModuleTitleBox);
+//        EditText moduleCod = (EditText) findViewById(R.id.addModuleCodeBox);
+//        EditText moduleLeader = (EditText) findViewById(R.id.addModuleLeader);
+//        EditText moduleNotes = (EditText) findViewById(R.id.addModuleNotesBox);
+            moduleNotes.setText(notes);
+            moduleCod.setText(code);
             moduleTitle.setText(title);
 
-        moduleLeader.setText(leader);
-}
-//        Module m = new Module();
-//        AppCompatButton saveModuleButton = (AppCompatButton) findViewById(R.id.buttonSaveModule);
-//        saveModuleButton.setOnClickListener(new View.OnClickListener() {
-//            @RequiresApi(api = Build.VERSION_CODES.M)
-//            @Override
-//            public void onClick(View v) {
-//                String deleteStatement = "DELETE FROM NEWMODULE8 WHERE title = '" + editableModule + "'";
-//                myBase.execSQL(deleteStatement);
+            moduleLeader.setText(leader);
+        }
+        Module m = new Module();
+        AppCompatButton saveModuleButton = (AppCompatButton) findViewById(R.id.buttonSaveModule);
+        saveModuleButton.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.M)
+            @Override
+            public void onClick(View v) {
+                String deleteStatement = "DELETE FROM NEWMODULE3 WHERE title = '" + editableModule + "'";
+                myBase.execSQL(deleteStatement);
 //
-//                m.nameMod = moduleTitle.getText().toString();
+                m.nameMod = moduleTitle.getText().toString();
 //
-//                m.moduleCode = moduleCod.getText().toString();
+                m.moduleCode = moduleCod.getText().toString();
 //
-//                m.courseLeader = moduleLeader.getText().toString();
+                m.courseLeader = moduleLeader.getText().toString();
 //
 //
-//                m.modNotes  = moduleNotes.getText().toString();
+                m.modNotes = moduleNotes.getText().toString();
 //
 //                // m.colour = "yellow";
 //                //DatabaseSingleton db = DatabaseSingleton.getInstance();
 //
 //                SQLiteDatabase myBase = getApplicationContext().openOrCreateDatabase("Names.db", 0, null);
 //
-//              //  myBase.execSQL("CREATE TABLE if not exists TESTMODULE(title TEXT, code TEXT, leader TEXT, notes TEXT);");
-//                String insertStatement = "INSERT INTO NEWMODULE8 VALUES('" + m.nameMod + "','" + m.moduleCode + "','" + m.modNotes + "','" + m.courseLeader + "');";
+                myBase.execSQL("CREATE TABLE if not exists NEWMODULE3(title TEXT, code TEXT, leader TEXT, notes TEXT);");
+                String insertStatement = "INSERT INTO NEWMODULE3 VALUES('" + m.nameMod + "','" + m.moduleCode + "','" + m.modNotes + "','" + m.courseLeader + "');";
 //                // String insertStatement = "INSERT INTO Modules VALUES('" + m.nameMod + "','"+ m.moduleCode + "','"  + m.courseLeader + "','"  + m.modNotes + "')\"";
-//                myBase.execSQL(insertStatement);
-//                //db.addModule(m);
+                myBase.execSQL(insertStatement);
+
+                //                //db.addModule(m);
 //                Toast.makeText(editModule.this, "Saved Module " + m.nameMod,
 //                        Toast.LENGTH_LONG).show();
-//                startActivity(new Intent(editModule.this, ModulesAndClasses.class));
-//            }
-//        });
+                startActivity(new Intent(editModule.this, ModulesAndClasses.class));
+
+            }});
+
 //
 //
 

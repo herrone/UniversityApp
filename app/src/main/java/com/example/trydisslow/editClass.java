@@ -90,14 +90,14 @@ public class editClass extends AppCompatActivity {
 //There are multiple variations of this, but this is the basic variant.
 
         //ArrayAdapter<String> moduleCodeAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, moduleCodeArray);
-        String[] classTypeItems = new String[]{"choose class type", "lecture", "practical", "tutorial"};
+        String[] classTypeItems = new String[]{"choose class type", "Lecture", "Practical", "Tutorial"};
         ArrayAdapter<String> classTypeAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, classTypeItems);
 //set the spinners adapter to the previously created one.
         classTypeList.setAdapter(classTypeAdapter);
         moduleCodeList.setAdapter(moduleCodeAdapter);
         //Spinner dayList = findViewById(R.id.dayList);
 //create a list of items for the spinner.
-        String[] days = new String[]{"choose day", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"};
+        String[] days = new String[]{"choose day", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
 //create an adapter to describe how the items are displayed, adapters are used in several places in android.
 //There are multiple variations of this, but this is the basic variant.
         ArrayAdapter<String> adapterDays = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, days);
@@ -130,9 +130,9 @@ public class editClass extends AppCompatActivity {
 
 
                 //myBase.execSQL("CREATE TABLE if not exists Classes(code TEXT, type TEXT, lecturer TEXT, notes TEXT, location TEXT, day TEXT, start TIME, finish TIME );");
-                myBase.execSQL("CREATE TABLE if not exists NEWCLASS2(code TEXT, type TEXT, lecturer TEXT, notes TEXT, location TEXT, day TEXT, start TEXT, finish TEXT );");
+                myBase.execSQL("CREATE TABLE if not exists NEWCLASSWITHIDS4(code TEXT, type TEXT, day TEXT, lecturer TEXT, notes TEXT, location TEXT, day TEXT, start TEXT, finish TEXT, id INT );");
                 // String insertStatement = "INSERT INTO Classes2 VALUES('" + c.modCode + "','" + c.classType + "','" + c.lecturer + "','" + c.notes + "');";
-                String insertStatement = "INSERT INTO NEWCLASS2 VALUES('" + c.modCode + "','" + c.classType + "','" + c.lecturer + "','" + c.notes + "','" + c.locationOrLink + "','" + c.startTime + "','" + c.dayOfClass + "','" + c.endTime + "');";
+                String insertStatement = "INSERT INTO NEWCLASSWITHIDS4 VALUES('" + c.modCode + "','" + c.classType + "','" + c.dayOfClass + "','" + c.lecturer + "','" + c.notes + "','" + c.locationOrLink + "','" + c.dayOfClass + "','" + c.startTime + "','" + c.endTime + "'," +c.id + ");";
                 myBase.execSQL(insertStatement);
                 Toast.makeText(editClass.this, c.classType + c.modCode + c.lecturer + c.notes + c.dayOfClass + c.locationOrLink + "Saved Class for module ",
                         Toast.LENGTH_LONG).show();

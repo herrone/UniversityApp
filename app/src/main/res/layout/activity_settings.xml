@@ -15,7 +15,8 @@
         android:textColor="#FFFFFF"
         android:textSize="12sp"
         tools:layout_editor_absoluteX="-17dp"
-        tools:layout_editor_absoluteY="681dp" />
+        tools:layout_editor_absoluteY="681dp"
+        tools:ignore="MissingConstraints" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/buttonAssignments4"
@@ -26,7 +27,8 @@
         android:textColor="#FFFFFF"
         android:textSize="12sp"
         tools:layout_editor_absoluteX="280dp"
-        tools:layout_editor_absoluteY="681dp" />
+        tools:layout_editor_absoluteY="681dp"
+        tools:ignore="MissingConstraints" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/buttonModulesAndClasses4"
@@ -38,7 +40,8 @@
         android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="681dp" />
+        tools:layout_editor_absoluteY="681dp"
+        tools:ignore="MissingConstraints" />
 
     <EditText
         android:id="@+id/assignmentNotificationsTitle"

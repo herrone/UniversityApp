@@ -5,24 +5,25 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".addClass">
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:background="@drawable/customborder"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" >
+<!--    <LinearLayout-->
+<!--        android:layout_width="fill_parent"-->
+<!--        android:layout_height="fill_parent"-->
+<!--        android:background="@drawable/customborder"-->
+<!--        android:orientation="vertical"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent" >-->
 
         <TextView
             android:id="@+id/addClassesTitle"
             android:layout_width="182dp"
             android:layout_height="40dp"
-            android:fontFamily="@font/caladea_bold"
+            android:fontFamily="sans-serif-condensed-medium"
             android:text="Add a Class"
-            android:textSize="24sp" />
-    </LinearLayout>
+            android:textSize="24sp"
+            tools:ignore="MissingConstraints" />
+<!--    </LinearLayout>-->
     <TextView
         android:id="@+id/dayTextPrompt"
         android:layout_width="53dp"
@@ -90,7 +91,7 @@
     <Spinner
         android:id="@+id/moduleCodeList"
         android:layout_width="279dp"
-        android:layout_height="24dp"
+        android:layout_height="30dp"
         android:layout_marginTop="30dp"
         android:layout_marginEnd="4dp"
         android:layout_marginBottom="20dp"
@@ -124,7 +125,7 @@
     <Spinner
         android:id="@+id/classTypeList"
         android:layout_width="262dp"
-        android:layout_height="24dp"
+        android:layout_height="30dp"
         android:layout_marginEnd="4dp"
         android:background="@android:drawable/btn_dropdown"
         android:contentDescription="class_type"
@@ -158,7 +159,7 @@
         android:background="#F3C677"
         android:text="Save Class"
         android:fontFamily="@font/caladea_bold"
-        android:textSize="24sp"
+        android:textSize="30sp"
         android:textColor="#4A148C"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

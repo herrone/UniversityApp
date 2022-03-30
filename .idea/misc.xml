@@ -4,21 +4,24 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="app/src/main/res/drawable/customborder.xml" value="0.167" />
-        <entry key="app/src/main/res/layout/activity_add_assignment.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/listviewborder.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_add_assignment.xml" value="0.24951782226562502" />
         <entry key="app/src/main/res/layout/activity_add_class.xml" value="0.19234924316406252" />
         <entry key="app/src/main/res/layout/activity_add_module.xml" value="0.14629211425781252" />
-        <entry key="app/src/main/res/layout/activity_add_module2.xml" value="0.25831298828125004" />
+        <entry key="app/src/main/res/layout/activity_add_module2.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_assignment_list.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/activity_assignments.xml" value="0.10439758300781252" />
-        <entry key="app/src/main/res/layout/activity_calendar.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/activity_class_list.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_assignments.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_calendar.xml" value="0.2912948608398438" />
+        <entry key="app/src/main/res/layout/activity_calendar_list.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_calendar_list2.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_class_list.xml" value="0.1395782470703125" />
         <entry key="app/src/main/res/layout/activity_delete.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_edit_assignment.xml" value="0.14176025390625" />
         <entry key="app/src/main/res/layout/activity_edit_class.xml" value="0.3330718994140625" />
         <entry key="app/src/main/res/layout/activity_edit_module.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.22523636127073837" />
         <entry key="app/src/main/res/layout/activity_module_list.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/activity_modules_and_classes.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_modules_and_classes.xml" value="0.165" />
         <entry key="app/src/main/res/layout/activity_modules_and_classes_2.xml" value="0.12968591691995948" />
         <entry key="app/src/main/res/layout/activity_settings.xml" value="0.16814575195312498" />
         <entry key="app/src/main/res/layout/activity_try_scroll.xml" value="0.1" />

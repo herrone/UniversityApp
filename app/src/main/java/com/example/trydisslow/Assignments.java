@@ -21,10 +21,11 @@ import java.util.ArrayList;
 
 public class Assignments extends AppCompatActivity {
 String selected;
+    String selectedAssignment = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        String selectedAssignment;
+
         setContentView(R.layout.activity_assignments);
         getSupportActionBar().hide();
 
@@ -37,7 +38,7 @@ String selected;
         Cursor query = myBase.rawQuery("SELECT * FROM NEWASSIGNMENTSWITHIDS2", null);
 
         if(query.moveToFirst()) {
-            String name = query.getString(0);
+            String name = query.getString(0) + "for module" + query.getString(1);
             listItems.add(name);
             while (query.moveToNext()) {
                 name = query.getString(0);
@@ -53,7 +54,7 @@ String selected;
             @Override
            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 //
-             selected = myListView.getItemAtPosition(i).toString();
+             selectedAssignment = myListView.getItemAtPosition(i).toString();
 //  selectedModule = myModuleListView.getItemAtPosition(i).toString();
                 Toast.makeText(Assignments.this, selected, Toast.LENGTH_LONG).show();
                // adapter.dismiss(); // If you want to close the adapter
@@ -96,7 +97,16 @@ String selected;
         addAssignmentButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(Assignments.this, addAssignment.class));
+                Cursor moduleQuery = myBase.rawQuery("SELECT * FROM NEWMODULE3", null);
+
+                if(moduleQuery.moveToFirst()) {
+                    if (!moduleQuery.moveToNext()) {
+                        Toast.makeText(Assignments.this, "You cannot add an assignment before adding a module", Toast.LENGTH_LONG).show();
+                    } else {
+
+                        startActivity(new Intent(Assignments.this, addAssignment.class));
+                    }
+                }
 
                // startActivity(new Intent(Assignments.this, addAssignment.class));
             }
@@ -105,19 +115,28 @@ String selected;
         editAssignmentButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-              Intent i = new Intent (Assignments.this, editAssignment.class);
-                i.putExtra("editableAssignment", selected);
-                startActivity(i);
+                if (selectedAssignment== null) {
+                    Toast.makeText(Assignments.this, "Please choose an assignment to edit", Toast.LENGTH_LONG).show();
 
+                } else {
+                    Intent i = new Intent(Assignments.this, editAssignment.class);
+                    i.putExtra("editableAssignment", selectedAssignment);
+                    startActivity(i);
+
+                }
             }
         });
        AppCompatButton deleteAssignmentButton =(AppCompatButton)findViewById(R.id.deleteAssignmentButton);
         deleteAssignmentButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (selectedAssignment== null) {
+                    Toast.makeText(Assignments.this, "Please choose an assignment to delete", Toast.LENGTH_LONG).show();
+
+                } else {
                 SQLiteDatabase myBase = getApplicationContext().openOrCreateDatabase("Names.db", 0, null);
 
-                String retrieveDetails = "SELECT * FROM NEWASSIGNMENTSWITHIDS2 WHERE title = '" + selected + "'";
+                String retrieveDetails = "SELECT * FROM NEWASSIGNMENTSWITHIDS2 WHERE title = '" + selectedAssignment + "'";
                 Cursor assignmentDetails = myBase.rawQuery(retrieveDetails, null);
                 if (assignmentDetails.moveToFirst()) {
                     int hourId = assignmentDetails.getInt(5);
@@ -145,11 +164,11 @@ String selected;
                     }
                     Toast.makeText(Assignments.this, "all cancelled", Toast.LENGTH_LONG).show();
 //                }
-                String deleteStatement = "DELETE FROM NEWASSIGNMENTSWITHIDS2 WHERE title = '" + selected + "';";
-                myBase.execSQL(deleteStatement);
-                startActivity(new Intent(Assignments.this, Assignments.class));
+                    String deleteStatement = "DELETE FROM NEWASSIGNMENTSWITHIDS2 WHERE title = '" + selectedAssignment+ "';";
+                    myBase.execSQL(deleteStatement);
+                    startActivity(new Intent(Assignments.this, Assignments.class));
 
-
+                }
             }}
         });
     }

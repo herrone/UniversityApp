@@ -10,6 +10,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.format.Time;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -29,10 +30,34 @@ public class addClass extends AppCompatActivity {
         getSupportActionBar().hide();
         setContentView(R.layout.activity_add_class);
         EditText notes = (EditText) findViewById(R.id.addNotesBox);
+        notes.setOnTouchListener(new View.OnTouchListener() {
+
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                notes.setText("");
+                return false;
+            }
+        });
         TimePicker from = (TimePicker) findViewById(R.id.timePickerFrom);
         TimePicker to = (TimePicker) findViewById(R.id.timePickerTo);
         EditText lecturer = (EditText) findViewById(R.id.lecturerAddBox);
+        lecturer.setOnTouchListener(new View.OnTouchListener() {
+
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+               lecturer.setText("");
+                return false;
+            }
+        });
         EditText where = (EditText) findViewById(R.id.addLocationBox);
+        where.setOnTouchListener(new View.OnTouchListener() {
+
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                where.setText("");
+                return false;
+            }
+        });
         Spinner moduleCodeList = findViewById(R.id.moduleCodeList);
         Spinner dayList = findViewById(R.id.dayList);
         Spinner classTypeList = findViewById(R.id.classTypeList);
@@ -59,14 +84,14 @@ public class addClass extends AppCompatActivity {
 
         ArrayAdapter<String> moduleCodeAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, moduleCodeArray);
 
-        String[] classTypeItems = new String[]{"choose class type", "lecture", "practical", "tutorial"};
+        String[] classTypeItems = new String[]{"choose class type", "Lecture", "Practical", "Tutorial"};
         ArrayAdapter<String> classTypeAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, classTypeItems);
 //set the spinners adapter to the previously created one.
         classTypeList.setAdapter(classTypeAdapter);
         moduleCodeList.setAdapter(moduleCodeAdapter);
         //Spinner dayList = findViewById(R.id.dayList);
 //create a list of items for the spinner.
-        String[] days = new String[]{"choose day", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"};
+        String[] days = new String[]{"choose day", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
 //create an adapter to describe how the items are displayed, adapters are used in several places in android.
 //There are multiple variations of this, but this is the basic variant.
         ArrayAdapter<String> adapterDays = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, days);
@@ -86,10 +111,27 @@ public class addClass extends AppCompatActivity {
                 c.id = r.nextInt(1000);
 
                 //frommer.second = 0;
-
                // toer.second = 0;
-                c.startTime = from.toString();
-                c.endTime = to.toString();
+               int fromHour = from.getHour();
+                int fromMinute = from.getMinute();
+                if(fromMinute<10){
+                    c.startTime = fromHour + ":0" + fromMinute;
+                }
+                else{
+                    c.startTime = fromHour + ":" + fromMinute;
+
+                }
+                int toHour = to.getHour();
+                int toMinute = to.getMinute();
+                if(toMinute<10){
+                    c.startTime = toHour + ":0" + toMinute;
+                }
+                else{
+                    c.startTime = toHour + ":" + toMinute;
+
+                }
+                c.startTime = fromHour + ":" + fromMinute;
+                c.endTime =  toHour + ":" + toMinute;
                 c.classType = classTypeList.getSelectedItem().toString();
                 SQLiteDatabase myBase = getApplicationContext().openOrCreateDatabase("Names.db", 0, null);
 
@@ -99,9 +141,9 @@ public class addClass extends AppCompatActivity {
 
 
                 //myBase.execSQL("CREATE TABLE if not exists Classes(code TEXT, type TEXT, lecturer TEXT, notes TEXT, location TEXT, day TEXT, start TIME, finish TIME );");
-                myBase.execSQL("CREATE TABLE if not exists NEWCLASSWITHIDS(code TEXT, type TEXT, lecturer TEXT, notes TEXT, location TEXT, day TEXT, start TEXT, finish TEXT, id INT );");
+                myBase.execSQL("CREATE TABLE if not exists NEWCLASSWITHIDS4(code TEXT, type TEXT, lecturer TEXT, notes TEXT, location TEXT, day TEXT, start TEXT, finish TEXT, id INT );");
                // String insertStatement = "INSERT INTO Classes2 VALUES('" + c.modCode + "','" + c.classType + "','" + c.lecturer + "','" + c.notes + "');";
-                 String insertStatement = "INSERT INTO NEWCLASSWITHIDS VALUES('" + c.modCode + "','" + c.classType + "','" + c.lecturer + "','" + c.notes + "','" + c.locationOrLink + "','" + c.startTime + "','" + c.dayOfClass + "','"+ c.endTime + "'," +c.id + ");";
+                 String insertStatement = "INSERT INTO NEWCLASSWITHIDS4 VALUES('" + c.modCode + "','" + c.classType + "','" + c.lecturer + "','" + c.notes + "','" + c.locationOrLink+ "','" + c.dayOfClass + "','" +  c.startTime + "','" + c.endTime + "'," +c.id + ");";
                 myBase.execSQL(insertStatement);
                 Toast.makeText(addClass.this, c.classType +  c.modCode + c.lecturer + c.notes  + c.dayOfClass + c.locationOrLink + "Saved Class for module ",
                         Toast.LENGTH_LONG).show();

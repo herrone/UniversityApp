@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -22,19 +23,55 @@ public class addModule extends AppCompatActivity {
         setContentView(R.layout.activity_add_module2);
         //DatabaseSingleton db = new DatabaseSingleton();
         Module m = new Module();
-       AppCompatButton saveModuleButton = (AppCompatButton) findViewById(R.id.buttonSaveModule);
+        EditText moduleTitle = (EditText) findViewById(R.id.addModuleTitleBox);
+       moduleTitle.setOnTouchListener(new View.OnTouchListener() {
+
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+              moduleTitle.setText("");
+                return false;
+            }
+        });
+        EditText moduleCod = (EditText) findViewById(R.id.addModuleCodeBox);
+        moduleCod.setOnTouchListener(new View.OnTouchListener() {
+
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                moduleCod.setText("");
+                return false;
+            }
+        });
+        EditText moduleLeader = (EditText) findViewById(R.id.addModuleLeader);
+        moduleLeader.setOnTouchListener(new View.OnTouchListener() {
+
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                moduleLeader.setText("");
+                return false;
+            }
+        });
+        EditText moduleNotes = (EditText) findViewById(R.id.addModuleNotesBox);
+        moduleNotes.setOnTouchListener(new View.OnTouchListener() {
+
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                moduleNotes.setText("");
+                return false;
+            }
+        });
+        AppCompatButton saveModuleButton = (AppCompatButton) findViewById(R.id.buttonSaveModule);
         saveModuleButton.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.M)
             @Override
             public void onClick(View v) {
 
-                EditText moduleTitle = (EditText) findViewById(R.id.addModuleTitleBox);
+                //EditText moduleTitle = (EditText) findViewById(R.id.addModuleTitleBox);
                 m.nameMod = moduleTitle.getText().toString();
-                EditText moduleCod = (EditText) findViewById(R.id.addModuleCodeBox);
+               // EditText moduleCod = (EditText) findViewById(R.id.addModuleCodeBox);
                 m.moduleCode = moduleCod.getText().toString();
-                EditText moduleLeader = (EditText) findViewById(R.id.addModuleLeader);
+               // EditText moduleLeader = (EditText) findViewById(R.id.addModuleLeader);
                 m.courseLeader = moduleLeader.getText().toString();
-                EditText moduleNotes = (EditText) findViewById(R.id.addModuleNotesBox);
+                //EditText moduleNotes = (EditText) findViewById(R.id.addModuleNotesBox);
                 m.modNotes  = moduleNotes.getText().toString();
 
                // m.colour = "yellow";

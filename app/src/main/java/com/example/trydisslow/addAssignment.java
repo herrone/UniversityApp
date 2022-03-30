@@ -20,6 +20,7 @@ import android.media.RingtoneManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.SystemClock;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -92,7 +93,23 @@ public class addAssignment extends AppCompatActivity {
         //set the spinners adapter to the previously created one.
         moduleCodeList.setAdapter(moduleCodeAdapter);
         EditText assignmentTitle = (EditText) findViewById(R.id.assignmentTitleInput);
+        assignmentTitle.setOnTouchListener(new View.OnTouchListener() {
+
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                assignmentTitle.setText("");
+                return false;
+            }
+        });
         EditText assignmentNotes = (EditText) findViewById(R.id.addAssignmentNotesBox);
+        assignmentNotes.setOnTouchListener(new View.OnTouchListener() {
+
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                assignmentNotes.setText("");
+                return false;
+            }
+        });
         TimePicker timeDue = (TimePicker) findViewById(R.id.timeDue);
         DatePicker dateDue = (DatePicker) findViewById(R.id.dateDue);
 //       // Settings settings = new Settings();
@@ -142,9 +159,11 @@ public class addAssignment extends AppCompatActivity {
                     scheduleNotification(addAssignment.this, delayCalculator(d, 48), feHourID, "48 Hour Reminder", title + "due soon");
                 }
 
-                Assignment a = new Assignment(title, d.toString(), moduleCodeInQuestion, notes, 3, tfHourID, feHourID);
+                Assignment a = new Assignment(title, d, moduleCodeInQuestion, notes, 3, tfHourID, feHourID);
                 myBase.execSQL("CREATE TABLE if not exists NEWASSIGNMENTSWITHIDS2(title TEXT, code TEXT, dueDate TEXT, notes TEXT, id TEXT, hID INT, tfID INT, feID INT);");
-                String insertStatement = "INSERT INTO NEWASSIGNMENTSWITHIDS2 VALUES('" + a.title + "','" + a.whichModuleIsTaskFor + "','" + a.dueDate + "','" + a.notes + "'," + a.assignmentId + "," + a.hourID + "," + a.tfHourId + "," + a.feHourId + ");";
+                java.text.SimpleDateFormat sdfToString = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                String stringDate = sdfToString.format(a.dueDate);
+                String insertStatement = "INSERT INTO NEWASSIGNMENTSWITHIDS2 VALUES('" + a.title + "','" + a.whichModuleIsTaskFor + "','" + stringDate + "','" + a.notes + "'," + a.assignmentId + "," + a.hourID + "," + a.tfHourId + "," + a.feHourId + ");";
                 myBase.execSQL(insertStatement);
                 // String insertStatement = "INSERT INTO Modules VALUES('" + m.nameMod + "','"+ m.moduleCode + "','"  + m.courseLeader + "','"  + m.modNotes + "')\"";
                 //                    Toast.makeText(addAssignment.this, "Time of " + a.dueDate,
