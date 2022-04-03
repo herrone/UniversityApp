@@ -64,6 +64,8 @@
         app:layout_constraintTop_toBottomOf="@+id/deleteClassButton"
         app:layout_constraintVertical_bias="1.0" />
 
+    <!--    </ListView>-->
+
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/deleteModuleButton"
         android:layout_width="64dp"
@@ -74,12 +76,10 @@
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.348"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.294" />
-
-    <!--    </ListView>-->
+        app:layout_constraintVertical_bias="0.297" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/buttonGoToAddClass2"
@@ -91,7 +91,7 @@
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.904"
+        app:layout_constraintHorizontal_bias="0.953"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.866" />
@@ -108,7 +108,22 @@
         app:layout_constraintHorizontal_bias="0.47"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.72" />
+        app:layout_constraintVertical_bias="0.72" >
+
+
+        <LinearLayout
+            android:id="@+id/linearLayoutmodule"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            tools:context=".ModulesAndClasses"></LinearLayout>
+    </ListView>
+    <LinearLayout
+        android:id="@+id/linearLayoutclass"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        tools:context=".ModulesAndClasses"></LinearLayout>
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/deleteClassButton"
@@ -121,7 +136,7 @@
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.386"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.966" />
@@ -179,7 +194,7 @@
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.873"
+        app:layout_constraintHorizontal_bias="0.953"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.297" />
@@ -194,10 +209,10 @@
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.112"
+        app:layout_constraintHorizontal_bias="0.046"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.294" />
+        app:layout_constraintVertical_bias="0.296" />
 
     <ListView
         android:id="@+id/moduleListView"
@@ -211,6 +226,40 @@
         app:layout_constraintHorizontal_bias="0.308"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.133" />
+        app:layout_constraintVertical_bias="0.133">
+
+
+    </ListView>
+
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/showPopupBtnmod"
+        android:layout_width="64dp"
+        android:layout_height="32dp"
+        android:background="#F3C677"
+        android:text="Info"
+        android:textColor="#4A148C"
+        app:layout_constraintBottom_toBottomOf="@+id/buttonAssignments"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.648"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.297"
+        tools:ignore="MissingConstraints" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/showPopupBtnclass"
+        android:layout_width="64dp"
+        android:layout_height="32dp"
+        android:background="#F3C677"
+        android:text="Info"
+        android:textColor="#4A148C"
+        app:layout_constraintBottom_toBottomOf="@+id/buttonAssignments"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.679"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.869"
+        tools:ignore="MissingConstraints" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

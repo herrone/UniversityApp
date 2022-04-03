@@ -10,7 +10,7 @@
         <entry key="app/src/main/res/layout/activity_add_module.xml" value="0.14629211425781252" />
         <entry key="app/src/main/res/layout/activity_add_module2.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_assignment_list.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/activity_assignments.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_assignments.xml" value="0.23852386474609377" />
         <entry key="app/src/main/res/layout/activity_calendar.xml" value="0.2912948608398438" />
         <entry key="app/src/main/res/layout/activity_calendar_list.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_calendar_list2.xml" value="0.1" />
@@ -19,9 +19,10 @@
         <entry key="app/src/main/res/layout/activity_edit_assignment.xml" value="0.14176025390625" />
         <entry key="app/src/main/res/layout/activity_edit_class.xml" value="0.3330718994140625" />
         <entry key="app/src/main/res/layout/activity_edit_module.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_grade_calculator.xml" value="0.3248482524484828" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.22523636127073837" />
         <entry key="app/src/main/res/layout/activity_module_list.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/activity_modules_and_classes.xml" value="0.165" />
+        <entry key="app/src/main/res/layout/activity_modules_and_classes.xml" value="0.7698924731182796" />
         <entry key="app/src/main/res/layout/activity_modules_and_classes_2.xml" value="0.12968591691995948" />
         <entry key="app/src/main/res/layout/activity_settings.xml" value="0.16814575195312498" />
         <entry key="app/src/main/res/layout/activity_try_scroll.xml" value="0.1" />
@@ -30,6 +31,9 @@
         <entry key="app/src/main/res/layout/fragment_first.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_second.xml" value="0.1" />
         <entry key="app/src/main/res/layout/mybutton.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/popups.xml" value="0.33750305175781253" />
+        <entry key="app/src/main/res/layout/popupsclass.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/popupsmodules.xml" value="0.1" />
       </map>
     </option>
   </component>

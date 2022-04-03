@@ -9,11 +9,9 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Build;
 import android.os.Bundle;
-import android.text.format.Time;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TimePicker;
@@ -58,7 +56,7 @@ public class addClass extends AppCompatActivity {
                 return false;
             }
         });
-        Spinner moduleCodeList = findViewById(R.id.moduleCodeList);
+        Spinner moduleCodeList = findViewById(R.id.moduleCodeListGrades);
         Spinner dayList = findViewById(R.id.dayList);
         Spinner classTypeList = findViewById(R.id.classTypeList);
         ArrayList<String> moduleCodeArray = new ArrayList<String>();

@@ -28,10 +28,17 @@ android {
     buildFeatures {
         viewBinding true
     }
+    testOptions {
+        // Used for Unit testing Android dependent elements in /test folder
+        unitTests.includeAndroidResources  = true
+        unitTests.returnDefaultValues = true
+    }
+
 }
 
 dependencies {
-
+    testImplementation "android.arch.core:core-testing:1.1.1"
+    testImplementation "androidx.arch.core:core-testing:2.1.0"
     implementation 'androidx.appcompat:appcompat:1.4.1'
     implementation 'com.google.android.material:material:1.5.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.3'

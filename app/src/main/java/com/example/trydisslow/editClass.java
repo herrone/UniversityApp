@@ -7,7 +7,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TimePicker;
@@ -44,7 +43,7 @@ public class editClass extends AppCompatActivity {
         TimePicker to = (TimePicker) findViewById(R.id.timePickerTo);
         EditText lecturer = (EditText) findViewById(R.id.lecturerAddBox);
         EditText where = (EditText) findViewById(R.id.addLocationBox);
-        Spinner moduleCodeList = findViewById(R.id.moduleCodeList);
+        Spinner moduleCodeList = findViewById(R.id.moduleCodeListGrades);
         Spinner dayList = findViewById(R.id.dayList);
         Spinner classTypeList = findViewById(R.id.classTypeList);
         ArrayList<String> moduleCodeArray = new ArrayList<String>();

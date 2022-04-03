@@ -14,6 +14,23 @@ public class PrintableClass {
     public PrintableClass(){
 
     }
+
+    public Class getContained() {
+        return contained;
+    }
+
+    public void setContained(Class contained) {
+        this.contained = contained;
+    }
+
+    public Date getDueDate() {
+        return dueDate;
+    }
+
+    public void setDueDate(Date dueDate) {
+        this.dueDate = dueDate;
+    }
+
     public PrintableClass(Class a, Date d){
 
         contained = a;

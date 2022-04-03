@@ -79,7 +79,7 @@
         app:layout_constraintVertical_bias="0.741" />
 
     <Spinner
-        android:id="@+id/moduleCodeList"
+        android:id="@+id/moduleCodeListGrades"
         android:layout_width="279dp"
         android:layout_height="24dp"
         android:layout_marginTop="30dp"

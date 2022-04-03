@@ -7,7 +7,6 @@ import androidx.core.app.NotificationCompat;
 
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
-import android.icu.util.Calendar;
 import android.annotation.SuppressLint;
 import android.app.AlarmManager;
 import android.app.Notification;
@@ -23,7 +22,6 @@ import android.os.SystemClock;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -31,10 +29,7 @@ import android.widget.Spinner;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Random;
@@ -56,33 +51,41 @@ public class addAssignment extends AppCompatActivity {
         //            Toast. makeText(getApplicationContext(), "Got it", Toast. LENGTH_LONG);
         //        } else {
 
-        Spinner moduleCodeList = findViewById(R.id.moduleCodeList);
+        Spinner moduleCodeList = findViewById(R.id.moduleCodeListGrades);
         ArrayList<String> moduleCodeArray = new ArrayList<String>();
         CheckBox hour = findViewById(R.id.notificationAssignmentOneHourBefore);
         CheckBox twfohour = findViewById(R.id.notificationAssignmentTwentyFourHoursBefore);
         CheckBox foeihour = findViewById(R.id.notificationAssignmentFourtyEightHoursBefore);
 
-        //  moduleCodeArray[0] = "choose a module";
-
         SQLiteDatabase myBase = getApplicationContext().openOrCreateDatabase("Names.db", 0, null);
-        myBase.execSQL("CREATE TABLE if not exists NEWMODULE3(title TEXT, code TEXT, leader TEXT, notes TEXT);");
         Cursor query = myBase.rawQuery("SELECT * FROM NEWMODULE3", null);
 
-        if (query.moveToFirst()) {
-            String name = query.getString(0);
-            moduleCodeArray.add(name);
-            if (query.moveToNext()) {
-                String name2 = query.getString(0);
-                moduleCodeArray.add(name2);
+        if(query.moveToFirst()) {
+            while (query.moveToNext()) {
+                moduleCodeArray.add(query.getString(1));
             }
-            if (query.moveToNext()) {
-                String name3 = query.getString(0);
-                moduleCodeArray.add(name3);
-            }
-
-        } else {
-            moduleCodeArray.add("Please add a module first");
         }
+        //  moduleCodeArray[0] = "choose a module";
+
+//        SQLiteDatabase myBase = getApplicationContext().openOrCreateDatabase("Names.db", 0, null);
+//        myBase.execSQL("CREATE TABLE if not exists NEWMODULE3(title TEXT, code TEXT, leader TEXT, notes TEXT);");
+//        Cursor query = myBase.rawQuery("SELECT * FROM NEWMODULE3", null);
+//
+//        if (query.moveToFirst()) {
+//            String name = query.getString(0);
+//            moduleCodeArray.add(name);
+//            if (query.moveToNext()) {
+//                String name2 = query.getString(0);
+//                moduleCodeArray.add(name2);
+//            }
+//            if (query.moveToNext()) {
+//                String name3 = query.getString(0);
+//                moduleCodeArray.add(name3);
+//            }
+//
+//        } else {
+//            moduleCodeArray.add("Please add a module first");
+//        }
         //moduleCodeArray.add("a");
         //create an adapter to describe how the items are displayed, adapters are used in several places in android.
         //There are multiple variations of this, but this is the basic variant.

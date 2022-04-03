@@ -13,7 +13,6 @@ import android.os.Bundle;
 import android.os.SystemClock;
 import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -27,7 +26,6 @@ import androidx.appcompat.widget.AppCompatButton;
 import androidx.core.app.NotificationCompat;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Random;
@@ -52,7 +50,7 @@ public class editAssignment extends AppCompatActivity {
 
         Toast.makeText(this,editableAssignment,
                 Toast.LENGTH_SHORT).show();
-        Spinner moduleCodeList = findViewById(R.id.moduleCodeList);
+        Spinner moduleCodeList = findViewById(R.id.moduleCodeListGrades);
         ArrayList<String> moduleCodeArray = new ArrayList<String>();
 
 
@@ -71,8 +69,9 @@ public class editAssignment extends AppCompatActivity {
         TimePicker timeDue = (TimePicker) findViewById(R.id.timeDue);
         DatePicker dateDue = (DatePicker) findViewById(R.id.dateDue);
         SQLiteDatabase myBase = getApplicationContext().openOrCreateDatabase("Names.db", 0, null);
-
-        String retrieveDetails = "SELECT * FROM NEWASSIGNMENTSWITHIDS2 WHERE title = '" + editableAssignment + "'";
+String[]bits = editableAssignment.split(" for");
+String title = bits[0];
+        String retrieveDetails = "SELECT * FROM NEWASSIGNMENTSWITHIDS2 WHERE title = '" + title + "'";
         Cursor assignmentDetails = myBase.rawQuery(retrieveDetails, null);
 
         if (assignmentDetails.moveToFirst()) {
