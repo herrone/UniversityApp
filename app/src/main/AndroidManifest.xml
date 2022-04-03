@@ -13,6 +13,9 @@
             android:name=".Settings"
             android:exported="false" />
         <activity
+            android:name=".gradeCalculator"
+            android:exported="false" />
+        <activity
             android:name=".addAssignment"
             android:exported="false" />
         <activity

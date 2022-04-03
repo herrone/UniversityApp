@@ -23,6 +23,7 @@ import android.widget.Toast;
 
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 
 public class Assignments extends AppCompatActivity {
@@ -291,6 +292,13 @@ String selected;
 
                // }
             }}
+        });
+     Button gradeCalc = (Button)findViewById(R.id.gradeCalcbutton);
+       gradeCalc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(Assignments.this, gradeCalculator.class));
+            }
         });
     }
 }

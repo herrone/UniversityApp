@@ -10,7 +10,7 @@
         <entry key="app/src/main/res/layout/activity_add_module.xml" value="0.14629211425781252" />
         <entry key="app/src/main/res/layout/activity_add_module2.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_assignment_list.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/activity_assignments.xml" value="0.23852386474609377" />
+        <entry key="app/src/main/res/layout/activity_assignments.xml" value="0.32232971191406246" />
         <entry key="app/src/main/res/layout/activity_calendar.xml" value="0.2912948608398438" />
         <entry key="app/src/main/res/layout/activity_calendar_list.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_calendar_list2.xml" value="0.1" />
@@ -32,6 +32,7 @@
         <entry key="app/src/main/res/layout/fragment_second.xml" value="0.1" />
         <entry key="app/src/main/res/layout/mybutton.xml" value="0.1" />
         <entry key="app/src/main/res/layout/popups.xml" value="0.33750305175781253" />
+        <entry key="app/src/main/res/layout/popupsassignment.xml" value="0.1" />
         <entry key="app/src/main/res/layout/popupsclass.xml" value="0.1" />
         <entry key="app/src/main/res/layout/popupsmodules.xml" value="0.1" />
       </map>
