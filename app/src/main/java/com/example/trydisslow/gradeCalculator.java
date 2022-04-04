@@ -11,6 +11,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -181,22 +182,22 @@ int fio;
                 String grade = "SELECT * FROM Grades WHERE code = '" + code + "';";
                 Cursor gradeQuery = myBase.rawQuery(grade, null);
                 if(gradeQuery.moveToFirst()) {
+                 targetGrade.setText(String.valueOf(gradeQuery.getInt(1)));
+                   //targetGrade.setText(gradeQuery.getInt(1));
+                    assignmentWeight1.setText(String.valueOf(gradeQuery.getInt(2)));
+                    assignmentWeight2.setText(String.valueOf(gradeQuery.getInt(4)));
+                    assignmentWeight3.setText(String.valueOf(gradeQuery.getInt(6)));
+                    assignmentWeight4.setText(String.valueOf(gradeQuery.getInt(8)));
+                    assignmentWeight5.setText(String.valueOf(gradeQuery.getInt(10)));
 
-                    targetGrade.setText(gradeQuery.getInt(1));
-                    assignmentWeight1.setText(gradeQuery.getInt(2));
-                    assignmentWeight2.setText(gradeQuery.getInt(3));
-                    assignmentWeight3.setText(gradeQuery.getInt(4));
-                    assignmentWeight4.setText(gradeQuery.getInt(5));
-                    assignmentWeight5.setText(gradeQuery.getInt(6));
-
-                    obtained1.setText(gradeQuery.getInt(7));
-                    obtained2.setText(gradeQuery.getInt(8));
-                    obtained3.setText(gradeQuery.getInt(9));
-                    obtained4.setText(gradeQuery.getInt(10));
-                    obtained5.setText(gradeQuery.getInt(11));
+                    obtained1.setText(String.valueOf(gradeQuery.getInt(3)));
+                    obtained2.setText(String.valueOf(gradeQuery.getInt(5)));
+                    obtained3.setText(String.valueOf(gradeQuery.getInt(7)));
+                    obtained4.setText(String.valueOf(gradeQuery.getInt(9)));
+                    obtained5.setText(String.valueOf(gradeQuery.getInt(11)));
                     ArrayList<Object> returned =  calculateAverage(gradeQuery.getInt(1), gradeQuery.getInt(2),gradeQuery.getInt(3),gradeQuery.getInt(4),gradeQuery.getInt(5),gradeQuery.getInt(6),gradeQuery.getInt(7),gradeQuery.getInt(8),gradeQuery.getInt(9),gradeQuery.getInt(10),gradeQuery.getInt(11));
-                    String currentAverageString = "You have achieved " + (String)returned.get(1) + " possible marks so far";
-                    String needToGet = "You need to get an average of " + returned.get(3) + "% in your remaining assignment(s)";
+                    String currentAverageString = "You have achieved " + (String)returned.get(0) + " possible marks so far";
+                    String needToGet = "You need to get an average of " + returned.get(1) + "% in your remaining assignment(s)";
                     currentAverage.setText(currentAverageString);
                     needToObtain.setText(needToGet);
                 }
@@ -215,42 +216,47 @@ int fio;
             @Override
             public void onClick(View v) {
                String code =  moduleCode.getSelectedItem().toString();
-                String t = (String)targetGrade.getText();
-                String fw = (String)assignmentWeight1.getText();
-                String sw= (String)assignmentWeight2.getText();
-                String tw= (String)assignmentWeight3.getText();
-                String fourthw= (String)assignmentWeight4.getText();
-                String fifthw= (String)assignmentWeight5.getText();
+                String t = targetGrade.getText().toString();
+                String fw = assignmentWeight1.getText().toString();
+                String sw= assignmentWeight2.getText().toString();
+                String tw= assignmentWeight3.getText().toString();
+                String fourthw= assignmentWeight4.getText().toString();
+                String fifthw= assignmentWeight5.getText().toString();
                int target = Integer.parseInt(t);
                int firstw = Integer.parseInt(fw);
                int secondw = Integer.parseInt(sw);
                int thirdw = Integer.parseInt(tw);
                int fourthweight = Integer.parseInt(fourthw);
                int fifthweight = Integer.parseInt(fifthw);
-                String fo = (String)obtained1.getText();
-                String so= (String)obtained2.getText();
-                String to= (String)obtained3.getText();
-                String fourtho= (String)obtained4.getText();
-                String fiftho= (String)obtained5.getText();
+                String fo = obtained1.getText().toString();
+                String so= obtained2.getText().toString();
+                String to= obtained3.getText().toString();
+                String fourtho= obtained4.getText().toString();
+                String fiftho= obtained5.getText().toString();
               //  int target = Integer.parseInt(t);
                 int firsto = Integer.parseInt(fo);
                 int secondo = Integer.parseInt(so);
                 int thirdo = Integer.parseInt(to);
                 int fourthobtained = Integer.parseInt(fourtho);
                 int fifthobtained = Integer.parseInt(fiftho);
-                ArrayList<Object> returned =  calculateAverage(target, firstw, firsto, secondw, secondo, thirdw, thirdo, fourthweight, fourthobtained, fifthweight, fifthobtained);
-             String currentAverageString = "You have achieved " + (String)returned.get(1) + " possible marks so far";
-             String needToGet = "You need to get an average of " + returned.get(3) + "% in your remaining assignment(s)";
-                currentAverage.setText(currentAverageString);
-                needToObtain.setText(needToGet);
-                
-                SQLiteDatabase myBase = getApplicationContext().openOrCreateDatabase("Names.db", 0, null);
+               if(firstw + secondw + thirdw+ fourthweight + fifthweight != 100){
+                   Toast.makeText(gradeCalculator.this, "Please ensure the weighted amounts add up to 100" , Toast.LENGTH_LONG).show();
+               }
+               else {
+                   //
+                   ArrayList<Object> returned = calculateAverage(target, firstw, firsto, secondw, secondo, thirdw, thirdo, fourthweight, fourthobtained, fifthweight, fifthobtained);
+                   String currentAverageString = "You have achieved " + returned.get(0).toString() + " possible marks so far";
+                   String needToGet = "You need to get an average of " + returned.get(1).toString() + "% in your remaining assignment(s)";
+                   currentAverage.setText(currentAverageString);
+                   needToObtain.setText(needToGet);
 
-                myBase.execSQL("CREATE TABLE if not exists Grades(code TEXT, target INT, firstWeight INT, firstObtained INT, secondWeight INT, secondObtained INT, thirdWeight INT, thirdObtained INT,fourthWeight INT, fourthObtained INT, fifthWeight INT, fifthObtained INT);");
-                myBase.execSQL("DELETE FROM Grades WHERE code = '" + code + "';");
-                myBase.execSQL("INSERT INTO Grades VALUES(" + code + "," + target + "," + firstw + "," + firsto + "," + secondw + "," + secondo + "," + thirdw + "," + thirdo + "," + fourthweight + "," + fourthobtained + "," + fifthweight + "," + fifthobtained + ")");
-            
-                
+                   SQLiteDatabase myBase = getApplicationContext().openOrCreateDatabase("Names.db", 0, null);
+
+                   myBase.execSQL("CREATE TABLE if not exists Grades(code TEXT, target INT, firstWeight INT, firstObtained INT, secondWeight INT, secondObtained INT, thirdWeight INT, thirdObtained INT,fourthWeight INT, fourthObtained INT, fifthWeight INT, fifthObtained INT);");
+                   myBase.execSQL("DELETE FROM Grades WHERE code = '" + code + "';");
+                   myBase.execSQL("INSERT INTO Grades VALUES('" + code + "'," + target + "," + firstw + "," + firsto + "," + secondw + "," + secondo + "," + thirdw + "," + thirdo + "," + fourthweight + "," + fourthobtained + "," + fifthweight + "," + fifthobtained + ")");
+
+               }
             }
         });
 
@@ -259,77 +265,107 @@ int fio;
 
     }
         //method to calculate average
-        public static ArrayList<Object> calculateAverage(int target, int firstWeight, int firstObtained,int secondWeight, int secondObtained, int thirdWeight, int thirdObtained,int fourthWeight, int fourthObtained,int fifthWeight, int fifthObtained){
+        public ArrayList<Object> calculateAverage(int target, int firstWeight, int firstObtained, int secondWeight, int secondObtained, int thirdWeight, int thirdObtained, int fourthWeight, int fourthObtained, int fifthWeight, int fifthObtained){
             ArrayList<Integer> ints = new ArrayList<Integer>();
-            int first;
-            int second;
-            int third;
-            int fourth;
-            int fifth;
-            int pfirst;
-            int psecond;
-            int pthird;
-            int pfourth;
-            int pfifth;
-            if(firstObtained > 0) {
-               first =(firstObtained / 100 * firstWeight);
-               pfirst = firstWeight;
+            int first = 0;
+            int second = 0;
+            int third=0;
+            int fourth=0;
+            int fifth=0;
+            int pfirst=0;
+            int psecond=0;
+            int pthird=0;
+            int pfourth=0;
+            int pfifth=0;
+            int possibleMarksSoFar = 0;
+            int obtainedMarksSoFar = 0;
+            if(firstWeight>0 ) {
+                if (firstObtained > 0) {
+                    possibleMarksSoFar += firstWeight;
+                    obtainedMarksSoFar += (firstObtained * firstWeight)/100;
+                }
             }
             else{
                 first = 0;
                 pfirst = 0;
             }
-            if(secondObtained > 0) {
-                second =(secondObtained / 100 * secondWeight);
-                psecond = secondWeight;
+            if(secondWeight>0 ) {
+                if (secondObtained > 0) {
+                    possibleMarksSoFar += secondWeight;
+                    obtainedMarksSoFar += (secondObtained * secondWeight)/100;
+                }
             }
             else{
-               second = 0;
-               psecond = 0;
+                second = 0;
+                psecond = 0;
             }
-            if(thirdObtained > 0) {
-                third =(thirdObtained / 100 * thirdWeight);
-                pthird = thirdWeight;
+            if(thirdWeight>0 ) {
+                if (thirdObtained > 0) {
+                    possibleMarksSoFar += thirdWeight;
+                    obtainedMarksSoFar += (thirdObtained * thirdWeight)/100;
+                }
             }
             else{
-               third = 0;
-               pthird = 0;
+                third = 0;
+                pthird = 0;
             }
-            if(fourthObtained > 0) {
-                fourth =(fourthObtained / 100 * fourthWeight);
-                pfourth = fourthWeight;
+            if(fourthWeight>0 ) {
+                if (fourthObtained > 0) {
+                    possibleMarksSoFar += fourthWeight;
+                    obtainedMarksSoFar += (fourthObtained * fourthWeight)/100;
+                }
             }
             else{
                 fourth = 0;
                 pfourth = 0;
             }
-            if(fifthObtained > 0) {
-                fifth=(fifthObtained / 100 * fifthWeight);
-                pfifth = fifthWeight;
+            if(fifthWeight>0 ) {
+                if (fifthObtained > 0) {
+                    possibleMarksSoFar += fifthWeight;
+                    obtainedMarksSoFar += (fifthObtained * fifthWeight)/100;
+                }
             }
             else{
                 fifth = 0;
                 pfifth = 0;
             }
+           // int marksAchievedthusfar = first+second+third+fourth+fifth;
+           // int possibleMarksSoFar = pfirst + psecond + pthird + pfourth + pfifth;
+            String achieved = obtainedMarksSoFar + "/" + possibleMarksSoFar;
+            int percentSoFar;
+            int marks = 0;
+            if(possibleMarksSoFar == 0){
+                percentSoFar = 0;
+            }
+//            else{
+//                percentSoFar= (obtainedMarksSoFar/possibleMarksSoFar)*100;
+//            }
 
-            int marksAchievedthusfar = first+second+third+fourth+fifth;
-            int possibleMarksSoFar = pfirst + psecond + pthird + pfourth + pfifth;
-            String achieved = marksAchievedthusfar + "/" + possibleMarksSoFar;
-            int percentSoFar = (marksAchievedthusfar/possibleMarksSoFar)*100;
             ArrayList<Object> returnable = new ArrayList<>();
-            returnable.add(percentSoFar);
+            //returnable.add(percentSoFar);
             returnable.add(achieved);
-            int needToGetMarks = target - marksAchievedthusfar;
-            int needToGetPercent = (target - percentSoFar) / (100 - possibleMarksSoFar);
-            returnable.add(needToGetMarks);
+            int marksRemaining = 100 - possibleMarksSoFar;
+            int needToGetMarks = target - obtainedMarksSoFar;
+           // Toast.makeText(gradeCalculator.this, "marks to get " + needToGetMarks + "\n percent left " + marksRemaining, Toast.LENGTH_LONG).show();
+            int needToGetPercent = 0;
+            if (possibleMarksSoFar == 0){
+                needToGetPercent = target;
+            }
+            else {
+                needToGetPercent = (needToGetMarks / marksRemaining) * 100;
+             //  Toast.makeText(gradeCalculator.this, "marks to get " + needToGetMarks + "\n percent left " + marksRemaining, Toast.LENGTH_LONG).show();
+           //     Toast.makeText(gradeCalculator.this, "marks to get " + (needToGetMarks/marksRemaining), Toast.LENGTH_LONG).show();
+                 needToGetPercent = (int) (((double) needToGetMarks / (double) marksRemaining) * 100);
+                //Toast.makeText(gradeCalculator.this, String.valueOf(marks), Toast.LENGTH_LONG).show();
+
+            }
+            //returnable.add(needToGetMarks);
             returnable.add(needToGetPercent);
 
             return returnable;
 
 
         }
-
-
 
 
 }

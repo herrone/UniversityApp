@@ -23,11 +23,10 @@ import android.widget.Toast;
 
 import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 
 public class Assignments extends AppCompatActivity {
-String selected;
+    String selected;
     String selectedAssignment;
     Button showPopupBtn, closePopupBtn;
     PopupWindow popupWindow;
@@ -40,15 +39,15 @@ String selected;
         getSupportActionBar().hide();
 
         ListView myListView = (ListView) findViewById(R.id.listView);
-        myListView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
+        //myListView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
         ArrayList<String> listItems = new ArrayList<String>();
 
-       SQLiteDatabase myBase = getApplicationContext().openOrCreateDatabase("Names.db", 0, null);
-       myBase.execSQL("CREATE TABLE if not exists NEWASSIGNMENTSWITHIDS2(title TEXT, code TEXT, dueDate TEXT, notes TEXT, id INT, hID INT, tfID INT, feID INT);");
+        SQLiteDatabase myBase = getApplicationContext().openOrCreateDatabase("Names.db", 0, null);
+        myBase.execSQL("CREATE TABLE if not exists NEWASSIGNMENTSWITHIDS2(title TEXT, code TEXT, dueDate TEXT, notes TEXT, id INT, hID INT, tfID INT, feID INT);");
         Cursor query = myBase.rawQuery("SELECT * FROM NEWASSIGNMENTSWITHIDS2", null);
 
         if(query.moveToFirst()) {
-            String name = query.getString(0) + " for " + query.getString(1);
+            String name = " " + query.getString(0) + " for " + query.getString(1);
             listItems.add(name);
             while (query.moveToNext()) {
                 name = query.getString(0);
@@ -59,16 +58,16 @@ String selected;
 ////        listItems.add("third");
 ////        listItems.add("fourth");
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(Assignments.this,android.R.layout.simple_list_item_single_choice,listItems);
-       myListView.setAdapter(adapter);
+        myListView.setAdapter(adapter);
         myListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-           public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 //
-             selectedAssignment = myListView.getItemAtPosition(i).toString();
+                selectedAssignment = myListView.getItemAtPosition(i).toString();
 //  selectedModule = myModuleListView.getItemAtPosition(i).toString();
                 Toast.makeText(Assignments.this, selected, Toast.LENGTH_LONG).show();
-               // adapter.dismiss(); // If you want to close the adapter
-           }
+                // adapter.dismiss(); // If you want to close the adapter
+            }
         });
 //
 //
@@ -88,9 +87,9 @@ String selected;
 //                startActivity(new Intent(Assignments.this, Settings.class));
 //            }
 //        });
-    //    title TEXT, code TEXT, dueDate TEXT, notes TEXT, id INT, hID INT, tfID INT, feID INT
-      linearLayout1 = (LinearLayout) findViewById(R.id.linearLayout1);
-       AppCompatButton showPopupBtn = (AppCompatButton) findViewById(R.id.showPopupBtnclass);
+        //    title TEXT, code TEXT, dueDate TEXT, notes TEXT, id INT, hID INT, tfID INT, feID INT
+        linearLayout1 = (LinearLayout) findViewById(R.id.linearLayout1);
+        AppCompatButton showPopupBtn = (AppCompatButton) findViewById(R.id.showPopupBtnclass);
         showPopupBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -198,14 +197,15 @@ String selected;
                 }
             }
         });
-       AppCompatButton calendarButton =(AppCompatButton)findViewById(R.id.buttonCalendar);
+
+        AppCompatButton calendarButton =(AppCompatButton) findViewById(R.id.buttonCalendar);
         calendarButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(Assignments.this, Calendar.class));
             }
         });
-       AppCompatButton assignmentButton =(AppCompatButton)findViewById(R.id.buttonAssignments);
+        AppCompatButton assignmentButton =(AppCompatButton)findViewById(R.id.buttonAssignments);
         assignmentButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -213,7 +213,7 @@ String selected;
             }
         });
 
-       AppCompatButton addAssignmentButton =(AppCompatButton)findViewById(R.id.buttonGoToAddAssignments);
+        AppCompatButton addAssignmentButton =(AppCompatButton)findViewById(R.id.buttonGoToAddAssignments);
         addAssignmentButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -228,10 +228,10 @@ String selected;
                     }
                 }
 
-               // startActivity(new Intent(Assignments.this, addAssignment.class));
+                // startActivity(new Intent(Assignments.this, addAssignment.class));
             }
         });
-       AppCompatButton editAssignmentButton =(AppCompatButton)findViewById(R.id.buttonGoToEditAssignments);
+        AppCompatButton editAssignmentButton =(AppCompatButton)findViewById(R.id.buttonGoToEditAssignments);
         editAssignmentButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -246,7 +246,7 @@ String selected;
                 }
             }
         });
-       AppCompatButton deleteAssignmentButton =(AppCompatButton)findViewById(R.id.deleteAssignmentButton);
+        AppCompatButton deleteAssignmentButton =(AppCompatButton)findViewById(R.id.deleteAssignmentButton);
         deleteAssignmentButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -254,7 +254,7 @@ String selected;
                     Toast.makeText(Assignments.this, "Please choose an assignment to delete", Toast.LENGTH_LONG).show();
 
                 } else {
-                SQLiteDatabase myBase = getApplicationContext().openOrCreateDatabase("Names.db", 0, null);
+                    SQLiteDatabase myBase = getApplicationContext().openOrCreateDatabase("Names.db", 0, null);
 
 //                String retrieveDetails = "SELECT * FROM NEWASSIGNMENTSWITHIDS2 WHERE title = '" + selectedAssignment + "'";
 //                Cursor assignmentDetails = myBase.rawQuery(retrieveDetails, null);
@@ -285,16 +285,16 @@ String selected;
 //                    Toast.makeText(Assignments.this, "all cancelled", Toast.LENGTH_LONG).show();
 ////                }
                     String[]bits = selectedAssignment.split(" for");
-                   String justTitle = bits[0];
-                   String deleteStatement = "DELETE FROM NEWASSIGNMENTSWITHIDS2 WHERE title = '" +justTitle+ "';";
+                    String justTitle = bits[0];
+                    String deleteStatement = "DELETE FROM NEWASSIGNMENTSWITHIDS2 WHERE title = '" +justTitle+ "';";
                     myBase.execSQL(deleteStatement);
                     startActivity(new Intent(Assignments.this, Assignments.class));
 
-               // }
-            }}
+                    // }
+                }}
         });
-     Button gradeCalc = (Button)findViewById(R.id.gradeCalcbutton);
-       gradeCalc.setOnClickListener(new View.OnClickListener() {
+        Button gradeCalc = (Button)findViewById(R.id.gradeCalcbutton);
+        gradeCalc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(Assignments.this, gradeCalculator.class));

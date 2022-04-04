@@ -5,15 +5,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ModulesAndClasses">
-    <!--    <LinearLayout-->
-    <!--        android:layout_width="fill_parent"-->
-    <!--        android:layout_height="fill_parent"-->
-    <!--        android:background="@drawable/customborder"-->
-    <!--        android:orientation="vertical"-->
-    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
-    <!--        app:layout_constraintEnd_toEndOf="parent"-->
-    <!--        app:layout_constraintStart_toStartOf="parent"-->
-    <!--        app:layout_constraintTop_toTopOf="parent" />-->
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:background="@drawable/customborder"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/buttonCalendar"
@@ -94,7 +94,58 @@
         app:layout_constraintHorizontal_bias="0.953"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.866" />
+        app:layout_constraintVertical_bias="0.869" />
+
+    <ListView
+        android:id="@+id/moduleListView"
+        android:layout_width="396dp"
+        android:layout_height="128dp"
+        android:background="@drawable/listviewborder"
+        android:choiceMode="singleChoice"
+        android:listSelector='#666666'
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.308"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.133">
+
+    </ListView>
+
+        <LinearLayout
+            android:id="@+id/linearLayoutmodule"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            tools:context=".ModulesAndClasses">
+        </LinearLayout>
+
+
+    <EditText
+        android:id="@+id/myClassesTitle"
+        android:layout_width="160dp"
+        android:layout_height="65dp"
+        android:baselineAligned="false"
+        android:fontFamily="sans-serif-condensed-medium"
+        android:text="My Classes"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.513"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.37" />
+
+            <LinearLayout
+                android:id="@+id/linearLayoutclass"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                tools:context=".ModulesAndClasses">
+
+
+            </LinearLayout>
+
 
     <ListView
         android:id="@+id/classListView"
@@ -105,41 +156,42 @@
         android:listSelector='#666666'
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.47"
+        app:layout_constraintHorizontal_bias="0.476"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.72" >
+        app:layout_constraintVertical_bias="0.725">
 
 
-        <LinearLayout
-            android:id="@+id/linearLayoutmodule"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal"
-            tools:context=".ModulesAndClasses"></LinearLayout>
     </ListView>
-    <LinearLayout
-        android:id="@+id/linearLayoutclass"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal"
-        tools:context=".ModulesAndClasses"></LinearLayout>
+
+    <EditText
+        android:id="@+id/MyModulesTitle"
+        android:layout_width="163dp"
+        android:layout_height="56dp"
+        android:fontFamily="sans-serif-condensed-medium"
+        android:text="My Modules"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.52"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.023" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/deleteClassButton"
         android:layout_width="64dp"
         android:layout_height="32dp"
-        android:layout_marginBottom="72dp"
         android:background="#F3C677"
         android:text="Delete"
         android:textColor="#4A148C"
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.386"
+        app:layout_constraintHorizontal_bias="0.371"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.966" />
+        app:layout_constraintVertical_bias="0.869" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/editClassButton"
@@ -155,34 +207,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.866" />
-
-    <TextView
-        android:id="@+id/myClassesTitle"
-        android:layout_width="189dp"
-        android:layout_height="32dp"
-        android:fontFamily="sans-serif-condensed-medium"
-        android:text="My Classes"
-        android:textSize="30sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.072"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.366" />
-
-    <TextView
-        android:id="@+id/MyModulesTitle"
-        android:layout_width="182dp"
-        android:layout_height="40dp"
-        android:fontFamily="sans-serif-condensed-medium"
-        android:text="My Modules"
-        android:textSize="30sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.069"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.023" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/buttonGoToAddModule"
@@ -214,23 +238,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.296" />
 
-    <ListView
-        android:id="@+id/moduleListView"
-        android:layout_width="396dp"
-        android:layout_height="128dp"
-        android:background="@drawable/listviewborder"
-        android:choiceMode="singleChoice"
-        android:listSelector='#666666'
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.308"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.133">
-
-
-    </ListView>
-
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/showPopupBtnmod"
@@ -256,10 +263,10 @@
         android:textColor="#4A148C"
         app:layout_constraintBottom_toBottomOf="@+id/buttonAssignments"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.679"
+        app:layout_constraintHorizontal_bias="0.648"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.869"
+        app:layout_constraintVertical_bias="0.868"
         tools:ignore="MissingConstraints" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

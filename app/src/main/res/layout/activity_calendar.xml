@@ -5,16 +5,31 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Calendar">
-<!--    <LinearLayout-->
-<!--        android:layout_width="fill_parent"-->
-<!--        android:layout_height="fill_parent"-->
-<!--        android:background="@drawable/customborder"-->
-<!--        android:orientation="vertical"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="parent" />-->
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="@drawable/customborder"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" >
+    </LinearLayout>
 
+
+    <EditText
+        android:id="@+id/calendarTitleBox"
+        android:layout_width="150dp"
+        android:layout_height="57dp"
+        android:fontFamily="sans-serif-condensed-medium"
+        android:text="Calendar"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.041" />
 
     <ListView
         android:id="@+id/lv"
@@ -23,10 +38,10 @@
         android:background="@drawable/listviewborder"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.406"
+        app:layout_constraintHorizontal_bias="0.388"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.288"
+        app:layout_constraintVertical_bias="0.242"
         tools:ignore="MissingConstraints" />
 
     <androidx.appcompat.widget.AppCompatButton
@@ -72,30 +87,17 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0" />
 
-    <EditText
-        android:id="@+id/calendarTitleBox"
-        android:layout_width="150dp"
-        android:layout_height="57dp"
-        android:fontFamily="sans-serif-condensed-medium"
-        android:text="Calendar"
-        android:textSize="30sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.062" />
-
     <ListView
         android:id="@+id/lv2"
-        android:layout_width="397dp"
-        android:layout_height="233dp"
+        android:layout_width="389dp"
+        android:layout_height="246dp"
         android:background="@drawable/listviewborder"
 
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.87" />
+        app:layout_constraintVertical_bias="0.859" />
 
     <EditText
         android:id="@+id/editTextTextPersonName"
@@ -104,13 +106,13 @@
         android:ems="10"
         android:inputType="textPersonName"
         android:text="My Assignments"
-        android:textSize="20sp"
+        android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.189"
+        app:layout_constraintHorizontal_bias="0.12"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.144" />
+        app:layout_constraintVertical_bias="0.109" />
 
     <EditText
         android:id="@+id/editTextTextPersonName2"
@@ -119,13 +121,13 @@
         android:ems="10"
         android:inputType="textPersonName"
         android:text="My Classes"
-        android:textSize="20sp"
+        android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.188"
+        app:layout_constraintHorizontal_bias="0.218"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.537" /><![CDATA[
+        app:layout_constraintVertical_bias="0.513" /><![CDATA[
 
 
     />

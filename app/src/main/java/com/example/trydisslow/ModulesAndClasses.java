@@ -45,8 +45,10 @@ int selectedCode = 0;
 
 
       ListView myModuleListView = (ListView) findViewById(R.id.moduleListView);
+        myModuleListView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
         ArrayList<String> moduleListItems = new ArrayList<String>();
         ListView myClassListView = (ListView) findViewById(R.id.classListView);
+        myClassListView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
         ArrayList<String> classListItems = new ArrayList<String>();
 
         SQLiteDatabase myBase = getApplicationContext().openOrCreateDatabase("Names.db", 0, null);
@@ -102,11 +104,11 @@ int selectedCode = 0;
             String name = moduleQuery.getString(0) + "(" + moduleQuery.getString(1) + ")" ;
            // moduleListItems.add(name);
             while (moduleQuery.moveToNext()) {
-                name = moduleQuery.getString(0) + "/" + moduleQuery.getString(1) ;
+                name = " " + moduleQuery.getString(0) + "/" + moduleQuery.getString(1) ;
                 moduleListItems.add(name);
             }
         }
-        ArrayAdapter<String> moduleAdapter = new ArrayAdapter<String>(ModulesAndClasses.this,R.layout.activity_module_list,moduleListItems);
+        ArrayAdapter<String> moduleAdapter = new ArrayAdapter<String>(ModulesAndClasses.this,android.R.layout.simple_list_item_single_choice,moduleListItems);
         myModuleListView.setAdapter(moduleAdapter);
         myModuleListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -150,7 +152,7 @@ int selectedCode = 0;
             //    classListItems.add(name);
                // name =  classQuery.getString(2)+ " - " + classQuery.getString(0)  + " - Every " + classQuery.getString(3) + "-" + Integer.parseInt(classQuery.getString(6));
                // classListItems.add(name);
-                name =  classQuery2.getString(2)+ " - " + classQuery2.getString(0)  + " - Every " + classQuery2.getString(3) + "-" + Integer.parseInt(classQuery2.getString(6));
+                name =  " " + classQuery2.getString(2)+ " - " + classQuery2.getString(0)  + " - Every " + classQuery2.getString(3) + "-" + Integer.parseInt(classQuery2.getString(6));
                 classListItems.add(name);
 //                c.setId(classQuery.getInt(8));
 //                c.setLecturer(classQuery.getString(2));
@@ -166,7 +168,7 @@ int selectedCode = 0;
             }
         }
 //
-        ArrayAdapter<String> classAdapter = new ArrayAdapter<String>(ModulesAndClasses.this,R.layout.activity_class_list,classListItems);
+        ArrayAdapter<String> classAdapter = new ArrayAdapter<String>(ModulesAndClasses.this,android.R.layout.simple_list_item_single_choice,classListItems);
         myClassListView.setAdapter(classAdapter);
         myClassListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -367,13 +369,13 @@ int selectedCode = 0;
                 else {
 //                String[] bits = selectedModule.split("/");
 //                selectedModule = bits[0];
-                    for (Module m : moduleList
-                    ) {
-                        if (m.getNameMod().equals(selectedModule)) {
-                            tv.setText("Module name: " + m.getNameMod() + "\n Module code: " + c.getModCode() + "\n Module Leader: " + m.getCourseLeader() + "\n Module Notes: " + m.getModNotes());
-                        }
-
+                for (Module m : moduleList
+                     ) {
+                    if(m.getNameMod().equals(selectedModule)){
+                        tv.setText("Module name: " + m.getNameMod() + "\n Module code: " + c.getModCode() + "\n Module Leader: " + m.getCourseLeader() + "\n Module Notes: " + m.getModNotes() );
                     }
+
+                }
                 }
 
                 closePopupBtn = (Button) customView.findViewById(R.id.closePopupBtn);

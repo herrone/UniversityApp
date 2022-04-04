@@ -91,7 +91,7 @@ public class Calendar extends AppCompatActivity {
             c.dueDate.getDate();
             c.dueDate.getMonth();
             String dater = c.dueDate.getDate() + "/" + c.dueDate.getMonth();
-            String printable = String.format("%s for %s, due on %s \n", c.title, c.whichModuleIsTaskFor, dater);
+            String printable = String.format("  %s for %s, due on %s \n", c.title, c.whichModuleIsTaskFor, dater);
             //HashMap<String, Date> calendarItems  = new HashMap<>();
            // calendarItems.put(printable, c.dueDate);
             listItems.add(printable);
@@ -201,7 +201,7 @@ public class Calendar extends AppCompatActivity {
             c.dueDate.getDate();
             c.dueDate.getMonth();
             String dater = c.dueDate.getDate() + "/" + c.dueDate.getMonth();
-           String printable = String.format("%s for %s on %s, from %s to %s", c.contained.classType, c.contained.modCode, dater, c.contained.startTime, c.contained.endTime);
+           String printable = String.format("  %s for %s on \n  %s, from %s to %s", c.contained.classType, c.contained.modCode, dater, c.contained.startTime, c.contained.endTime);
            classListItems.add(printable);
             //  name = classQuery.getString(0) + "," + classQuery.getString(2)+ ",(" + classQuery.getString(1)+ "), Every " + classQuery.getString(3)+ ", from " + classQuery.getString(4)+ ", to " + classQuery.getString(5)+ "," + classQuery.getInt(6);
            // calendarItems.put(printable, c.dueDate);
