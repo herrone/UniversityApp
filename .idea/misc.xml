@@ -4,22 +4,23 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="app/src/main/res/drawable/customborder.xml" value="0.167" />
+        <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/listviewborder.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/activity_add_assignment.xml" value="0.24951782226562502" />
-        <entry key="app/src/main/res/layout/activity_add_class.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_add_assignment.xml" value="0.1923492431640625" />
+        <entry key="app/src/main/res/layout/activity_add_class.xml" value="0.3880416870117188" />
         <entry key="app/src/main/res/layout/activity_add_module.xml" value="0.14629211425781252" />
-        <entry key="app/src/main/res/layout/activity_add_module2.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_add_module2.xml" value="0.18135528564453124" />
         <entry key="app/src/main/res/layout/activity_assignment_list.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/activity_assignments.xml" value="0.267108154296875" />
+        <entry key="app/src/main/res/layout/activity_assignments.xml" value="0.1747589111328125" />
         <entry key="app/src/main/res/layout/activity_calendar.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_calendar_list.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_calendar_list2.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_class_list.xml" value="0.1395782470703125" />
         <entry key="app/src/main/res/layout/activity_delete.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_edit_assignment.xml" value="0.14176025390625" />
-        <entry key="app/src/main/res/layout/activity_edit_class.xml" value="0.3330718994140625" />
+        <entry key="app/src/main/res/layout/activity_edit_class.xml" value="0.19845360824742267" />
         <entry key="app/src/main/res/layout/activity_edit_module.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/activity_grade_calculator.xml" value="0.12665733774756166" />
+        <entry key="app/src/main/res/layout/activity_grade_calculator.xml" value="0.21433715820312502" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_module_list.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_modules_and_classes.xml" value="0.11745605468750003" />
@@ -37,6 +38,11 @@
         <entry key="app/src/main/res/layout/popupsmodules.xml" value="0.1" />
       </map>
     </option>
+  </component>
+  <component name="JavadocGenerationManager">
+    <option name="OUTPUT_DIRECTORY" value="$USER_HOME$/Desktop/javadoc" />
+    <option name="OPTION_DOCUMENT_TAG_USE" value="true" />
+    <option name="OPTION_DOCUMENT_TAG_AUTHOR" value="true" />
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />

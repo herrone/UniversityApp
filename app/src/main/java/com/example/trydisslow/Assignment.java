@@ -1,13 +1,12 @@
 package com.example.trydisslow;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import java.util.Date;
 import java.util.Random;
 
 public class Assignment extends AppCompatActivity {
-  Date dueDate;
-   // int percentOfGrade;
+
+    Date dueDate;
     String whichModuleIsTaskFor;
     String notes;
     String title;
@@ -16,7 +15,6 @@ public class Assignment extends AppCompatActivity {
     int hourID;
     int tfHourId;
     int feHourId;
-
     public Date getDueDate() {
         return dueDate;
     }
@@ -83,13 +81,13 @@ public class Assignment extends AppCompatActivity {
     }
 
     Random random = new Random();
-    public Assignment(){
-        //assignmentCode = random.nextInt(100);
-    }
-    public Assignment(String name, Date due,  String whichModule, String note,  int h, int t, int f){
 
+    public Assignment() { // basic constructor
+
+    }
+    public Assignment(String name, Date due, String whichModule, String note, int h, int t, int f) {
+ // populated constructor
         dueDate = due;
-        //percentOfGrade = percent;
         whichModuleIsTaskFor = whichModule;
         notes = note;
         title = name;
@@ -98,10 +96,9 @@ public class Assignment extends AppCompatActivity {
         t = tfHourId;
         f = feHourId;
     }
-    public Assignment(String name, Date due,  String whichModule, String note, int id, int h, int t, int f){
-
+    public Assignment(String name, Date due, String whichModule, String note, int id, int h, int t, int f) {
+        // populated constructor
         dueDate = due;
-        //percentOfGrade = percent;
         whichModuleIsTaskFor = whichModule;
         notes = note;
         title = name;
@@ -110,4 +107,5 @@ public class Assignment extends AppCompatActivity {
         t = tfHourId;
         f = feHourId;
     }
+
 }

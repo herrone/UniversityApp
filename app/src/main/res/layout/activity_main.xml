@@ -22,8 +22,8 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/buttonLetsGo"
-        android:layout_width="150dp"
-        android:layout_height="72dp"
+        android:layout_width="110dp"
+        android:layout_height="42dp"
         android:background="#F3C677"
         android:text="Let's Go! "
         android:textSize="20sp"
@@ -34,6 +34,16 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.844"
         tools:ignore="TextContrastCheck" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="161dp"
+        android:layout_height="238dp"
+        android:layout_marginTop="286dp"
+        android:layout_marginEnd="124dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/my_book" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

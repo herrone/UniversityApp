@@ -5,7 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".editClass">
+
     <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:background="@drawable/customborder"
@@ -13,7 +15,39 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        </LinearLayout>
+
+
+    <Spinner
+        android:id="@+id/moduleCodeListGrades"
+        android:layout_width="260dp"
+        android:layout_height="41dp"
+        android:background="@android:drawable/btn_dropdown"
+        android:contentDescription="module_code"
+        android:spinnerMode="dropdown"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.847"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.149" />
+
+    <EditText
+        android:id="@+id/addLocationBox"
+        android:layout_width="337dp"
+        android:layout_height="46dp"
+        android:layout_marginStart="41dp"
+        android:layout_marginTop="21dp"
+        android:layout_marginEnd="33dp"
+        android:layout_marginBottom="9dp"
+        android:text="Add Location or videolink "
+        app:layout_constraintBottom_toTopOf="@+id/addNotesBox"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/timePickerTo" />
+
     <TextView
         android:id="@+id/dayTextPrompt"
         android:layout_width="53dp"
@@ -43,62 +77,33 @@
         app:layout_constraintVertical_bias="0.218" />
 
     <EditText
-        android:id="@+id/addLocationBox"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Add Location or videolink "
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.645" />
-
-    <EditText
         android:id="@+id/lecturerAddBox"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="325dp"
+        android:layout_height="49dp"
         android:text="Enter Lecturer Details"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.476"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.826" />
+        app:layout_constraintVertical_bias="0.844" />
 
     <EditText
         android:id="@+id/addNotesBox"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="328dp"
+        android:layout_height="46dp"
         android:text="Add Notes"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.493"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.741" />
-
-    <Spinner
-        android:id="@+id/moduleCodeListGrades"
-        android:layout_width="279dp"
-        android:layout_height="24dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginEnd="4dp"
-        android:layout_marginBottom="20dp"
-        android:background="@android:drawable/btn_dropdown"
-        android:contentDescription="module_code"
-        android:spinnerMode="dropdown"
-        app:layout_constraintBottom_toTopOf="@+id/classTypeList"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.984"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/addClassesTitle"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="0.76" />
 
     <Spinner
         android:id="@+id/dayList"
-        android:layout_width="268dp"
-        android:layout_height="28dp"
+        android:layout_width="267dp"
+        android:layout_height="41dp"
         android:layout_marginTop="1dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="239dp"
@@ -110,12 +115,12 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/classTypeList"
-        app:layout_constraintVertical_bias="0.126" />
+        app:layout_constraintVertical_bias="0.041" />
 
     <Spinner
         android:id="@+id/classTypeList"
         android:layout_width="262dp"
-        android:layout_height="24dp"
+        android:layout_height="39dp"
         android:layout_marginEnd="4dp"
         android:background="@android:drawable/btn_dropdown"
         android:contentDescription="class_type"
@@ -131,7 +136,7 @@
         android:id="@+id/addClassesTitle"
         android:layout_width="182dp"
         android:layout_height="40dp"
-        android:fontFamily="@font/caladea_bold"
+        android:fontFamily="sans-serif-medium"
         android:text="Edit Class"
         android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="parent"

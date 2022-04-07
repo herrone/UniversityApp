@@ -1,9 +1,5 @@
 package com.example.trydisslow;
 
-import android.text.format.Time;
-
-import java.time.DayOfWeek;
-
 public class Class {
 
     String modCode;
@@ -16,9 +12,12 @@ public class Class {
     String lecturer;
     int id;
 
-    public Class(){
+
+    public Class() { // empty constructor
 
     }
+
+
 
     public String getModCode() {
         return modCode;
@@ -92,17 +91,18 @@ public class Class {
         this.id = id;
     }
 
-    public Class(String code, String type, String day, String startTimeClass, String endTimeClass, String locationOrLinkClass, String notesClass, String lecturerClass, int id){
-
+    public Class(String code, String type, String day, String startTimeClass, String endTimeClass, String locationOrLinkClass, String notesClass, String lecturerClass, int id) {
+//full constructor
         modCode = code;
         classType = type;
         dayOfClass = day;
-        startTime = startTimeClass ;
-        endTime = endTimeClass ;
+        startTime = startTimeClass;
+        endTime = endTimeClass;
         locationOrLink = locationOrLinkClass;
         notes = notesClass;
         lecturer = lecturerClass;
         this.id = id;
 
     }
+
 }

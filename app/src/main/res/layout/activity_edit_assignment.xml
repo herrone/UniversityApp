@@ -5,7 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".addAssignment">
+
     <LinearLayout
+        android:id="@+id/linearLayout3"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:background="@drawable/customborder"
@@ -13,20 +15,29 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent" >
+
+        </LinearLayout>
+
     <TextView
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="266dp"
+        android:layout_marginBottom="14dp"
         android:fontFamily="sans-serif-medium"
         android:text="Set Notifications"
         android:textSize="16sp"
-        tools:layout_editor_absoluteX="25dp"
-        tools:layout_editor_absoluteY="514dp"
+        app:layout_constraintBottom_toTopOf="@+id/notificationAssignmentOneHourBefore"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/addAssignmentNotesBox"
         tools:ignore="MissingConstraints" />
 
     <CheckBox
-        android:id="@+id/notificationAssignmentFourtyEightHoursBefore2"
+        android:id="@+id/notificationAssignmentFourtyEightHoursBefore"
         android:layout_width="113dp"
         android:layout_height="24dp"
         android:text="48 hours before"
@@ -39,7 +50,7 @@
         app:layout_constraintVertical_bias="0.776" />
 
     <CheckBox
-        android:id="@+id/notificationAssignmentOneHourBefore2"
+        android:id="@+id/notificationAssignmentOneHourBefore"
         android:layout_width="113dp"
         android:layout_height="24dp"
         android:text="1 hour before"
@@ -52,7 +63,7 @@
         app:layout_constraintVertical_bias="0.776" />
 
     <CheckBox
-        android:id="@+id/notificationAssignmentTwentyFourHoursBefore2"
+        android:id="@+id/notificationAssignmentTwentyFourHoursBefore"
         android:layout_width="113dp"
         android:layout_height="24dp"
         android:text="24 hours before"

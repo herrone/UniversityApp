@@ -14,8 +14,21 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" >
+</LinearLayout>
 
-        </LinearLayout>
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/buttonSave"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#E53935"
+        android:text="Save"
+        android:textColor="#FDD835"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.91"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.035" />
 
     <TextView
         android:id="@+id/currentGradeText"
@@ -184,15 +197,17 @@
         android:spinnerMode="dropdown"
         app:layout_constraintBottom_toTopOf="@+id/targetGrade"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/modulePromt"
-        app:layout_constraintTop_toBottomOf="@+id/myGradesTitle" />
+        app:layout_constraintTop_toBottomOf="@+id/myGradesTitle"
+        app:layout_constraintVertical_bias="1.0" />
 
     <TextView
         android:id="@+id/myGradesTitle"
-        android:layout_width="182dp"
-        android:layout_height="40dp"
+        android:layout_width="251dp"
+        android:layout_height="56dp"
         android:fontFamily="sans-serif-condensed-medium"
-        android:text="My Grades"
+        android:text="Grade Calculator"
         android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -225,22 +240,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.914" />
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/buttonSave"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="109dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="20dp"
-        android:text="Save"
-        android:background="#E53935"
-        android:textColor="#FDD835"
-        app:layout_constraintBottom_toTopOf="@+id/moduleCodeListGrades"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/myGradesTitle"
-        app:layout_constraintTop_toTopOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

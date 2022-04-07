@@ -11,12 +11,12 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TimePicker;
 import android.widget.Toast;
-
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
-
+import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class editClass extends AppCompatActivity {
     String name;
@@ -24,19 +24,26 @@ public class editClass extends AppCompatActivity {
     String type;
     String professor;
     String notesText;
-            String location ;
-        String day ;
-        String start;
-        String finish ;
+    String location;
+    String day;
+    String start;
+    String finish;
+
+    Class inQuestion;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_class);
         getSupportActionBar().hide();
         Intent intent = getIntent();
-        String editableClass = intent.getExtras().getString("editableClass");
+        int classCode = intent.getExtras().getInt("editableClass");
 
-        Toast.makeText(this, editableClass,
+        ArrayList < Class > classList = getAllClasses();
+        ArrayList < Module > moduleList = getAllModules();
+        ArrayList < Assignment > assignmentList = getAllAssignments();
+
+
+        Toast.makeText(this, String.valueOf(classCode),
                 Toast.LENGTH_SHORT).show();
         EditText notes = (EditText) findViewById(R.id.addNotesBox);
         TimePicker from = (TimePicker) findViewById(R.id.timePickerFrom);
@@ -46,103 +53,210 @@ public class editClass extends AppCompatActivity {
         Spinner moduleCodeList = findViewById(R.id.moduleCodeListGrades);
         Spinner dayList = findViewById(R.id.dayList);
         Spinner classTypeList = findViewById(R.id.classTypeList);
-        ArrayList<String> moduleCodeArray = new ArrayList<String>();
+        ArrayList < String > moduleCodeArray = new ArrayList < String > ();
+        for (Class c:
+                classList) {
+            if (c.id == classCode) {
 
-        SQLiteDatabase myBase = getApplicationContext().openOrCreateDatabase("Names.db", 0, null);
-        String retrieveClass = "SELECT * FROM NEWCLASSWITHIDS WHERE title = '" + editableClass + "'";
-        //code TEXT, type TEXT, lecturer TEXT, notes TEXT, location TEXT, day TEXT, start TEXT, finish TEXT
-        Cursor query = myBase.rawQuery(retrieveClass, null);
-      //  SQLiteDatabase myBase = getApplicationContext().openOrCreateDatabase("Names.db", 0, null);
-        Cursor queryModuleCodes = myBase.rawQuery("SELECT * FROM NEWMODULE3", null);
+                inQuestion = c;
 
-        if(query.moveToFirst()) {
-            while (query.moveToNext()) {
-                moduleCodeArray.add(query.getString(0));
             }
-        }
-
-//create an adapter to describe how the items are displayed, adapters are used in several places in android.
-//There are multiple variations of this, but this is the basic variant.
-
-        ArrayAdapter<String> moduleCodeAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, moduleCodeArray);
-
-        if (query.moveToFirst()) {
-           // code TEXT, type TEXT, lecturer TEXT, notes TEXT, location TEXT, day TEXT, start TEXT, finish TEXT
-            code = query.getString(0);
-             type= query.getString(1);
-             professor = query.getString(2);
-             notesText = query.getString(3);
-             location = query.getString(4);
-             day = query.getString(5);
-            start= query.getString(6);
-            finish = query.getString(7);
-           notes.setText(notesText);
-            lecturer.setText(professor);
-            where.setText(location);
-
 
         }
 
-        //from.set
+        for (Module m:
+                moduleList) {
+            moduleCodeArray.add(m.moduleCode);
 
-//create an adapter to describe how the items are displayed, adapters are used in several places in android.
-//There are multiple variations of this, but this is the basic variant.
+        }
 
-        //ArrayAdapter<String> moduleCodeAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, moduleCodeArray);
-        String[] classTypeItems = new String[]{"choose class type", "Lecture", "Practical", "Tutorial"};
-        ArrayAdapter<String> classTypeAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, classTypeItems);
-//set the spinners adapter to the previously created one.
+        ArrayAdapter < String > moduleCodeAdapter = new ArrayAdapter < > (this, android.R.layout.simple_spinner_dropdown_item, moduleCodeArray);
+
+
+        notes.setText(inQuestion.notes);
+        lecturer.setText(inQuestion.lecturer);
+        where.setText(inQuestion.locationOrLink);
+        String[] classTypeItems = new String[] {
+                "choose class type",
+                "Lecture",
+                "Practical",
+                "Tutorial"
+        };
+        ArrayAdapter < String > classTypeAdapter = new ArrayAdapter < > (this, android.R.layout.simple_spinner_dropdown_item, classTypeItems);
+
         classTypeList.setAdapter(classTypeAdapter);
         moduleCodeList.setAdapter(moduleCodeAdapter);
-        //Spinner dayList = findViewById(R.id.dayList);
-//create a list of items for the spinner.
-        String[] days = new String[]{"choose day", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
-//create an adapter to describe how the items are displayed, adapters are used in several places in android.
-//There are multiple variations of this, but this is the basic variant.
-        ArrayAdapter<String> adapterDays = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, days);
+
+        String[] days = new String[] {
+                "choose day",
+                "Monday",
+                "Tuesday",
+                "Wednesday",
+                "Thursday",
+                "Friday",
+                "Saturday",
+                "Sunday"
+        };
+        ArrayAdapter < String > adapterDays = new ArrayAdapter < > (this, android.R.layout.simple_spinner_dropdown_item, days);
         dayList.setAdapter(adapterDays);
         AppCompatButton saveClassButton = (AppCompatButton) findViewById(R.id.buttonSaveClass);
         saveClassButton.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.M)
             @Override
             public void onClick(View v) {
-                String deleteStatement = "DELETE FROM NEWCLASS2 WHERE code = '" + code + "' AND type = '" + type + "'";
-                myBase.execSQL(deleteStatement);
-                Class c = new Class();
-                c.modCode = moduleCodeList.getSelectedItem().toString();
-                c.notes = notes.getText().toString();
-                c.lecturer = lecturer.getText().toString();
-                c.locationOrLink = where.getText().toString();
-                c.dayOfClass = dayList.getSelectedItem().toString();
-
-                //frommer.second = 0;
-
-                // toer.second = 0;
-                c.startTime = from.toString();
-                c.endTime = to.toString();
-                c.classType = classTypeList.getSelectedItem().toString();
-                SQLiteDatabase myBase = getApplicationContext().openOrCreateDatabase("Names.db", 0, null);
-
-//                String dayOfClass;
-//                Time startTime;
-//                Time endTime;
 
 
-                //myBase.execSQL("CREATE TABLE if not exists Classes(code TEXT, type TEXT, lecturer TEXT, notes TEXT, location TEXT, day TEXT, start TIME, finish TIME );");
-                myBase.execSQL("CREATE TABLE if not exists NEWCLASSWITHIDS4(code TEXT, type TEXT, day TEXT, lecturer TEXT, notes TEXT, location TEXT, day TEXT, start TEXT, finish TEXT, id INT );");
-                // String insertStatement = "INSERT INTO Classes2 VALUES('" + c.modCode + "','" + c.classType + "','" + c.lecturer + "','" + c.notes + "');";
-                String insertStatement = "INSERT INTO NEWCLASSWITHIDS4 VALUES('" + c.modCode + "','" + c.classType + "','" + c.dayOfClass + "','" + c.lecturer + "','" + c.notes + "','" + c.locationOrLink + "','" + c.dayOfClass + "','" + c.startTime + "','" + c.endTime + "'," +c.id + ");";
-                myBase.execSQL(insertStatement);
-                Toast.makeText(editClass.this, c.classType + c.modCode + c.lecturer + c.notes + c.dayOfClass + c.locationOrLink + "Saved Class for module ",
-                        Toast.LENGTH_LONG).show();
+                inQuestion.modCode = moduleCodeList.getSelectedItem().toString();
+                inQuestion.notes = notes.getText().toString();
+                inQuestion.lecturer = lecturer.getText().toString();
+                inQuestion.locationOrLink = where.getText().toString();
+                inQuestion.dayOfClass = dayList.getSelectedItem().toString();
+
+
+                inQuestion.startTime = from.toString();
+                inQuestion.endTime = to.toString();
+                inQuestion.classType = classTypeList.getSelectedItem().toString();
+                updateClass(inQuestion);
+
                 startActivity(new Intent(editClass.this, ModulesAndClasses.class));
 
             }
         });
 
 
-        // TimePicker picker=(TimePicker)findViewById(R.id.timePickerFrom);
-        // from.setIs24HourView(true);
-        // to.setIs24HourView(true);
+
     }
+    public ArrayList < Assignment > getAllAssignments() {
+        SQLiteDatabase myBase = this.openOrCreateDatabase("Names.db", 0, null);
+
+        myBase.execSQL("CREATE TABLE if not exists Assignments(title TEXT, module TEXT, date TEXT, notes TEXT);");
+        myBase.execSQL("CREATE TABLE if not exists Modules(title TEXT, code TEXT, leader TEXT, notes TEXT);");
+        myBase.execSQL("CREATE TABLE if not exists Classes(code TEXT, type TEXT, lecturer TEXT, notes TEXT, location TEXT, day TEXT, start TEXT, finish TEXT, id INT);");
+        myBase.execSQL("CREATE TABLE if not exists Grades(code TEXT, target INT, firstWeight INT, firstObtained INT, secondWeight INT, secondObtained INT, thirdWeight INT, thirdObtained INT,fourthWeight INT, fourthObtained INT, fifthWeight INT, fifthObtained INT);");
+
+
+        ArrayList < Assignment > assignmentList = new ArrayList < > ();
+        Cursor query = myBase.rawQuery("SELECT * FROM NEWASSIGNMENTSWITHIDS2", null);
+        if (query.moveToFirst()) {
+            String name = query.getString(0);
+            String code = query.getString(1);
+            String stringDueDate = query.getString(2);
+            java.text.SimpleDateFormat sdfBackToDate = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            Date dueDate = null;
+            try {
+                dueDate = sdfBackToDate.parse(stringDueDate);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            String notes = query.getString(3);
+            int id = query.getInt(4);
+            int hId = query.getInt(5);
+            int tfId = query.getInt(6);
+            int feId = query.getInt(7);
+            Assignment a = new Assignment(name, dueDate, code, notes, id, hId, tfId, feId);
+            assignmentList.add(a);
+
+            while (query.moveToNext()) {
+                name = query.getString(0);
+                code = query.getString(1);
+                stringDueDate = query.getString(2);
+
+                try {
+                    dueDate = sdfBackToDate.parse(stringDueDate);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                notes = query.getString(3);
+                id = query.getInt(4);
+                hId = query.getInt(5);
+                tfId = query.getInt(6);
+                feId = query.getInt(7);
+                a = new Assignment(name, dueDate, code, notes, id, hId, tfId, feId);
+                assignmentList.add(a);
+            }
+        }
+
+        return assignmentList;
+    }
+    public ArrayList < Module > getAllModules() {
+        SQLiteDatabase myBase = getApplicationContext().openOrCreateDatabase("Names.db", 0, null);
+
+        myBase.execSQL("CREATE TABLE if not exists Assignments2(title TEXT, module TEXT, date TEXT, notes TEXT);");
+        myBase.execSQL("CREATE TABLE if not exists Modules(title TEXT, code TEXT, leader TEXT, notes TEXT);");
+        myBase.execSQL("CREATE TABLE if not exists Classes(code TEXT, type TEXT, lecturer TEXT, notes TEXT, location TEXT, day TEXT, start TEXT, finish TEXT, id INT);");
+        myBase.execSQL("CREATE TABLE if not exists Grades(code TEXT, target INT, firstWeight INT, firstObtained INT, secondWeight INT, secondObtained INT, thirdWeight INT, thirdObtained INT,fourthWeight INT, fourthObtained INT, fifthWeight INT, fifthObtained INT);");
+
+        ArrayList < Module > moduleList = new ArrayList < > ();
+        Module m = new Module();
+        Cursor moduleQuery = myBase.rawQuery("SELECT * FROM Modules", null);
+        if (moduleQuery.moveToFirst()) {
+            m.setNameMod(moduleQuery.getString(0));
+            m.setModNotes(moduleQuery.getString(3));
+            m.setCourseLeader(moduleQuery.getString(2));
+            m.setModuleCode(moduleQuery.getString(1));
+            moduleList.add(m);
+            while (moduleQuery.moveToNext()) {
+                Module mo = new Module();
+                mo.setNameMod(moduleQuery.getString(0));
+                mo.setModNotes(moduleQuery.getString(3));
+                mo.setCourseLeader(moduleQuery.getString(2));
+                mo.setModuleCode(moduleQuery.getString(1));
+                moduleList.add(mo);
+            }
+        }
+        return moduleList;
+    }
+    public ArrayList < Class > getAllClasses() {
+
+        SQLiteDatabase myBase = getApplicationContext().openOrCreateDatabase("Names.db", 0, null);
+        myBase.execSQL("CREATE TABLE if not exists Assignments(title TEXT, module TEXT, date TEXT, notes TEXT);");
+        myBase.execSQL("CREATE TABLE if not exists Modules(title TEXT, code TEXT, leader TEXT, notes TEXT);");
+        myBase.execSQL("CREATE TABLE if not exists Classes(code TEXT, type TEXT, lecturer TEXT, notes TEXT, location TEXT, day TEXT, start TEXT, finish TEXT, id INT);");
+        myBase.execSQL("CREATE TABLE if not exists Grades(code TEXT, target INT, firstWeight INT, firstObtained INT, secondWeight INT, secondObtained INT, thirdWeight INT, thirdObtained INT,fourthWeight INT, fourthObtained INT, fifthWeight INT, fifthObtained INT);");
+
+        ArrayList < Class > classList = new ArrayList < > ();
+        Class c = new Class();
+        Class co = new Class();
+        Cursor classQuery = myBase.rawQuery("SELECT * FROM Classes;", null);
+        if (classQuery.moveToFirst()) {
+            co.setId(classQuery.getInt(8));
+            co.setLecturer(classQuery.getString(2));
+            co.setNotes(classQuery.getString(3));
+            co.setModCode(classQuery.getString(0));
+            co.setEndTime(classQuery.getString(7));
+            co.setStartTime(classQuery.getString(6));
+            co.setLocationOrLink(classQuery.getString(4));
+            co.setClassType(classQuery.getString(1));
+            co.setDayOfClass(classQuery.getString(5));
+            classList.add(co);
+
+            while (classQuery.moveToNext()) {
+                c.setId(classQuery.getInt(8));
+                c.setLecturer(classQuery.getString(2));
+                c.setNotes(classQuery.getString(3));
+                c.setModCode(classQuery.getString(0));
+                c.setEndTime(classQuery.getString(7));
+                c.setStartTime(classQuery.getString(6));
+                c.setLocationOrLink(classQuery.getString(4));
+                c.setClassType(classQuery.getString(1));
+                c.setDayOfClass(classQuery.getString(5));
+                classList.add(c);
+            }
+        }
+        return classList;
+    }
+    public void updateClass(Class c) {
+        SQLiteDatabase myBase = this.openOrCreateDatabase("Names.db", 0, null);
+
+        myBase.execSQL("CREATE TABLE if not exists Assignments(title TEXT, module TEXT, date TEXT, notes TEXT);");
+        myBase.execSQL("CREATE TABLE if not exists Modules(title TEXT, code TEXT, leader TEXT, notes TEXT);");
+        myBase.execSQL("CREATE TABLE if not exists Classes(code TEXT, type TEXT, lecturer TEXT, notes TEXT, location TEXT, day TEXT, start TEXT, finish TEXT, id INT);");
+        myBase.execSQL("CREATE TABLE if not exists Grades(code TEXT, target INT, firstWeight INT, firstObtained INT, secondWeight INT, secondObtained INT, thirdWeight INT, thirdObtained INT,fourthWeight INT, fourthObtained INT, fifthWeight INT, fifthObtained INT);");
+
+        String deleteStatement = "DELETE FROM Classes WHERE id = " + c.id + ";";
+        myBase.execSQL(deleteStatement);
+        String insertStatement = "INSERT INTO Classes VALUES('" + c.modCode + "','" + c.classType + "','" + c.lecturer + "','" + c.notes + "','" + c.locationOrLink + "','" + c.dayOfClass + "','" + c.startTime + "','" + c.endTime + "'," + c.id + ");";
+        myBase.execSQL(insertStatement);
+    }
+
 }
