@@ -12,9 +12,9 @@ public class Assignment extends AppCompatActivity {
     String title;
     int assignmentId;
     //int id;
-    int hourID;
-    int tfHourId;
-    int feHourId;
+    int hourID; // these are to track notifications
+    int tfHourId;// these are to track notifications
+    int feHourId;// these are to track notifications
     public Date getDueDate() {
         return dueDate;
     }

@@ -11,20 +11,28 @@ import android.view.View;
 public class MainActivity extends AppCompatActivity {
 
 
-    private final static String NOT_SUPPORTED_MESSAGE = "Sorry, sensor not available for this device.";
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         getSupportActionBar().hide();
         SQLiteDatabase myBase = getApplicationContext().openOrCreateDatabase("Names.db", 0, null);
-//        myBase.execSQL("DROP TABLE ASSIGNMENTS2;");
+         //used for testing
+//        myBase.execSQL("DROP TABLE Assignments2;");
 //        myBase.execSQL("DROP TABLE Modules;");
 //        myBase.execSQL("DROP TABLE Classes;");
 //        myBase.execSQL("DROP TABLE Grades;");
 
-        final MediaPlayer mp = MediaPlayer.create(this, R.raw.cheer);
+       MediaPlayer mp = MediaPlayer.create(this, R.raw.cheer);
+// preps DB tables
+//        myBase.execSQL("CREATE TABLE if not exists Assignments2(title TEXT, code TEXT, dueDate TEXT, notes TEXT, id INT, hID INT, tfID INT, feID INT);");
+//        myBase.execSQL("CREATE TABLE if not exists Modules(title TEXT, code TEXT, leader TEXT, notes TEXT);");
+//        myBase.execSQL("CREATE TABLE if not exists Classes(code TEXT, type TEXT, lecturer TEXT, notes TEXT, location TEXT, day TEXT, start TEXT, finish TEXT, id INT);");
+//        myBase.e//        myBase.execSQL("CREATE TABLE if not exists Assignments2(title TEXT, code TEXT, dueDate TEXT, notes TEXT, id INT, hID INT, tfID INT, feID INT);");
+////        myBase.execSQL("CREATE TABLE if not exists Modules(title TEXT, code TEXT, leader TEXT, notes TEXT);");
+////        myBase.execSQL("CREATE TABLE if not exists Classes(code TEXT, type TEXT, lecturer TEXT, notes TEXT, location TEXT, day TEXT, start TEXT, finish TEXT, id INT);");
+////        myBase.execSQL("CREATE TABLE if not exists Grades(code TEXT, target INT, firstWeight INT, firstObtained INT, secondWeight INT, secondObtained INT, thirdWeight INT, thirdObtained INT,fourthWeight INT, fourthObtained INT, fifthWeight INT, fifthObtained INT);");xecSQL("CREATE TABLE if not exists Grades(code TEXT, target INT, firstWeight INT, firstObtained INT, secondWeight INT, secondObtained INT, thirdWeight INT, thirdObtained INT,fourthWeight INT, fourthObtained INT, fifthWeight INT, fifthObtained INT);");
+
 
         AppCompatButton letsGoButton = (AppCompatButton) findViewById(R.id.buttonLetsGo);
         letsGoButton.setOnClickListener(new View.OnClickListener() {

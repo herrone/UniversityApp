@@ -174,7 +174,6 @@ int target;
 
 
                 SQLiteDatabase myBase = getApplicationContext().openOrCreateDatabase("Names.db", 0, null);
-                myBase.execSQL("CREATE TABLE if not exists Grades(code TEXT, target INT, firstWeight INT, firstObtained INT, secondWeight INT, secondObtained INT, thirdWeight INT, thirdObtained INT,fourthWeight INT, fourthObtained INT, fifthWeight INT, fifthObtained INT);");
                 String grade = "SELECT * FROM Grades WHERE code = '" + code + "';";
                 Cursor gradeQuery = myBase.rawQuery(grade, null);
                 if (gradeQuery.moveToFirst()) {
@@ -351,11 +350,6 @@ int target;
     }
         public ArrayList < Module > getAllModules() {
             SQLiteDatabase myBase = getApplicationContext().openOrCreateDatabase("Names.db", 0, null);
-
-            myBase.execSQL("CREATE TABLE if not exists Assignments2(title TEXT, module TEXT, date TEXT, notes TEXT);");
-            myBase.execSQL("CREATE TABLE if not exists Modules(title TEXT, code TEXT, leader TEXT, notes TEXT);");
-            myBase.execSQL("CREATE TABLE if not exists Classes(code TEXT, type TEXT, lecturer TEXT, notes TEXT, location TEXT, day TEXT, start TEXT, finish TEXT, id INT);");
-            myBase.execSQL("CREATE TABLE if not exists Grades(code TEXT, target INT, firstWeight INT, firstObtained INT, secondWeight INT, secondObtained INT, thirdWeight INT, thirdObtained INT,fourthWeight INT, fourthObtained INT, fifthWeight INT, fifthObtained INT);");
 
             ArrayList < Module > moduleList = new ArrayList < > ();
             Module m = new Module();

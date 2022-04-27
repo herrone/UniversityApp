@@ -62,9 +62,9 @@ public class editAssignment extends AppCompatActivity {
         ArrayList < Assignment > assignments = getAllAssignments(); //get all assignments in db
         for (Assignment a:
                 assignments) {
-            if (a.title.equals(editableAssignmentCode)) { // if any of them match the intent
+            if (a.title.equals(editableAssignmentCode)) { // if any of them match the code recieved in the intent
                 inQuestion = a;
-                assignmentNotes.setText(a.notes); //set details to it's properties
+                assignmentNotes.setText(a.notes); //set boxes to it's properties
                 assignmentTitle.setText(a.title);
                 moduleCodeArray.add(a.whichModuleIsTaskFor);
 
@@ -86,25 +86,24 @@ public class editAssignment extends AppCompatActivity {
                 CheckBox twfohour = findViewById(R.id.notificationAssignmentTwentyFourHoursBefore);
                 CheckBox foeihour = findViewById(R.id.notificationAssignmentFourtyEightHoursBefore);
 
-            if (inQuestion.hourID > 0) {
+            if (inQuestion.hourID > 0) { // if there was an alarm scheduled, therefore making the hourID above 0 from randomly generated
                     Intent myIntent = new Intent(editAssignment.this, Assignments.class);
                     PendingIntent pendingIntent = PendingIntent.getBroadcast(editAssignment.this, hourId, myIntent, 0);
                     AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
-                    alarmManager.cancel(pendingIntent);
+                    alarmManager.cancel(pendingIntent); // cancel it
                 }
-                if (inQuestion.tfHourId > 0) {
+                if (inQuestion.tfHourId > 0) {// if there was an alarm scheduled, therefore making the hourID above 0 from randomly generated
                     Intent myIntent = new Intent(editAssignment.this, Assignments.class);
                     PendingIntent pendingIntent = PendingIntent.getBroadcast(editAssignment.this, tfHourId, myIntent, 0);
                     AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
-                    alarmManager.cancel(pendingIntent);
+                    alarmManager.cancel(pendingIntent); // cancel it
                 }
-                if (inQuestion.feHourId > 0) {
+                if (inQuestion.feHourId > 0) {// if there was an alarm scheduled, therefore making the hourID above 0 from randomly generated
                     Intent myIntent = new Intent(editAssignment.this, Assignments.class);
                     PendingIntent pendingIntent = PendingIntent.getBroadcast(editAssignment.this, feHourId, myIntent, 0);
                     AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
-                    alarmManager.cancel(pendingIntent);
+                    alarmManager.cancel(pendingIntent); // cancel it
                 }
-
                 String notes = assignmentNotes.getText().toString();
                 String title = assignmentTitle.getText().toString();
                 String moduleCodeInQuestion = moduleCodeList.getSelectedItem().toString();
@@ -120,23 +119,21 @@ public class editAssignment extends AppCompatActivity {
                 int feHourID = 0;
                 Random r = new Random();
                 if (hour.isChecked()) {
-                    Toast.makeText(editAssignment.this, "1 hour",
-                            Toast.LENGTH_LONG).show();
+//
                     hourID = r.nextInt(1000);
-                    scheduleNotification(editAssignment.this, delayCalculator(d, 1), r.nextInt(100), "1 Hour Reminder", title + "due soon");
+                    scheduleAssignmentNotification(editAssignment.this, delayCalculator(d, 1), r.nextInt(100), "1 Hour Reminder", title + "due soon");
                     }
                 if (twfohour.isChecked()) {
                     tfHourID = r.nextInt(1000);
-
-                    scheduleNotification(editAssignment.this, delayCalculator(d, 24), r.nextInt(100), "24 Hour Reminder", title + "due soon");
+                    scheduleAssignmentNotification(editAssignment.this, delayCalculator(d, 24), r.nextInt(100), "24 Hour Reminder", title + "due soon");
                 }
                 if (foeihour.isChecked()) {
                    feHourID = r.nextInt(1000);
-                    scheduleNotification(editAssignment.this, delayCalculator(d, 48), r.nextInt(100), "48 Hour Reminder", title + "due soon");
+                    scheduleAssignmentNotification(editAssignment.this, delayCalculator(d, 48), r.nextInt(100), "48 Hour Reminder", title + "due soon");
                 }
                 Assignment a = new Assignment(title, d, moduleCodeInQuestion, notes, hourID, tfHourID, feHourID);
-                updateAssignment(a);
-                deleteAssignment(inQuestion);
+                addAssignment(a);
+                deleteAssignment(inQuestion); // delete the old one
 
                 startActivity(new Intent(editAssignment.this, Assignments.class));
 
@@ -145,54 +142,38 @@ public class editAssignment extends AppCompatActivity {
 
 
     }
-    public void scheduleNotification(Context context, long delay, int notificationId, String title, String content) { //delay is after how much time(in millis) from current time you want to schedule the notification
-        String CHANNEL_ID = "MYCHANNEL";
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(getApplicationContext(), CHANNEL_ID)
-                .setContentTitle(title)
-                .setContentText(content)
-                .setAutoCancel(true)
-                .setSmallIcon(R.drawable.alarm)
-                .setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION));
+    public void scheduleAssignmentNotification(Context context, long delay, int notificationId, String title, String content) { //delay is after how much time(in millis) from current time you want to schedule the notification
 
+        String CHANNEL_ID = "MYCHANNEL";
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(getApplicationContext(), CHANNEL_ID).setContentTitle(title).setContentText(content).setAutoCancel(true).setSmallIcon(R.drawable.alarm).setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION));
         Intent intent = new Intent(context, MainActivity.class);
         PendingIntent activity = PendingIntent.getActivity(context, notificationId, intent, PendingIntent.FLAG_CANCEL_CURRENT);
         builder.setContentIntent(activity);
-
-        Notification notification = builder.build();
-
-        Intent notificationIntent = new Intent(context, MyNotificationPublisher.class);
-        notificationIntent.putExtra(MyNotificationPublisher.NOTIFICATION_ID, notificationId);
-        notificationIntent.putExtra(MyNotificationPublisher.NOTIFICATION, notification);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(context, notificationId, notificationIntent, PendingIntent.FLAG_CANCEL_CURRENT);
-
-        long futureInMillis = SystemClock.elapsedRealtime() + delay;
+        Notification assignmentNotification = builder.build();
+        Intent assignmentNotificationIntent = new Intent(context, MyNotificationHelper.class);
+        assignmentNotificationIntent.putExtra(MyNotificationHelper.NOTIFICATION_ID, notificationId);
+        assignmentNotificationIntent.putExtra(MyNotificationHelper.NOTIFICATION, assignmentNotification);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(context, notificationId, assignmentNotificationIntent, PendingIntent.FLAG_CANCEL_CURRENT);
+        long futureInMilliSeconds = SystemClock.elapsedRealtime() + delay; // now plus delay
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-        alarmManager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, futureInMillis, pendingIntent);
+        alarmManager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, futureInMilliSeconds, pendingIntent);// schedules system to wake up on time
     }
 
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     public long delayCalculator(Date due, int hours) { // calculate the delay between now and when we want the notification
 
-        // SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM-dd 'at' HH:mm:ss z");
         Date date = new Date(System.currentTimeMillis());
         long dueMillis = due.getTime();
         long nowMillis = date.getTime();
-
         long beforeMillis = hours * 60 * 60 * 1000;
-
-
         long delay = dueMillis - nowMillis - beforeMillis;
         return delay;
     }
+
     public ArrayList < Assignment > getAllAssignments() { // get all the assignments from the db
 
         SQLiteDatabase myBase = getApplicationContext().openOrCreateDatabase("Names.db", 0, null);
-
-        myBase.execSQL("CREATE TABLE if not exists Assignments(title TEXT, module TEXT, date TEXT, notes TEXT);");
-        myBase.execSQL("CREATE TABLE if not exists Modules(title TEXT, code TEXT, leader TEXT, notes TEXT);");
-        myBase.execSQL("CREATE TABLE if not exists Classes(code TEXT, type TEXT, lecturer TEXT, notes TEXT, location TEXT, day TEXT, start TEXT, finish TEXT, id INT);");
-        myBase.execSQL("CREATE TABLE if not exists Grades(code TEXT, target INT, firstWeight INT, firstObtained INT, secondWeight INT, secondObtained INT, thirdWeight INT, thirdObtained INT,fourthWeight INT, fourthObtained INT, fifthWeight INT, fifthObtained INT);");
 
         ArrayList < Assignment > assignmentList = new ArrayList < > ();
         Cursor query = myBase.rawQuery("SELECT * FROM Assignments2", null);
@@ -216,6 +197,7 @@ public class editAssignment extends AppCompatActivity {
             assignmentList.add(a);
 
             while (query.moveToNext()) {
+
                 name = query.getString(0);
                 code = query.getString(1);
                 stringDueDate = query.getString(2);
@@ -240,11 +222,6 @@ public class editAssignment extends AppCompatActivity {
     public ArrayList < Module > getAllModules() { // returns a full list of modules in the db
         SQLiteDatabase myBase = getApplicationContext().openOrCreateDatabase("Names.db", 0, null);
 
-        myBase.execSQL("CREATE TABLE if not exists Assignments2(title TEXT, module TEXT, date TEXT, notes TEXT);");
-        myBase.execSQL("CREATE TABLE if not exists Modules(title TEXT, code TEXT, leader TEXT, notes TEXT);");
-        myBase.execSQL("CREATE TABLE if not exists Classes(code TEXT, type TEXT, lecturer TEXT, notes TEXT, location TEXT, day TEXT, start TEXT, finish TEXT, id INT);");
-        myBase.execSQL("CREATE TABLE if not exists Grades(code TEXT, target INT, firstWeight INT, firstObtained INT, secondWeight INT, secondObtained INT, thirdWeight INT, thirdObtained INT,fourthWeight INT, fourthObtained INT, fifthWeight INT, fifthObtained INT);");
-
         ArrayList < Module > moduleList = new ArrayList < > ();
         Module m = new Module();
         Cursor moduleQuery = myBase.rawQuery("SELECT * FROM Modules", null);
@@ -266,24 +243,14 @@ public class editAssignment extends AppCompatActivity {
         return moduleList;
     }
 
-    public void updateAssignment(Assignment a) { // insert assignment to db
+    public void addAssignment(Assignment a) { // insert assignment to db
         SQLiteDatabase myBase = this.openOrCreateDatabase("Names.db", 0, null);
-
-        myBase.execSQL("CREATE TABLE if not exists Assignments2(title TEXT, code TEXT, dueDate TEXT, notes TEXT, id INT, hID INT, tfID INT, feID INT);");
-        myBase.execSQL("CREATE TABLE if not exists Modules(title TEXT, code TEXT, leader TEXT, notes TEXT);");
-        myBase.execSQL("CREATE TABLE if not exists Classes(code TEXT, type TEXT, lecturer TEXT, notes TEXT, location TEXT, day TEXT, start TEXT, finish TEXT, id INT);");
-        myBase.execSQL("CREATE TABLE if not exists Grades(code TEXT, target INT, firstWeight INT, firstObtained INT, secondWeight INT, secondObtained INT, thirdWeight INT, thirdObtained INT,fourthWeight INT, fourthObtained INT, fifthWeight INT, fifthObtained INT);");
 
         String insertStatement = "INSERT INTO Assignments2 VALUES('" + a.title + "','" + a.whichModuleIsTaskFor + "','" + a.dueDate + "','" + a.notes + "'," + a.assignmentId + "," + a.hourID + "," + a.tfHourId + "," + a.feHourId + ");";
         myBase.execSQL(insertStatement);
     }
     public void deleteAssignment(Assignment a) { // takes in an assignment
         SQLiteDatabase myBase = getApplicationContext().openOrCreateDatabase("Names.db", 0, null);
-
-        myBase.execSQL("CREATE TABLE if not exists Assignments2(title TEXT, code TEXT, dueDate TEXT, notes TEXT, id INT, hID INT, tfID INT, feID INT);");
-        myBase.execSQL("CREATE TABLE if not exists Modules(title TEXT, code TEXT, leader TEXT, notes TEXT);");
-        myBase.execSQL("CREATE TABLE if not exists Classes(code TEXT, type TEXT, lecturer TEXT, notes TEXT, location TEXT, day TEXT, start TEXT, finish TEXT, id INT);");
-        myBase.execSQL("CREATE TABLE if not exists Grades(code TEXT, target INT, firstWeight INT, firstObtained INT, secondWeight INT, secondObtained INT, thirdWeight INT, thirdObtained INT,fourthWeight INT, fourthObtained INT, fifthWeight INT, fifthObtained INT);");
 
         String deleteStatement = "DELETE FROM Assignments2 WHERE title = '" + a.title + "';"; // deletes it from the db
         myBase.execSQL(deleteStatement);

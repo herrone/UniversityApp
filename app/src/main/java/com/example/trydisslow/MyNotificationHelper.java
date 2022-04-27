@@ -4,9 +4,11 @@ import android.app.NotificationManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-public class MyNotificationPublisher extends BroadcastReceiver {
+
+public class MyNotificationHelper extends BroadcastReceiver {
 
     public static String NOTIFICATION_ID = "notification_id";
+
     public static String NOTIFICATION = "notification";
 
     @Override
@@ -15,7 +17,9 @@ public class MyNotificationPublisher extends BroadcastReceiver {
         NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
 
         Notification notification = intent.getParcelableExtra(NOTIFICATION);
-        int notificationId = intent.getIntExtra(NOTIFICATION_ID, 0);
-        notificationManager.notify(notificationId, notification);
+
+        int idNotification = intent.getIntExtra(NOTIFICATION_ID, 0);
+
+        notificationManager.notify(idNotification, notification);
     }
 }

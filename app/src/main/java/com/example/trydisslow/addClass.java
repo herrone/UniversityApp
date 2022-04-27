@@ -129,7 +129,7 @@ public class addClass extends AppCompatActivity {
 
                 addClass(c); // add it to the database
                 startActivity(new Intent(addClass.this, ModulesAndClasses.class));
-//move back to list
+
             }
         });
     }
@@ -137,10 +137,6 @@ public class addClass extends AppCompatActivity {
     public ArrayList < Module > getAllModules() { // communicates with the database to retrieve an arraylist of modules
 
         SQLiteDatabase myBase = this.openOrCreateDatabase("Names.db", 0, null);
-        myBase.execSQL("CREATE TABLE if not exists Assignments2(title TEXT, code TEXT, dueDate TEXT, notes TEXT, id INT, hID INT, tfID INT, feID INT);");
-        myBase.execSQL("CREATE TABLE if not exists Modules(title TEXT, code TEXT, leader TEXT, notes TEXT);");
-        myBase.execSQL("CREATE TABLE if not exists Classes(code TEXT, type TEXT, lecturer TEXT, notes TEXT, location TEXT, day TEXT, start TEXT, finish TEXT, id INT);");
-        myBase.execSQL("CREATE TABLE if not exists Grades(code TEXT, target INT, firstWeight INT, firstObtained INT, secondWeight INT, secondObtained INT, thirdWeight INT, thirdObtained INT,fourthWeight INT, fourthObtained INT, fifthWeight INT, fifthObtained INT);");
 
         ArrayList < Module > moduleList = new ArrayList < > ();
         Cursor moduleQuery = myBase.rawQuery("SELECT * FROM Modules", null);
@@ -165,11 +161,6 @@ public class addClass extends AppCompatActivity {
 
     public void addClass(Class c) { // module accepts a class, then adds it to the database
         SQLiteDatabase myBase = this.openOrCreateDatabase("Names.db", 0, null);
-
-        myBase.execSQL("CREATE TABLE if not exists Assignments2(title TEXT, module TEXT, date TEXT, notes TEXT);");
-        myBase.execSQL("CREATE TABLE if not exists Modules(title TEXT, code TEXT, leader TEXT, notes TEXT);");
-        myBase.execSQL("CREATE TABLE if not exists Classes(code TEXT, type TEXT, lecturer TEXT, notes TEXT, location TEXT, day TEXT, start TEXT, finish TEXT, id INT);");
-        myBase.execSQL("CREATE TABLE if not exists Grades(code TEXT, target INT, firstWeight INT, firstObtained INT, secondWeight INT, secondObtained INT, thirdWeight INT, thirdObtained INT,fourthWeight INT, fourthObtained INT, fifthWeight INT, fifthObtained INT);");
 
         String insertStatement = "INSERT INTO Classes VALUES('" + c.modCode + "','" + c.classType + "','" + c.lecturer + "','" + c.notes + "','" + c.locationOrLink + "','" + c.dayOfClass + "','" + c.startTime + "','" + c.endTime + "'," + c.id + ");";
         myBase.execSQL(insertStatement); // inserts into db

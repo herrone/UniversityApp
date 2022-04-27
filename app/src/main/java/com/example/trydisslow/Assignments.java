@@ -188,12 +188,6 @@ ArrayList<Module> moduleList = getAllModules();
     public ArrayList < Assignment > getAllAssignments() { // returns a list of all Assignments in the db
 
         SQLiteDatabase myBase = getApplicationContext().openOrCreateDatabase("Names.db", 0, null);
-
-        myBase.execSQL("CREATE TABLE if not exists Assignments2(title TEXT, code TEXT, dueDate TEXT, notes TEXT, id INT, hID INT, tfID INT, feID INT);");
-        myBase.execSQL("CREATE TABLE if not exists Modules(title TEXT, code TEXT, leader TEXT, notes TEXT);");
-        myBase.execSQL("CREATE TABLE if not exists Classes(code TEXT, type TEXT, lecturer TEXT, notes TEXT, location TEXT, day TEXT, start TEXT, finish TEXT, id INT);");
-        myBase.execSQL("CREATE TABLE if not exists Grades(code TEXT, target INT, firstWeight INT, firstObtained INT, secondWeight INT, secondObtained INT, thirdWeight INT, thirdObtained INT,fourthWeight INT, fourthObtained INT, fifthWeight INT, fifthObtained INT);");
-
         //Assignment a = new Assignment();
         ArrayList < Assignment > assignmentList = new ArrayList < > ();
         Cursor query = myBase.rawQuery("SELECT * FROM Assignments2", null); // selects everything frkm assignment db
@@ -240,11 +234,6 @@ ArrayList<Module> moduleList = getAllModules();
     public ArrayList < Module > getAllModules() { // returns a list of every module in the db
         SQLiteDatabase myBase = this.openOrCreateDatabase("Names.db", 0, null);
 
-        myBase.execSQL("CREATE TABLE if not exists Assignments(title TEXT, code TEXT, dueDate TEXT, notes TEXT, id INT, hID INT, tfID INT, feID INT);");
-        myBase.execSQL("CREATE TABLE if not exists Modules(title TEXT, code TEXT, leader TEXT, notes TEXT);");
-        myBase.execSQL("CREATE TABLE if not exists Classes(code TEXT, type TEXT, lecturer TEXT, notes TEXT, location TEXT, day TEXT, start TEXT, finish TEXT, id INT);");
-        myBase.execSQL("CREATE TABLE if not exists Grades(code TEXT, target INT, firstWeight INT, firstObtained INT, secondWeight INT, secondObtained INT, thirdWeight INT, thirdObtained INT,fourthWeight INT, fourthObtained INT, fifthWeight INT, fifthObtained INT);");
-
         ArrayList < Module > moduleList = new ArrayList < > ();
         Module m = new Module();
         Module mo = new Module();
@@ -270,11 +259,6 @@ ArrayList<Module> moduleList = getAllModules();
 
     public void deleteAssignment(Assignment a) { // takes in an assignment
         SQLiteDatabase myBase = getApplicationContext().openOrCreateDatabase("Names.db", 0, null);
-
-        myBase.execSQL("CREATE TABLE if not exists Assignments2(title TEXT, code TEXT, dueDate TEXT, notes TEXT, id INT, hID INT, tfID INT, feID INT);");
-        myBase.execSQL("CREATE TABLE if not exists Modules(title TEXT, code TEXT, leader TEXT, notes TEXT);");
-        myBase.execSQL("CREATE TABLE if not exists Classes(code TEXT, type TEXT, lecturer TEXT, notes TEXT, location TEXT, day TEXT, start TEXT, finish TEXT, id INT);");
-        myBase.execSQL("CREATE TABLE if not exists Grades(code TEXT, target INT, firstWeight INT, firstObtained INT, secondWeight INT, secondObtained INT, thirdWeight INT, thirdObtained INT,fourthWeight INT, fourthObtained INT, fifthWeight INT, fifthObtained INT);");
 
         String deleteStatement = "DELETE FROM Assignments2 WHERE title = '" + a.title + "';"; // deletes it from the db
         myBase.execSQL(deleteStatement);

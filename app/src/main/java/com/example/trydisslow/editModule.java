@@ -76,13 +76,8 @@ public class editModule extends AppCompatActivity {
 
     }
     public ArrayList < Assignment > getAllAssignments() {
+
         SQLiteDatabase myBase = this.openOrCreateDatabase("Names.db", 0, null);
-
-        myBase.execSQL("CREATE TABLE if not exists Assignments(title TEXT, module TEXT, date TEXT, notes TEXT);");
-        myBase.execSQL("CREATE TABLE if not exists Modules(title TEXT, code TEXT, leader TEXT, notes TEXT);");
-        myBase.execSQL("CREATE TABLE if not exists Classes(code TEXT, type TEXT, lecturer TEXT, notes TEXT, location TEXT, day TEXT, start TEXT, finish TEXT, id INT);");
-        myBase.execSQL("CREATE TABLE if not exists Grades(code TEXT, target INT, firstWeight INT, firstObtained INT, secondWeight INT, secondObtained INT, thirdWeight INT, thirdObtained INT,fourthWeight INT, fourthObtained INT, fifthWeight INT, fifthObtained INT);");
-
 
         ArrayList < Assignment > assignmentList = new ArrayList < > ();
         Cursor query = myBase.rawQuery("SELECT * FROM NEWASSIGNMENTSWITHIDS2", null);
@@ -130,11 +125,6 @@ public class editModule extends AppCompatActivity {
     public ArrayList < Module > getAllModules() {
         SQLiteDatabase myBase = getApplicationContext().openOrCreateDatabase("Names.db", 0, null);
 
-        myBase.execSQL("CREATE TABLE if not exists Assignments(title TEXT, module TEXT, date TEXT, notes TEXT);");
-        myBase.execSQL("CREATE TABLE if not exists Modules(title TEXT, code TEXT, leader TEXT, notes TEXT);");
-        myBase.execSQL("CREATE TABLE if not exists Classes(code TEXT, type TEXT, lecturer TEXT, notes TEXT, location TEXT, day TEXT, start TEXT, finish TEXT, id INT);");
-        myBase.execSQL("CREATE TABLE if not exists Grades(code TEXT, target INT, firstWeight INT, firstObtained INT, secondWeight INT, secondObtained INT, thirdWeight INT, thirdObtained INT,fourthWeight INT, fourthObtained INT, fifthWeight INT, fifthObtained INT);");
-
         ArrayList < Module > moduleList = new ArrayList < > ();
         Module m = new Module();
         Cursor moduleQuery = myBase.rawQuery("SELECT * FROM Modules", null);
@@ -158,10 +148,6 @@ public class editModule extends AppCompatActivity {
     public ArrayList < Class > getAllClasses() {
 
         SQLiteDatabase myBase = this.openOrCreateDatabase("Names.db", 0, null);
-        myBase.execSQL("CREATE TABLE if not exists Assignments(title TEXT, module TEXT, date TEXT, notes TEXT);");
-        myBase.execSQL("CREATE TABLE if not exists Modules(title TEXT, code TEXT, leader TEXT, notes TEXT);");
-        myBase.execSQL("CREATE TABLE if not exists Classes(code TEXT, type TEXT, lecturer TEXT, notes TEXT, location TEXT, day TEXT, start TEXT, finish TEXT, id INT);");
-        myBase.execSQL("CREATE TABLE if not exists Grades(code TEXT, target INT, firstWeight INT, firstObtained INT, secondWeight INT, secondObtained INT, thirdWeight INT, thirdObtained INT,fourthWeight INT, fourthObtained INT, fifthWeight INT, fifthObtained INT);");
 
         ArrayList < Class > classList = new ArrayList < > ();
         Class c = new Class();
@@ -196,11 +182,6 @@ public class editModule extends AppCompatActivity {
     public void addModule(Module m) {
         SQLiteDatabase myBase = this.openOrCreateDatabase("Names.db", 0, null);
 
-        myBase.execSQL("CREATE TABLE if not exists Assignments(title TEXT, module TEXT, date TEXT, notes TEXT);");
-        myBase.execSQL("CREATE TABLE if not exists Modules(title TEXT, code TEXT, leader TEXT, notes TEXT);");
-        myBase.execSQL("CREATE TABLE if not exists Classes(code TEXT, type TEXT, lecturer TEXT, notes TEXT, location TEXT, day TEXT, start TEXT, finish TEXT, id INT);");
-        myBase.execSQL("CREATE TABLE if not exists Grades(code TEXT, target INT, firstWeight INT, firstObtained INT, secondWeight INT, secondObtained INT, thirdWeight INT, thirdObtained INT,fourthWeight INT, fourthObtained INT, fifthWeight INT, fifthObtained INT);");
-
         String insertStatement = "INSERT INTO Modules VALUES('" + m.nameMod + "','" + m.moduleCode + "','" + m.courseLeader + "','" + m.modNotes + "')";
         myBase.execSQL(insertStatement);
 
@@ -208,11 +189,6 @@ public class editModule extends AppCompatActivity {
 
     public void updateModule(Module m, String deleteable) {
         SQLiteDatabase myBase = this.openOrCreateDatabase("Names.db", 0, null);
-
-        myBase.execSQL("CREATE TABLE if not exists Assignments(title TEXT, module TEXT, date TEXT, notes TEXT);");
-        myBase.execSQL("CREATE TABLE if not exists Modules(title TEXT, code TEXT, leader TEXT, notes TEXT);");
-        myBase.execSQL("CREATE TABLE if not exists Classes(code TEXT, type TEXT, lecturer TEXT, notes TEXT, location TEXT, day TEXT, start TEXT, finish TEXT, id INT);");
-        myBase.execSQL("CREATE TABLE if not exists Grades(code TEXT, target INT, firstWeight INT, firstObtained INT, secondWeight INT, secondObtained INT, thirdWeight INT, thirdObtained INT,fourthWeight INT, fourthObtained INT, fifthWeight INT, fifthObtained INT);");
 
         String deleteStatement = "DELETE FROM Modules WHERE code = '" + deleteable + "';";
         myBase.execSQL(deleteStatement);

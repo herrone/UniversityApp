@@ -80,6 +80,7 @@ public class addAssignment extends AppCompatActivity {
         // save assignment by creating a new assignment object
         AppCompatButton saveAssignmentButton = (AppCompatButton) findViewById(R.id.buttonSaveAssignment);
         saveAssignmentButton.setOnClickListener(new View.OnClickListener() {
+
             @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onClick(View v) {
@@ -98,75 +99,35 @@ public class addAssignment extends AppCompatActivity {
                 d.setDate(dateDue.getDayOfMonth());
                 if (hour.isChecked()) {
                     hourID = r.nextInt(1000);
-                    scheduleNotification(addAssignment.this, delayCalculator(d, 1), hourID, "1 Hour Warning", title);
+                    scheduleAssignmentNotification(addAssignment.this, calculateDelay(d, 1), hourID, "1 Hour Warning", title + "due soon");
                     Toast.makeText(addAssignment.this, "scheduled", Toast.LENGTH_LONG).show();
                 }
                 if (twfohour.isChecked()) {
                     tfHourID = r.nextInt(1000);
 
-                   // scheduleNotification(addAssignment.this, delayCalculator(d, 24), tfHourID, "24 Hour Reminder", title + "due soon");
-                    scheduleNotification(addAssignment.this, delayCalculator(d, 24), tfHourID, "24 Hour Warning", title);
+
+                    scheduleAssignmentNotification(addAssignment.this, calculateDelay(d, 24), tfHourID, "24 Hour Warning", title + " due soon");
+                    Toast.makeText(addAssignment.this, "scheduled", Toast.LENGTH_LONG).show();
                 }
                 if (foeihour.isChecked()) {
-                 //   scheduleNotification(addAssignment.this, delayCalculator(d, 48), r.nextInt(), "48 Hour Warning", title);
+
                     feHourID = r.nextInt(1000);
-                    scheduleNotification(addAssignment.this, delayCalculator(d, 48), feHourID, "48 Hour Reminder", title + "due soon");
+                    scheduleAssignmentNotification(addAssignment.this, calculateDelay(d, 48), feHourID, "48 Hour Reminder", title + "due soon");
+                    Toast.makeText(addAssignment.this, "scheduled", Toast.LENGTH_LONG).show();
                 }
 
                 Assignment a = new Assignment(title, d, moduleCodeInQuestion, notes, hourID, tfHourID, feHourID);
                 addAssignmentToDb(a);
 // add the created object to the database
                 startActivity(new Intent(addAssignment.this, Assignments.class));
-
+                Toast.makeText(addAssignment.this, "scheduled", Toast.LENGTH_LONG).show();
             }
         });
 
     }
- //to be called if the checkboxes to set an alarm are on
-    @RequiresApi(api = Build.VERSION_CODES.O)
-    public void show_Notification() {
-        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-        String CHANNEL_ID = "MYCHANNEL";
-        NotificationChannel notificationChannel = new NotificationChannel(CHANNEL_ID, "name", NotificationManager.IMPORTANCE_LOW);
-        PendingIntent pendingIntent = PendingIntent.getActivity(getApplicationContext(), 1, intent, 0);
-        Notification notification = new Notification.Builder(getApplicationContext(), CHANNEL_ID)
-                .setContentText("Clicked on")
-                .setContentTitle("shown")
-                .setContentIntent(pendingIntent)
-                .addAction(android.R.drawable.sym_action_chat, "Title", pendingIntent)
-                .setChannelId(CHANNEL_ID)
-                .setSmallIcon(android.R.drawable.sym_action_chat)
-                .build();
-        NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-        notificationManager.createNotificationChannel(notificationChannel);
-        notificationManager.notify(1, notification);
-
-    }
-    //as above
-    public void scheduleNotification(Context context, long delay, int notificationId, String title, String content) { //delay is after how much time(in millis) from current time you want to schedule the notification
-        String CHANNEL_ID = "MYCHANNEL";
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(getApplicationContext(), CHANNEL_ID)
-                .setContentTitle(title)
-                .setContentText(content)
-                .setAutoCancel(true)
-                .setSmallIcon(R.drawable.alarm)
-                .setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION));
-        Intent intent = new Intent(context, MainActivity.class);
-        PendingIntent activity = PendingIntent.getActivity(context, notificationId, intent, PendingIntent.FLAG_CANCEL_CURRENT);
-        builder.setContentIntent(activity);
-        Notification notification = builder.build();
-        Intent notificationIntent = new Intent(context, MyNotificationPublisher.class);
-        notificationIntent.putExtra(MyNotificationPublisher.NOTIFICATION_ID, notificationId);
-        notificationIntent.putExtra(MyNotificationPublisher.NOTIFICATION, notification);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(context, notificationId, notificationIntent, PendingIntent.FLAG_CANCEL_CURRENT);
-        long futureInMillis = SystemClock.elapsedRealtime() + delay;
-        AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-        alarmManager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, futureInMillis, pendingIntent);
-    }
-
-    // this method calculates how long to delay from now, until the alarm
+    // this method calculates how long to delay the alarm in millis
     @RequiresApi(api = Build.VERSION_CODES.N)
-    public long delayCalculator(Date due, int hours) {
+    public long calculateDelay(Date due, int hours) {
 
         new SimpleDateFormat("yyyy-MM-dd 'at' HH:mm:ss z");
         Date date = new Date(System.currentTimeMillis());
@@ -176,16 +137,32 @@ public class addAssignment extends AppCompatActivity {
         long beforeMillis = hours * 60 * 60 * 1000;
 
         long delay = dueMillis - nowMillis - beforeMillis;
+
         return delay;
     }
+
+    public void scheduleAssignmentNotification(Context context, long delay, int notificationId, String title, String content) { //delay is calculated in millis from now
+
+        String CHANNEL_ID = "MYCHANNEL";
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(getApplicationContext(), CHANNEL_ID).setContentTitle(title).setContentText(content).setAutoCancel(true).setSmallIcon(R.drawable.alarm).setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION));
+       // this builds the actual notification
+        Intent intent = new Intent(context, MainActivity.class);
+        PendingIntent activity = PendingIntent.getActivity(context, notificationId, intent, PendingIntent.FLAG_CANCEL_CURRENT);
+        builder.setContentIntent(activity);
+        Notification notification = builder.build();//completes the notification
+        Intent assignmentNotificationIntent = new Intent(context, MyNotificationHelper.class);
+        assignmentNotificationIntent.putExtra(MyNotificationHelper.NOTIFICATION_ID, notificationId); // to keep them matched throughout the system (within assignment)
+        assignmentNotificationIntent.putExtra(MyNotificationHelper.NOTIFICATION, notification); // to be recieved on the other side
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(context, notificationId, assignmentNotificationIntent, PendingIntent.FLAG_CANCEL_CURRENT);
+        long futureInMilliSeconds = SystemClock.elapsedRealtime() + delay;
+        AlarmManager alarmManager = (AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
+        alarmManager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, futureInMilliSeconds, pendingIntent); // sets alarm to wake up
+    }
+
+
 // this method calls the database, and returns a full list of every module in it
     public ArrayList < Module > getAllModules() {
         SQLiteDatabase myBase = this.openOrCreateDatabase("Names.db", 0, null);
-
-        myBase.execSQL("CREATE TABLE if not exists Assignments2(title TEXT, code TEXT, dueDate TEXT, notes TEXT, id INT, hID INT, tfID INT, feID INT);");
-        myBase.execSQL("CREATE TABLE if not exists Modules(title TEXT, code TEXT, leader TEXT, notes TEXT);");
-        myBase.execSQL("CREATE TABLE if not exists Classes(code TEXT, type TEXT, lecturer TEXT, notes TEXT, location TEXT, day TEXT, start TEXT, finish TEXT, id INT);");
-        myBase.execSQL("CREATE TABLE if not exists Grades(code TEXT, target INT, firstWeight INT, firstObtained INT, secondWeight INT, secondObtained INT, thirdWeight INT, thirdObtained INT,fourthWeight INT, fourthObtained INT, fifthWeight INT, fifthObtained INT);");
 
         ArrayList < Module > moduleList = new ArrayList < > ();
 
@@ -212,11 +189,6 @@ public class addAssignment extends AppCompatActivity {
     // this method takes in an assignment, and inserts it to the database
     public void addAssignmentToDb(Assignment a) {
         SQLiteDatabase myBase = this.openOrCreateDatabase("Names.db", 0, null);
-
-        myBase.execSQL("CREATE TABLE if not exists Assignments2(title TEXT, code TEXT, dueDate TEXT, notes TEXT, id INT, hID INT, tfID INT, feID INT);");
-        myBase.execSQL("CREATE TABLE if not exists Modules(title TEXT, code TEXT, leader TEXT, notes TEXT);");
-        myBase.execSQL("CREATE TABLE if not exists Classes(code TEXT, type TEXT, lecturer TEXT, notes TEXT, location TEXT, day TEXT, start TEXT, finish TEXT, id INT);");
-        myBase.execSQL("CREATE TABLE if not exists Grades(code TEXT, target INT, firstWeight INT, firstObtained INT, secondWeight INT, secondObtained INT, thirdWeight INT, thirdObtained INT,fourthWeight INT, fourthObtained INT, fifthWeight INT, fifthObtained INT);");
 
         java.text.SimpleDateFormat sdfToString = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String stringDate = sdfToString.format(a.dueDate);

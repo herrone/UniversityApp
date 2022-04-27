@@ -265,7 +265,6 @@ public class ModulesAndClasses extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 ArrayList < Module > moduleList2 = getAllModules();
-                // myBase.execSQL("CREATE TABLE if not exists NEWMODULE3(title TEXT, code TEXT, leader TEXT, notes TEXT);");
                 if (moduleList2.isEmpty()) {
                     Toast.makeText(ModulesAndClasses.this, "You cannot add a class before adding a module", Toast.LENGTH_LONG).show();
                 } else {
@@ -303,65 +302,10 @@ public class ModulesAndClasses extends AppCompatActivity {
     }
 
 
-    public ArrayList < Assignment > getAllAssignments() {
-        SQLiteDatabase myBase = getApplicationContext().openOrCreateDatabase("Names.db", 0, null);
 
-        myBase.execSQL("CREATE TABLE if not exists Assignments2(title TEXT, module TEXT, date TEXT, notes TEXT);");
-        myBase.execSQL("CREATE TABLE if not exists Modules(title TEXT, code TEXT, leader TEXT, notes TEXT);");
-        myBase.execSQL("CREATE TABLE if not exists Classes(code TEXT, type TEXT, lecturer TEXT, notes TEXT, location TEXT, day TEXT, start TEXT, finish TEXT, id INT);");
-        myBase.execSQL("CREATE TABLE if not exists Grades(code TEXT, target INT, firstWeight INT, firstObtained INT, secondWeight INT, secondObtained INT, thirdWeight INT, thirdObtained INT,fourthWeight INT, fourthObtained INT, fifthWeight INT, fifthObtained INT);");
-
-
-        ArrayList < Assignment > assignmentList = new ArrayList < > ();
-        Cursor query = myBase.rawQuery("SELECT * FROM Assignments", null);
-        if (query.moveToFirst()) {
-            String name = query.getString(0);
-            String code = query.getString(1);
-            String stringDueDate = query.getString(2);
-            java.text.SimpleDateFormat sdfBackToDate = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-            Date dueDate = null;
-            try {
-                dueDate = sdfBackToDate.parse(stringDueDate);
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
-            String notes = query.getString(3);
-            int id = query.getInt(4);
-            int hId = query.getInt(5);
-            int tfId = query.getInt(6);
-            int feId = query.getInt(7);
-            Assignment a = new Assignment(name, dueDate, code, notes, id, hId, tfId, feId);
-            assignmentList.add(a);
-
-            while (query.moveToNext()) {
-                name = query.getString(0);
-                code = query.getString(1);
-                stringDueDate = query.getString(2);
-
-                try {
-                    dueDate = sdfBackToDate.parse(stringDueDate);
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
-                notes = query.getString(3);
-                id = query.getInt(4);
-                hId = query.getInt(5);
-                tfId = query.getInt(6);
-                feId = query.getInt(7);
-                a = new Assignment(name, dueDate, code, notes, id, hId, tfId, feId);
-                assignmentList.add(a);
-            }
-        }
-
-        return assignmentList;
-    }
     public ArrayList < Module > getAllModules() {
         SQLiteDatabase myBase = getApplicationContext().openOrCreateDatabase("Names.db", 0, null);
 
-        myBase.execSQL("CREATE TABLE if not exists Assignments2(title TEXT, module TEXT, date TEXT, notes TEXT);");
-        myBase.execSQL("CREATE TABLE if not exists Modules(title TEXT, code TEXT, leader TEXT, notes TEXT);");
-        myBase.execSQL("CREATE TABLE if not exists Classes(code TEXT, type TEXT, lecturer TEXT, notes TEXT, location TEXT, day TEXT, start TEXT, finish TEXT, id INT);");
-        myBase.execSQL("CREATE TABLE if not exists Grades(code TEXT, target INT, firstWeight INT, firstObtained INT, secondWeight INT, secondObtained INT, thirdWeight INT, thirdObtained INT,fourthWeight INT, fourthObtained INT, fifthWeight INT, fifthObtained INT);");
 
         ArrayList < Module > moduleList = new ArrayList < > ();
         Module m = new Module();
@@ -386,10 +330,6 @@ public class ModulesAndClasses extends AppCompatActivity {
     public ArrayList < Class > getAllClasses() {
 
         SQLiteDatabase myBase = getApplicationContext().openOrCreateDatabase("Names.db", 0, null);
-        myBase.execSQL("CREATE TABLE if not exists Assignments2(title TEXT, module TEXT, date TEXT, notes TEXT);");
-        myBase.execSQL("CREATE TABLE if not exists Modules(title TEXT, code TEXT, leader TEXT, notes TEXT);");
-        myBase.execSQL("CREATE TABLE if not exists Classes(code TEXT, type TEXT, lecturer TEXT, notes TEXT, location TEXT, day TEXT, start TEXT, finish TEXT, id INT);");
-        myBase.execSQL("CREATE TABLE if not exists Grades(code TEXT, target INT, firstWeight INT, firstObtained INT, secondWeight INT, secondObtained INT, thirdWeight INT, thirdObtained INT,fourthWeight INT, fourthObtained INT, fifthWeight INT, fifthObtained INT);");
 
         ArrayList < Class > classList = new ArrayList < > ();
         Class c = new Class();
@@ -425,10 +365,6 @@ public class ModulesAndClasses extends AppCompatActivity {
     public void updateClass(Class c) {
         SQLiteDatabase myBase = getApplicationContext().openOrCreateDatabase("Names.db", 0, null);
 
-        myBase.execSQL("CREATE TABLE if not exists Assignments2(title TEXT, module TEXT, date TEXT, notes TEXT);");
-        myBase.execSQL("CREATE TABLE if not exists Modules(title TEXT, code TEXT, leader TEXT, notes TEXT);");
-        myBase.execSQL("CREATE TABLE if not exists Classes(code TEXT, type TEXT, lecturer TEXT, notes TEXT, location TEXT, day TEXT, start TEXT, finish TEXT, id INT);");
-        myBase.execSQL("CREATE TABLE if not exists Grades(code TEXT, target INT, firstWeight INT, firstObtained INT, secondWeight INT, secondObtained INT, thirdWeight INT, thirdObtained INT,fourthWeight INT, fourthObtained INT, fifthWeight INT, fifthObtained INT);");
 
         String deleteStatement = "DELETE FROM Classes WHERE code = '" + c.modCode + "' AND type = '" + c.classType + "'";
         myBase.execSQL(deleteStatement);
@@ -438,10 +374,6 @@ public class ModulesAndClasses extends AppCompatActivity {
     public void deleteClass(Class c) {
         SQLiteDatabase myBase = getApplicationContext().openOrCreateDatabase("Names.db", 0, null);
 
-        myBase.execSQL("CREATE TABLE if not exists Assignments2(title TEXT, module TEXT, date TEXT, notes TEXT);");
-        myBase.execSQL("CREATE TABLE if not exists Modules(title TEXT, code TEXT, leader TEXT, notes TEXT);");
-        myBase.execSQL("CREATE TABLE if not exists Classes(code TEXT, type TEXT, lecturer TEXT, notes TEXT, location TEXT, day TEXT, start TEXT, finish TEXT, id INT);");
-        myBase.execSQL("CREATE TABLE if not exists Grades(code TEXT, target INT, firstWeight INT, firstObtained INT, secondWeight INT, secondObtained INT, thirdWeight INT, thirdObtained INT,fourthWeight INT, fourthObtained INT, fifthWeight INT, fifthObtained INT);");
 
         String deleteStatement = "DELETE FROM Classes WHERE id = " + c.id + ";";
         myBase.execSQL(deleteStatement);
@@ -449,10 +381,6 @@ public class ModulesAndClasses extends AppCompatActivity {
 
     public void deleteModule(Module m) {
         SQLiteDatabase myBase = this.openOrCreateDatabase("Names.db", 0, null);
-        myBase.execSQL("CREATE TABLE if not exists Assignments2(title TEXT, module TEXT, date TEXT, notes TEXT);");
-        myBase.execSQL("CREATE TABLE if not exists Modules(title TEXT, code TEXT, leader TEXT, notes TEXT);");
-        myBase.execSQL("CREATE TABLE if not exists Classes(code TEXT, type TEXT, lecturer TEXT, notes TEXT, location TEXT, day TEXT, start TEXT, finish TEXT, id INT);");
-        myBase.execSQL("CREATE TABLE if not exists Grades(code TEXT, target INT, firstWeight INT, firstObtained INT, secondWeight INT, secondObtained INT, thirdWeight INT, thirdObtained INT,fourthWeight INT, fourthObtained INT, fifthWeight INT, fifthObtained INT);");
         String deleteStatement = "DELETE FROM Modules WHERE code = '" + m.moduleCode + "';";
         myBase.execSQL(deleteStatement);
     }

@@ -26,6 +26,13 @@ public class Calendar extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calendar);
         getSupportActionBar().hide();
+        SQLiteDatabase myBase = getApplicationContext().openOrCreateDatabase("Names.db", 0, null);
+
+        myBase.execSQL("CREATE TABLE if not exists Assignments2(title TEXT, code TEXT, dueDate TEXT, notes TEXT, id INT, hID INT, tfID INT, feID INT);");
+        myBase.execSQL("CREATE TABLE if not exists Modules(title TEXT, code TEXT, leader TEXT, notes TEXT);");
+        myBase.execSQL("CREATE TABLE if not exists Classes(code TEXT, type TEXT, lecturer TEXT, notes TEXT, location TEXT, day TEXT, start TEXT, finish TEXT, id INT);");
+        myBase.execSQL("CREATE TABLE if not exists Grades(code TEXT, target INT, firstWeight INT, firstObtained INT, secondWeight INT, secondObtained INT, thirdWeight INT, thirdObtained INT,fourthWeight INT, fourthObtained INT, fifthWeight INT, fifthObtained INT);");
+
         ListView lvAssignments = (ListView) findViewById(R.id.lv);
 
         ListView lv = (ListView) findViewById(R.id.lv2);
@@ -141,12 +148,6 @@ public class Calendar extends AppCompatActivity {
     public ArrayList < Assignment > getAllAssignments() { // this method returns a full arraylist of assignments in the db
         SQLiteDatabase myBase = getApplicationContext().openOrCreateDatabase("Names.db", 0, null);
 
-        myBase.execSQL("CREATE TABLE if not exists Assignments2(title TEXT, code TEXT, dueDate TEXT, notes TEXT, id INT, hID INT, tfID INT, feID INT);");
-        myBase.execSQL("CREATE TABLE if not exists Modules(title TEXT, code TEXT, leader TEXT, notes TEXT);");
-        myBase.execSQL("CREATE TABLE if not exists Classes(code TEXT, type TEXT, lecturer TEXT, notes TEXT, location TEXT, day TEXT, start TEXT, finish TEXT, id INT);");
-        myBase.execSQL("CREATE TABLE if not exists Grades(code TEXT, target INT, firstWeight INT, firstObtained INT, secondWeight INT, secondObtained INT, thirdWeight INT, thirdObtained INT,fourthWeight INT, fourthObtained INT, fifthWeight INT, fifthObtained INT);");
-
-
         ArrayList<Assignment> assignmentList = new ArrayList<>();
         Cursor query = myBase.rawQuery("SELECT * FROM Assignments2", null); // select everything
         if (query.moveToFirst()) { // if its not empty
@@ -194,11 +195,6 @@ public class Calendar extends AppCompatActivity {
     public ArrayList < Class > getAllClasses() { // method returns a list of every class in db
 
         SQLiteDatabase myBase = getApplicationContext().openOrCreateDatabase("Names.db", 0, null);
-        myBase.execSQL("CREATE TABLE if not exists Assignments2(title TEXT, module TEXT, date TEXT, notes TEXT);");
-        myBase.execSQL("CREATE TABLE if not exists Modules(title TEXT, code TEXT, leader TEXT, notes TEXT);");
-        myBase.execSQL("CREATE TABLE if not exists Classes(code TEXT, type TEXT, lecturer TEXT, notes TEXT, location TEXT, day TEXT, start TEXT, finish TEXT, id INT);");
-        myBase.execSQL("CREATE TABLE if not exists Grades(code TEXT, target INT, firstWeight INT, firstObtained INT, secondWeight INT, secondObtained INT, thirdWeight INT, thirdObtained INT,fourthWeight INT, fourthObtained INT, fifthWeight INT, fifthObtained INT);");
-
         ArrayList < Class > classList = new ArrayList < > (); // make new lass
         Class c = new Class();
         Class co = new Class();
